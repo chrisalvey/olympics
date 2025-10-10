@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter Olympics Fantasy Draft</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .warning-message {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .warning-message.hidden {
+            display: none;
+        }
+
+        .sort-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .sort-controls label {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .sort-controls input[type="radio"] {
+            cursor: pointer;
+        }
+
+        .selected-countries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            min-height: 50px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .selected-countries.empty::after {
+            content: 'No countries selected yet';
+            color: #999;
+            font-style: italic;
+        }
+
+        .selected-chip {
+            background: #667eea;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .selected-chip:hover {
+            background: #5568d3;
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .country-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .country-card:hover:not(.selected):not(.disabled) {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: translateY(-2px);
+        }
+
+        .country-card.selected {
+            background: #e8e8e8;
+            border-color: #999;
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .country-card.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .country-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .country-points {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .country-card.selected .country-points,
+        .country-card.disabled .country-points {
+            background: #999;
+        }
+
+        .submit-section {
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button[type="submit"]:hover:not(:disabled) {
+            background: #5568d3;
+        }
+
+        button[type="submit"]:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏅 Winter Olympics Fantasy Draft</h1>
+        <div class="subtitle">Milano Cortina 2026 • February 6-22</div>
+
+        <form id="draftForm">
+            <div class="form-section">
+                <h2>Participant Information</h2>
+                <div class="input-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="teamName">Team Name *</label>
+                    <input type="text" id="teamName" name="teamName" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Draft Status</h2>
+                <div class="stats-bar">
+                    <div class="stat">
+                        <div class="stat-label">Points Spent</div>
+                        <div class="stat-value"><span id="pointsSpent">0</span> / 100</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Points Remaining</div>
+                        <div class="stat-value" id="pointsRemaining">100</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Countries Selected</div>
+                        <div class="stat-value" id="countriesCount">0</div>
+                    </div>
+                </div>
+
+                <div id="warningMessage" class="warning-message">
+                    ⚠️ Please select at least 3 countries
+                </div>
+
+                <h2>Your Team</h2>
+                <div id="selectedCountries" class="selected-countries empty"></div>
+            </div>
+
+            <div class="form-section">
+                <h2>Select Countries</h2>
+                <div class="sort-controls">
+                    <strong>Sort by:</strong>
+                    <label>
+                        <input type="radio" name="sort" value="name" checked> Country Name
+                    </label>
+                    <label>
+                        <input type="radio" name="sort" value="pointsHigh"> Points (High to Low)
+                    </label>
+                    <label>
+                        <input type="radio" name="sort" value="pointsLow"> Points (Low to High)
+                    </label>
+                </div>
+                <div id="countryGrid" class="country-grid"></div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" id="submitBtn" disabled>Submit Draft</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const countries = [
+            { "name": "Albania", "code": "ALB", "points": 8 },
+            { "name": "Andorra", "code": "AND", "points": 12 },
+            { "name": "Argentina", "code": "ARG", "points": 10 },
+            { "name": "Armenia", "code": "ARM", "points": 11 },
+            { "name": "Australia", "code": "AUS", "points": 15 },
+            { "name": "Austria", "code": "AUT", "points": 28 },
+            { "name": "Azerbaijan", "code": "AZE", "points": 9 },
+            { "name": "Belgium", "code": "BEL", "points": 16 },
+            { "name": "Bolivia", "code": "BOL", "points": 7 },
+            { "name": "Bosnia and Herzegovina", "code": "BIH", "points": 10 },
+            { "name": "Brazil", "code": "BRA", "points": 11 },
+            { "name": "Bulgaria", "code": "BUL", "points": 13 },
+            { "name": "Canada", "code": "CAN", "points": 29 },
+            { "name": "Chile", "code": "CHI", "points": 12 },
+            { "name": "China", "code": "CHN", "points": 24 },
+            { "name": "Chinese Taipei", "code": "TPE", "points": 10 },
+            { "name": "Colombia", "code": "COL", "points": 9 },
+            { "name": "Croatia", "code": "CRO", "points": 17 },
+            { "name": "Cyprus", "code": "CYP", "points": 6 },
+            { "name": "Czech Republic", "code": "CZE", "points": 22 },
+            { "name": "Denmark", "code": "DEN", "points": 14 },
+            { "name": "Eritrea", "code": "ERI", "points": 5 },
+            { "name": "Estonia", "code": "EST", "points": 16 },
+            { "name": "Finland", "code": "FIN", "points": 23 },
+            { "name": "France", "code": "FRA", "points": 26 },
+            { "name": "Georgia", "code": "GEO", "points": 11 },
+            { "name": "Germany", "code": "GER", "points": 29 },
+            { "name": "Great Britain", "code": "GBR", "points": 19 },
+            { "name": "Greece", "code": "GRE", "points": 9 },
+            { "name": "Haiti", "code": "HAI", "points": 6 },
+            { "name": "Hong Kong", "code": "HKG", "points": 8 },
+            { "name": "Hungary", "code": "HUN", "points": 14 },
+            { "name": "Iceland", "code": "ISL", "points": 13 },
+            { "name": "India", "code": "IND", "points": 10 },
+            { "name": "Individual Neutral Athletes", "code": "AIN", "points": 20 },
+            { "name": "Iran", "code": "IRI", "points": 9 },
+            { "name": "Ireland", "code": "IRL", "points": 11 },
+            { "name": "Israel", "code": "ISR", "points": 10 },
+            { "name": "Italy", "code": "ITA", "points": 27 },
+            { "name": "Japan", "code": "JPN", "points": 25 },
+            { "name": "Kazakhstan", "code": "KAZ", "points": 18 },
+            { "name": "Kenya", "code": "KEN", "points": 7 },
+            { "name": "Kosovo", "code": "KOS", "points": 8 },
+            { "name": "Kyrgyzstan", "code": "KGZ", "points": 9 },
+            { "name": "Latvia", "code": "LAT", "points": 17 },
+            { "name": "Lebanon", "code": "LIB", "points": 7 },
+            { "name": "Liechtenstein", "code": "LIE", "points": 13 },
+            { "name": "Lithuania", "code": "LTU", "points": 15 },
+            { "name": "Luxembourg", "code": "LUX", "points": 9 },
+            { "name": "Madagascar", "code": "MAD", "points": 6 },
+            { "name": "Malaysia", "code": "MAS", "points": 8 },
+            { "name": "Malta", "code": "MLT", "points": 7 },
+            { "name": "Mexico", "code": "MEX", "points": 11 },
+            { "name": "Monaco", "code": "MON", "points": 10 },
+            { "name": "Mongolia", "code": "MGL", "points": 10 },
+            { "name": "Montenegro", "code": "MNE", "points": 9 },
+            { "name": "Netherlands", "code": "NED", "points": 24 },
+            { "name": "New Zealand", "code": "NZL", "points": 14 },
+            { "name": "Nigeria", "code": "NGR", "points": 7 },
+            { "name": "North Macedonia", "code": "MKD", "points": 9 },
+            { "name": "Norway", "code": "NOR", "points": 30 },
+            { "name": "Philippines", "code": "PHI", "points": 8 },
+            { "name": "Poland", "code": "POL", "points": 21 },
+            { "name": "Portugal", "code": "POR", "points": 10 },
+            { "name": "Romania", "code": "ROU", "points": 14 },
+            { "name": "Saudi Arabia", "code": "KSA", "points": 8 },
+            { "name": "Serbia", "code": "SRB", "points": 12 },
+            { "name": "Singapore", "code": "SGP", "points": 7 },
+            { "name": "Slovakia", "code": "SVK", "points": 19 },
+            { "name": "Slovenia", "code": "SLO", "points": 20 },
+            { "name": "South Africa", "code": "RSA", "points": 9 },
+            { "name": "South Korea", "code": "KOR", "points": 23 },
+            { "name": "Spain", "code": "ESP", "points": 16 },
+            { "name": "Sweden", "code": "SWE", "points": 27 },
+            { "name": "Switzerland", "code": "SUI", "points": 28 },
+            { "name": "Thailand", "code": "THA", "points": 8 },
+            { "name": "Trinidad and Tobago", "code": "TTO", "points": 7 },
+            { "name": "Turkey", "code": "TUR", "points": 11 },
+            { "name": "Ukraine", "code": "UKR", "points": 18 },
+            { "name": "United Arab Emirates", "code": "UAE", "points": 6 },
+            { "name": "United States", "code": "USA", "points": 30 },
+            { "name": "Uzbekistan", "code": "UZB", "points": 10 }
+        ];
+
+        let selectedCountries = [];
+        let pointsSpent = 0;
+
+        function sortCountries(sortType) {
+            const sorted = [...countries];
+            if (sortType === 'name') {
+                sorted.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortType === 'pointsHigh') {
+                sorted.sort((a, b) => b.points - a.points);
+            } else if (sortType === 'pointsLow') {
+                sorted.sort((a, b) => a.points - b.points);
+            }
+            return sorted;
+        }
+
+        function renderCountries() {
+            const grid = document.getElementById('countryGrid');
+            const sortType = document.querySelector('input[name="sort"]:checked').value;
+            const sorted = sortCountries(sortType);
+            
+            grid.innerHTML = '';
+            sorted.forEach(country => {
+                const card = document.createElement('div');
+                card.className = 'country-card';
+                
+                const isSelected = selectedCountries.some(c => c.name === country.name);
+                const pointsRemaining = 100 - pointsSpent;
+                const canAfford = !isSelected && (country.points <= pointsRemaining);
+                
+                if (isSelected) {
+                    card.classList.add('selected');
+                } else if (!canAfford) {
+                    card.classList.add('disabled');
+                }
+                
+                card.innerHTML = `
+                    <span class="country-name">${country.name}</span>
+                    <span class="country-points">${country.points}</span>
+                `;
+                
+                if (!isSelected && canAfford) {
+                    card.addEventListener('click', () => selectCountry(country));
+                }
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function selectCountry(country) {
+            const pointsRemaining = 100 - pointsSpent;
+            if (country.points <= pointsRemaining) {
+                selectedCountries.push(country);
+                pointsSpent += country.points;
+                updateUI();
+            }
+        }
+
+        function deselectCountry(country) {
+            selectedCountries = selectedCountries.filter(c => c.name !== country.name);
+            pointsSpent -= country.points;
+            updateUI();
+        }
+
+        function updateUI() {
+            // Update stats
+            document.getElementById('pointsSpent').textContent = pointsSpent;
+            document.getElementById('pointsRemaining').textContent = 100 - pointsSpent;
+            document.getElementById('countriesCount').textContent = selectedCountries.length;
+            
+            // Update warning message
+            const warning = document.getElementById('warningMessage');
+            if (selectedCountries.length >= 3) {
+                warning.classList.add('hidden');
+            } else {
+                warning.classList.remove('hidden');
+            }
+            
+            // Update selected countries display
+            const selectedDiv = document.getElementById('selectedCountries');
+            if (selectedCountries.length === 0) {
+                selectedDiv.className = 'selected-countries empty';
+                selectedDiv.innerHTML = '';
+            } else {
+                selectedDiv.className = 'selected-countries';
+                selectedDiv.innerHTML = selectedCountries.map(country => `
+                    <div class="selected-chip" onclick="deselectCountry({name: '${country.name}', points: ${country.points}})">
+                        ${country.name} (${country.points})
+                        <span>✕</span>
+                    </div>
+                `).join('');
+            }
+            
+            // Update country grid
+            renderCountries();
+            
+            // Update submit button
+            validateForm();
+        }
+
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const teamName = document.getElementById('teamName').value.trim();
+            const hasMinCountries = selectedCountries.length >= 3;
+            const withinBudget = pointsSpent <= 100;
+            
+            const isValid = name && teamName && hasMinCountries && withinBudget;
+            document.getElementById('submitBtn').disabled = !isValid;
+        }
+
+        // Event listeners
+        document.querySelectorAll('input[name="sort"]').forEach(radio => {
+            radio.addEventListener('change', renderCountries);
+        });
+
+        document.getElementById('name').addEventListener('input', validateForm);
+        document.getElementById('teamName').addEventListener('input', validateForm);
+
+        document.getElementById('draftForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submission = {
+                name: document.getElementById('name').value.trim(),
+                teamName: document.getElementById('teamName').value.trim(),
+                countries: selectedCountries.map(c => c.name),
+                totalPointsSpent: pointsSpent
+            };
+            
+            const jsonData = JSON.stringify(submission, null, 2);
+            const subject = encodeURIComponent(`Winter Olympics Draft - ${submission.teamName}`);
+            const body = encodeURIComponent(`New Draft Submission:\n\n${jsonData}`);
+            
+            window.location.href = `mailto:chrisalvey@gmail.com?subject=${subject}&body=${body}`;
+        });
+
+        // Initial render
+        renderCountries();
+    </script>
+</body>
+</html>
