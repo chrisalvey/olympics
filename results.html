@@ -334,8 +334,8 @@
                     participants.push(doc.data());
                 });
 
-                // Load medals from JSON file
-                const response = await fetch('medals.json');
+                // Load medals from JSON file (with cache busting)
+                const response = await fetch(`medals.json?t=${new Date().getTime()}`);
                 medalsData = await response.json();
 
                 renderParticipants();
