@@ -12,67 +12,68 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            padding: 30px;
+            border-radius: 16px;
+            padding: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
         h1 {
             text-align: center;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-size: 24px;
         }
 
         .subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
+            margin-bottom: 15px;
+            font-size: 13px;
         }
 
         .last-updated {
             text-align: center;
             color: #999;
-            font-size: 12px;
+            font-size: 11px;
             margin-bottom: 20px;
         }
 
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #e0e0e0;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 4px;
         }
 
         .tab {
-            padding: 12px 24px;
-            background: none;
+            flex: 1;
+            padding: 10px;
+            background: transparent;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
             color: #666;
-            border-bottom: 3px solid transparent;
+            border-radius: 8px;
             transition: all 0.3s;
         }
 
-        .tab:hover {
-            color: #667eea;
-        }
-
         .tab.active {
+            background: white;
             color: #667eea;
-            border-bottom-color: #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .tab-content {
@@ -83,63 +84,83 @@
             display: block;
         }
 
-        .leaderboard-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-
-        .leaderboard-table thead {
+        .participant-card {
             background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
         }
 
-        .leaderboard-table th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: #333;
-            border-bottom: 2px solid #e0e0e0;
+        .participant-card.rank-1 {
+            border-left-color: #FFD700;
+            background: linear-gradient(135deg, #fff9e6 0%, #f8f9fa 100%);
         }
 
-        .leaderboard-table th.center,
-        .leaderboard-table td.center {
-            text-align: center;
+        .participant-card.rank-2 {
+            border-left-color: #C0C0C0;
         }
 
-        .leaderboard-table td {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
+        .participant-card.rank-3 {
+            border-left-color: #CD7F32;
         }
 
-        .leaderboard-table tbody tr:hover {
-            background: #f8f9ff;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
         }
 
-        .rank {
+        .card-rank {
+            font-size: 28px;
             font-weight: bold;
             color: #667eea;
+            line-height: 1;
+        }
+
+        .card-rank.rank-1 { color: #FFD700; }
+        .card-rank.rank-2 { color: #C0C0C0; }
+        .card-rank.rank-3 { color: #CD7F32; }
+
+        .card-info {
+            flex: 1;
+            margin-left: 12px;
+        }
+
+        .team-name {
             font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
         }
 
-        .rank-1 {
-            color: #FFD700;
+        .participant-name {
+            font-size: 14px;
+            color: #666;
         }
 
-        .rank-2 {
-            color: #C0C0C0;
+        .card-score {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            line-height: 1;
         }
 
-        .rank-3 {
-            color: #CD7F32;
+        .medal-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .medal-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: bold;
-            margin: 0 2px;
         }
 
         .gold-badge {
@@ -157,56 +178,103 @@
             color: white;
         }
 
-        .score-highlight {
-            font-size: 20px;
-            font-weight: bold;
-            color: #667eea;
-        }
-
         .countries-list {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
+            line-height: 1.6;
         }
 
-        .recent-results {
-            margin-top: 40px;
-        }
-
-        .recent-results h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 20px;
-        }
-
-        .result-card {
+        .country-card {
             background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .result-info {
+        .country-card.rank-1 {
+            background: linear-gradient(135deg, #fff9e6 0%, #f8f9fa 100%);
+        }
+
+        .country-info {
             flex: 1;
+        }
+
+        .country-rank {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 12px;
+        }
+
+        .country-rank.rank-1 { color: #FFD700; }
+        .country-rank.rank-2 { color: #C0C0C0; }
+        .country-rank.rank-3 { color: #CD7F32; }
+
+        .country-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .country-medals {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .medal-count {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .country-total {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .recent-results {
+            margin-top: 30px;
+        }
+
+        .recent-results h2 {
+            color: #667eea;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
         }
 
         .result-event {
             font-weight: 600;
             color: #333;
-            margin-bottom: 5px;
-        }
-
-        .result-athlete {
-            font-size: 14px;
-            color: #666;
+            font-size: 15px;
+            flex: 1;
         }
 
         .result-medal {
-            padding: 8px 16px;
+            padding: 4px 12px;
             border-radius: 6px;
             font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
         }
 
         .result-medal.gold {
@@ -224,72 +292,51 @@
             color: white;
         }
 
-        .loading {
+        .result-athlete {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .loading, .error {
             text-align: center;
-            padding: 40px;
+            padding: 40px 20px;
             color: #666;
         }
 
         .error {
-            text-align: center;
-            padding: 40px;
             color: #d32f2f;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .leaderboard-table {
-                font-size: 14px;
-            }
-
-            .leaderboard-table th,
-            .leaderboard-table td {
-                padding: 10px 5px;
-            }
-
-            .countries-list {
-                font-size: 11px;
-            }
-
-            .tabs {
-                flex-direction: column;
-            }
-
-            .tab {
-                border-bottom: 1px solid #e0e0e0;
-            }
-
-            .tab.active {
-                border-bottom-color: #667eea;
-            }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏅 Winter Olympics Fantasy Leaderboard</h1>
-        <div class="subtitle">Milano Cortina 2026 • February 6-22</div>
+        <h1>🏅 Winter Olympics Fantasy</h1>
+        <div class="subtitle">Milano Cortina 2026 • Feb 6-22</div>
         <div class="last-updated" id="lastUpdated">Loading...</div>
 
         <div class="tabs">
-            <button class="tab active" data-tab="participants">Participant Leaderboard</button>
-            <button class="tab" data-tab="countries">Medal Standings</button>
+            <button class="tab active" data-tab="participants">Leaderboard</button>
+            <button class="tab" data-tab="countries">Medal Count</button>
         </div>
 
         <div id="participantsTab" class="tab-content active">
-            <div id="participantsContent" class="loading">Loading participants...</div>
+            <div id="participantsContent" class="loading">Loading...</div>
         </div>
 
         <div id="countriesTab" class="tab-content">
-            <div id="countriesContent" class="loading">Loading medal standings...</div>
+            <div id="countriesContent" class="loading">Loading...</div>
         </div>
 
         <div class="recent-results">
-            <h2>Recent Medal Results</h2>
-            <div id="recentResults">Loading recent results...</div>
+            <h2>🏆 Recent Results</h2>
+            <div id="recentResults">Loading...</div>
         </div>
     </div>
 
@@ -312,7 +359,6 @@
         let participants = [];
         let medalsData = null;
 
-        // Tab switching with event listeners
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const tabName = this.getAttribute('data-tab');
@@ -327,14 +373,12 @@
 
         async function loadData() {
             try {
-                // Load participants from Firebase
                 const querySnapshot = await getDocs(collection(db, 'submissions'));
                 participants = [];
                 querySnapshot.forEach((doc) => {
                     participants.push(doc.data());
                 });
 
-                // Load medals from JSON file (with cache busting)
                 const response = await fetch(`medals.json?t=${new Date().getTime()}`);
                 medalsData = await response.json();
 
@@ -346,11 +390,11 @@
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('participantsContent').innerHTML = 
-                    '<div class="error">Error loading data. Make sure medals.json exists in the same directory.</div>';
+                    '<div class="error">Error loading data. Make sure medals.json is in the same folder.</div>';
                 document.getElementById('countriesContent').innerHTML = 
                     '<div class="error">Error loading data.</div>';
                 document.getElementById('recentResults').innerHTML = 
-                    '<div class="error">Error loading recent results.</div>';
+                    '<div class="error">Error loading results.</div>';
             }
         }
 
@@ -375,6 +419,12 @@
         }
 
         function renderParticipants() {
+            if (participants.length === 0) {
+                document.getElementById('participantsContent').innerHTML = 
+                    '<div class="empty-state">No participants yet. Be the first to submit!</div>';
+                return;
+            }
+
             const participantsWithScores = participants.map(p => {
                 const { score, medalBreakdown } = calculateScore(p.countries);
                 return { ...p, score, medalBreakdown };
@@ -382,43 +432,33 @@
 
             participantsWithScores.sort((a, b) => b.score - a.score);
 
-            let html = `
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th class="center">Rank</th>
-                            <th>Team Name</th>
-                            <th>Participant</th>
-                            <th class="center">Medals</th>
-                            <th class="center">Score</th>
-                            <th>Countries</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
+            let html = '';
             participantsWithScores.forEach((p, index) => {
                 const rank = index + 1;
-                const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
+                const rankClass = rank <= 3 ? `rank-${rank}` : '';
                 
                 html += `
-                    <tr>
-                        <td class="center"><span class="rank ${rankClass}">${rank}</span></td>
-                        <td><strong>${p.teamName}</strong></td>
-                        <td>${p.name}</td>
-                        <td class="center">
-                            ${p.medalBreakdown.gold > 0 ? `<span class="medal-badge gold-badge">${p.medalBreakdown.gold}G</span>` : ''}
-                            ${p.medalBreakdown.silver > 0 ? `<span class="medal-badge silver-badge">${p.medalBreakdown.silver}S</span>` : ''}
-                            ${p.medalBreakdown.bronze > 0 ? `<span class="medal-badge bronze-badge">${p.medalBreakdown.bronze}B</span>` : ''}
-                            ${p.medalBreakdown.gold === 0 && p.medalBreakdown.silver === 0 && p.medalBreakdown.bronze === 0 ? '-' : ''}
-                        </td>
-                        <td class="center"><span class="score-highlight">${p.score}</span></td>
-                        <td class="countries-list">${p.countries.join(', ')}</td>
-                    </tr>
+                    <div class="participant-card ${rankClass}">
+                        <div class="card-header">
+                            <div class="card-rank ${rankClass}">${rank}</div>
+                            <div class="card-info">
+                                <div class="team-name">${p.teamName}</div>
+                                <div class="participant-name">${p.name}</div>
+                            </div>
+                            <div class="card-score">${p.score}</div>
+                        </div>
+                        ${p.medalBreakdown.gold + p.medalBreakdown.silver + p.medalBreakdown.bronze > 0 ? `
+                            <div class="medal-row">
+                                ${p.medalBreakdown.gold > 0 ? `<span class="medal-badge gold-badge">🥇 ${p.medalBreakdown.gold}</span>` : ''}
+                                ${p.medalBreakdown.silver > 0 ? `<span class="medal-badge silver-badge">🥈 ${p.medalBreakdown.silver}</span>` : ''}
+                                ${p.medalBreakdown.bronze > 0 ? `<span class="medal-badge bronze-badge">🥉 ${p.medalBreakdown.bronze}</span>` : ''}
+                            </div>
+                        ` : ''}
+                        <div class="countries-list">${p.countries.join(' • ')}</div>
+                    </div>
                 `;
             });
 
-            html += '</tbody></table>';
             document.getElementById('participantsContent').innerHTML = html;
         }
 
@@ -434,44 +474,47 @@
                 return b.bronze - a.bronze;
             });
 
-            let html = `
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th class="center">Rank</th>
-                            <th>Country</th>
-                            <th class="center">🥇 Gold</th>
-                            <th class="center">🥈 Silver</th>
-                            <th class="center">🥉 Bronze</th>
-                            <th class="center">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
+            // Only show countries with medals
+            const countriesWithMedals = countriesArray.filter(c => c.total > 0);
 
-            countriesArray.forEach((country, index) => {
+            if (countriesWithMedals.length === 0) {
+                document.getElementById('countriesContent').innerHTML = 
+                    '<div class="empty-state">No medals awarded yet. Check back soon!</div>';
+                return;
+            }
+
+            let html = '';
+            countriesWithMedals.forEach((country, index) => {
                 const rank = index + 1;
-                const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
+                const rankClass = rank <= 3 ? `rank-${rank}` : '';
                 
                 html += `
-                    <tr>
-                        <td class="center"><span class="rank ${rankClass}">${rank}</span></td>
-                        <td><strong>${country.name}</strong></td>
-                        <td class="center">${country.gold}</td>
-                        <td class="center">${country.silver}</td>
-                        <td class="center">${country.bronze}</td>
-                        <td class="center"><strong>${country.total}</strong></td>
-                    </tr>
+                    <div class="country-card ${rankClass}">
+                        <div class="country-info">
+                            <div style="display: flex; align-items: center;">
+                                <span class="country-rank ${rankClass}">${rank}</span>
+                                <div>
+                                    <div class="country-name">${country.name}</div>
+                                    <div class="country-medals">
+                                        <span class="medal-count">🥇 ${country.gold}</span>
+                                        <span class="medal-count">🥈 ${country.silver}</span>
+                                        <span class="medal-count">🥉 ${country.bronze}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="country-total">${country.total}</div>
+                    </div>
                 `;
             });
 
-            html += '</tbody></table>';
             document.getElementById('countriesContent').innerHTML = html;
         }
 
         function renderRecentResults() {
             if (!medalsData.recentResults || medalsData.recentResults.length === 0) {
-                document.getElementById('recentResults').innerHTML = '<p style="text-align:center; color:#666;">No recent results yet.</p>';
+                document.getElementById('recentResults').innerHTML = 
+                    '<div class="empty-state">No recent results yet.</div>';
                 return;
             }
 
@@ -483,11 +526,11 @@
             sorted.slice(0, 10).forEach(result => {
                 html += `
                     <div class="result-card">
-                        <div class="result-info">
+                        <div class="result-header">
                             <div class="result-event">${result.event}</div>
-                            <div class="result-athlete">${result.athlete} • ${result.country}</div>
+                            <div class="result-medal ${result.medal}">${result.medal}</div>
                         </div>
-                        <div class="result-medal ${result.medal}">${result.medal.toUpperCase()}</div>
+                        <div class="result-athlete">${result.athlete} • ${result.country}</div>
                     </div>
                 `;
             });
@@ -499,15 +542,13 @@
             if (medalsData.metadata && medalsData.metadata.lastUpdated) {
                 const date = new Date(medalsData.metadata.lastUpdated);
                 document.getElementById('lastUpdated').textContent = 
-                    `Last updated: ${date.toLocaleString()}`;
+                    `Updated: ${date.toLocaleString()}`;
             } else {
                 document.getElementById('lastUpdated').textContent = '';
             }
         }
 
         loadData();
-        
-        // Auto-refresh every 60 seconds
         setInterval(loadData, 60000);
     </script>
 </body>
