@@ -1,0 +1,92 @@
+{
+  "medals": {
+    "Norway": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "United States": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Germany": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Canada": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Austria": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Switzerland": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Sweden": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Netherlands": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "France": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Italy": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Japan": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "South Korea": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "China": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Finland": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    },
+    "Great Britain": {
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0
+    }
+  },
+  "recentResults": [
+    {
+      "event": "Example Event",
+      "country": "Norway",
+      "medal": "gold",
+      "athlete": "Example Athlete",
+      "timestamp": "2026-02-08T14:30:00Z"
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2026-02-08T15:00:00Z",
+    "totalMedalsAwarded": 0
+  }
+}
