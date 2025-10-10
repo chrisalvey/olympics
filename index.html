@@ -245,12 +245,43 @@
             background: #ccc;
             cursor: not-allowed;
         }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h2 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🏅 Winter Olympics Fantasy Draft</h1>
         <div class="subtitle">Milano Cortina 2026 • February 6-22</div>
+
+        <div id="successMessage" class="success-message">
+            <h2>✅ Draft Submitted Successfully!</h2>
+            <p>Your team has been saved. Good luck!</p>
+            <p style="margin-top: 15px;"><strong>Team:</strong> <span id="successTeamName"></span></p>
+        </div>
 
         <form id="draftForm">
             <div class="form-section">
@@ -313,7 +344,23 @@
         </form>
     </div>
 
-    <script>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtj1xbEbFkBbE2KSW7EudwItJjf2-HqN8",
+            authDomain: "fantasy-olympics-cb09d.firebaseapp.com",
+            projectId: "fantasy-olympics-cb09d",
+            storageBucket: "fantasy-olympics-cb09d.firebasestorage.app",
+            messagingSenderId: "757292812325",
+            appId: "1:757292812325:web:1dc9d1e98f2fc3599017cc"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         const countries = [
             { "name": "Albania", "code": "ALB", "points": 8 },
             { "name": "Andorra", "code": "AND", "points": 12 },
@@ -456,19 +503,17 @@
             }
         }
 
-        function deselectCountry(country) {
+        window.deselectCountry = function(country) {
             selectedCountries = selectedCountries.filter(c => c.name !== country.name);
             pointsSpent -= country.points;
             updateUI();
         }
 
         function updateUI() {
-            // Update stats
             document.getElementById('pointsSpent').textContent = pointsSpent;
             document.getElementById('pointsRemaining').textContent = 100 - pointsSpent;
             document.getElementById('countriesCount').textContent = selectedCountries.length;
             
-            // Update warning message
             const warning = document.getElementById('warningMessage');
             if (selectedCountries.length >= 3) {
                 warning.classList.add('hidden');
@@ -476,7 +521,6 @@
                 warning.classList.remove('hidden');
             }
             
-            // Update selected countries display
             const selectedDiv = document.getElementById('selectedCountries');
             if (selectedCountries.length === 0) {
                 selectedDiv.className = 'selected-countries empty';
@@ -491,10 +535,7 @@
                 `).join('');
             }
             
-            // Update country grid
             renderCountries();
-            
-            // Update submit button
             validateForm();
         }
 
@@ -508,7 +549,6 @@
             document.getElementById('submitBtn').disabled = !isValid;
         }
 
-        // Event listeners
         document.querySelectorAll('input[name="sort"]').forEach(radio => {
             radio.addEventListener('change', renderCountries);
         });
@@ -516,24 +556,40 @@
         document.getElementById('name').addEventListener('input', validateForm);
         document.getElementById('teamName').addEventListener('input', validateForm);
 
-        document.getElementById('draftForm').addEventListener('submit', function(e) {
+        document.getElementById('draftForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const submission = {
-                name: document.getElementById('name').value.trim(),
-                teamName: document.getElementById('teamName').value.trim(),
-                countries: selectedCountries.map(c => c.name),
-                totalPointsSpent: pointsSpent
-            };
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('draftForm');
             
-            const jsonData = JSON.stringify(submission, null, 2);
-            const subject = encodeURIComponent(`Winter Olympics Draft - ${submission.teamName}`);
-            const body = encodeURIComponent(`New Draft Submission:\n\n${jsonData}`);
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            form.classList.add('loading');
             
-            window.location.href = `mailto:chrisalvey@gmail.com?subject=${subject}&body=${body}`;
+            try {
+                const submission = {
+                    name: document.getElementById('name').value.trim(),
+                    teamName: document.getElementById('teamName').value.trim(),
+                    countries: selectedCountries.map(c => c.name),
+                    totalPointsSpent: pointsSpent,
+                    timestamp: serverTimestamp()
+                };
+                
+                await addDoc(collection(db, 'submissions'), submission);
+                
+                document.getElementById('successTeamName').textContent = submission.teamName;
+                document.getElementById('successMessage').classList.add('show');
+                form.style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error submitting draft:', error);
+                alert('Error submitting draft. Please try again.');
+                submitBtn.textContent = 'Submit Draft';
+                submitBtn.disabled = false;
+                form.classList.remove('loading');
+            }
         });
 
-        // Initial render
         renderCountries();
     </script>
 </body>
