@@ -90,19 +90,44 @@
             padding: 16px;
             margin-bottom: 12px;
             border-left: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .participant-card.rank-1 {
             border-left-color: #FFD700;
-            background: linear-gradient(135deg, #fff9e6 0%, #f8f9fa 100%);
+            border-left-width: 6px;
+            background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 50%, #f8f9fa 100%);
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+            margin-bottom: 16px;
+            animation: goldShimmer 3s ease-in-out infinite;
         }
 
         .participant-card.rank-2 {
             border-left-color: #C0C0C0;
+            border-left-width: 6px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #f8f9fa 100%);
+            padding: 18px;
+            box-shadow: 0 4px 16px rgba(192, 192, 192, 0.25);
+            margin-bottom: 14px;
         }
 
         .participant-card.rank-3 {
             border-left-color: #CD7F32;
+            border-left-width: 6px;
+            background: linear-gradient(135deg, #fff4ed 0%, #f8f9fa 100%);
+            padding: 18px;
+            box-shadow: 0 4px 16px rgba(205, 127, 50, 0.25);
+            margin-bottom: 14px;
+        }
+
+        @keyframes goldShimmer {
+            0%, 100% {
+                box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 8px 24px rgba(255, 215, 0, 0.5);
+            }
         }
 
         .card-header {
@@ -133,6 +158,26 @@
             font-weight: bold;
             color: #333;
             margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rank-1 .team-name {
+            font-size: 20px;
+        }
+
+        .rank-2 .team-name {
+            font-size: 19px;
+        }
+
+        .rank-3 .team-name {
+            font-size: 19px;
+        }
+
+        .medal-emoji {
+            font-size: 22px;
+            line-height: 1;
         }
 
         .participant-name {
@@ -145,6 +190,22 @@
             font-weight: bold;
             color: #667eea;
             line-height: 1;
+        }
+
+        .rank-1 .card-score {
+            font-size: 40px;
+            color: #FFD700;
+            text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+        }
+
+        .rank-2 .card-score {
+            font-size: 36px;
+            color: #C0C0C0;
+        }
+
+        .rank-3 .card-score {
+            font-size: 36px;
+            color: #CD7F32;
         }
 
         .medal-row {
@@ -436,13 +497,22 @@
             participantsWithScores.forEach((p, index) => {
                 const rank = index + 1;
                 const rankClass = rank <= 3 ? `rank-${rank}` : '';
-                
+
+                // Medal emojis for top 3
+                let medalEmoji = '';
+                if (rank === 1) medalEmoji = '🥇';
+                else if (rank === 2) medalEmoji = '🥈';
+                else if (rank === 3) medalEmoji = '🥉';
+
                 html += `
                     <div class="participant-card ${rankClass}">
                         <div class="card-header">
                             <div class="card-rank ${rankClass}">${rank}</div>
                             <div class="card-info">
-                                <div class="team-name">${p.teamName}</div>
+                                <div class="team-name">
+                                    ${medalEmoji ? `<span class="medal-emoji">${medalEmoji}</span>` : ''}
+                                    <span>${p.teamName}</span>
+                                </div>
                                 <div class="participant-name">${p.name}</div>
                             </div>
                             <div class="card-score">${p.score}</div>
