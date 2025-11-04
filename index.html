@@ -3,117 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Winter Olympics Fantasy Draft</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Winter Olympics Fantasy Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .participant-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .participant-card.rank-1 {
+            border-left-color: #FFD700;
+            background: linear-gradient(135deg, #fff9e6 0%, #f8f9fa 100%);
+        }
+
+        .participant-card.rank-2 {
+            border-left-color: #C0C0C0;
+        }
+
+        .participant-card.rank-3 {
+            border-left-color: #CD7F32;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .card-rank {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+            line-height: 1;
+        }
+
+        .card-rank.rank-1 { color: #FFD700; }
+        .card-rank.rank-2 { color: #C0C0C0; }
+        .card-rank.rank-3 { color: #CD7F32; }
+
+        .card-info {
+            flex: 1;
+            margin-left: 12px;
+        }
+
+        .team-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .participant-name {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .card-score {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            line-height: 1;
+        }
+
+        .medal-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .medal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .gold-badge {
+            background: #FFD700;
+            color: #333;
+        }
+
+        .silver-badge {
+            background: #C0C0C0;
+            color: #333;
+        }
+
+        .bronze-badge {
+            background: #CD7F32;
+            color: white;
+        }
+
+        .countries-list {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .country-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .country-card.rank-1 {
+            background: linear-gradient(135deg, #fff9e6 0%, #f8f9fa 100%);
+        }
+
+        .country-info {
+            flex: 1;
+        }
+
+        .country-rank {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 12px;
+        }
+
+        .country-rank.rank-1 { color: #FFD700; }
+        .country-rank.rank-2 { color: #C0C0C0; }
+        .country-rank.rank-3 { color: #CD7F32; }
+
+        .country-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .country-medals {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .medal-count {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .country-total {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .recent-results {
+            margin-top: 30px;
+        }
+
+        .recent-results h2 {
+            color: #667eea;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .result-event {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+            flex: 1;
+        }
+
+        .result-medal {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .result-medal.gold {
+            background: #FFD700;
+            color: #333;
+        }
+
+        .result-medal.silver {
+            background: #C0C0C0;
+            color: #333;
+        }
+
+        .result-medal.bronze {
+            background: #CD7F32;
+            color: white;
+        }
+
+        .result-athlete {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .loading, .error {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .error {
+            color: #d32f2f;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏅 Winter Olympics Fantasy Draft</h1>
-        <div class="subtitle">Milano Cortina 2026 • February 6-22</div>
+        <h1>🏅 Winter Olympics Fantasy</h1>
+        <div class="subtitle">Milano Cortina 2026 • Feb 6-22</div>
+        <div class="last-updated" id="lastUpdated">Loading...</div>
 
-        <div id="successMessage" class="success-message">
-            <h2>✅ Draft Submitted Successfully!</h2>
-            <p>Your team has been saved. Good luck!</p>
-            <p style="margin-top: 15px;"><strong>Team:</strong> <span id="successTeamName"></span></p>
+        <div class="tabs">
+            <button class="tab active" data-tab="participants">Leaderboard</button>
+            <button class="tab" data-tab="countries">Medal Count</button>
         </div>
 
-        <form id="draftForm">
-            <div class="form-section">
-                <h2>Participant Information</h2>
-                <div class="input-group">
-                    <label for="name">Your Name *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="input-group">
-                    <label for="teamName">Team Name *</label>
-                    <input type="text" id="teamName" name="teamName" required>
-                </div>
-            </div>
+        <div id="participantsTab" class="tab-content active">
+            <div id="participantsContent" class="loading">Loading...</div>
+        </div>
 
-            <div class="form-section">
-                <h2>Draft Status</h2>
-                <div class="stats-bar">
-                    <div class="stat">
-                        <div class="stat-label">Points Spent</div>
-                        <div class="stat-value"><span id="pointsSpent">0</span> / 100</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-label">Points Remaining</div>
-                        <div class="stat-value" id="pointsRemaining">100</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-label">Countries Selected</div>
-                        <div class="stat-value" id="countriesCount">0</div>
-                    </div>
-                </div>
+        <div id="countriesTab" class="tab-content">
+            <div id="countriesContent" class="loading">Loading...</div>
+        </div>
 
-                <div class="progress-bar-container">
-                    <div class="progress-bar-label">
-                        <span>Budget Progress</span>
-                        <span id="pointsSpent2">0 / 100</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div id="progressFill" class="progress-bar-fill" style="width: 0%;">0 / 100</div>
-                    </div>
-                </div>
-
-                <div id="warningMessage" class="warning-message">
-                    ⚠️ Please select at least 3 countries
-                </div>
-
-                <div class="selected-countries-header">
-                    <h2>Your Team</h2>
-                    <button type="button" id="clearAllBtn" class="clear-all-btn" disabled>Clear All</button>
-                </div>
-                <div id="selectedCountries" class="selected-countries empty"></div>
-            </div>
-
-            <div class="form-section">
-                <h2>Select Countries</h2>
-
-                <div class="search-box">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Search countries...">
-                </div>
-
-                <div class="sort-controls">
-                    <strong>Sort by:</strong>
-                    <label>
-                        <input type="radio" name="sort" value="name" checked> Name
-                    </label>
-                    <label>
-                        <input type="radio" name="sort" value="pointsHigh"> High
-                    </label>
-                    <label>
-                        <input type="radio" name="sort" value="pointsLow"> Low
-                    </label>
-                </div>
-                <div id="countryGrid" class="country-grid"></div>
-            </div>
-
-            <div class="submit-section">
-                <button type="submit" id="submitBtn" disabled>Submit Draft</button>
-            </div>
-        </form>
-
-        <!-- Confirmation Dialog -->
-        <div id="confirmationOverlay" class="confirmation-overlay">
-            <div class="confirmation-dialog">
-                <h3>Confirm Your Draft</h3>
-                <p>Are you sure you want to submit this team?</p>
-                <div class="draft-summary">
-                    <strong>Team Name:</strong> <span id="confirmTeamName"></span><br>
-                    <strong>Total Points:</strong> <span id="confirmTotalPoints"></span> / 100<br><br>
-                    <strong>Countries:</strong>
-                    <div id="confirmCountryList" class="country-list"></div>
-                </div>
-                <div class="confirmation-buttons">
-                    <button type="button" id="cancelConfirm" class="btn-cancel">Cancel</button>
-                    <button type="button" id="confirmSubmit" class="btn-confirm">Yes, Submit</button>
-                </div>
-            </div>
+        <div class="recent-results">
+            <h2>🏆 Recent Results</h2>
+            <div id="recentResults">Loading...</div>
         </div>
     </div>
 
-    <script type="module" src="app.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtj1xbEbFkBbE2KSW7EudwItJjf2-HqN8",
+            authDomain: "fantasy-olympics-cb09d.firebaseapp.com",
+            projectId: "fantasy-olympics-cb09d",
+            storageBucket: "fantasy-olympics-cb09d.firebasestorage.app",
+            messagingSenderId: "757292812325",
+            appId: "1:757292812325:web:1dc9d1e98f2fc3599017cc"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let participants = [];
+        let medalsData = null;
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById(tabName + 'Tab').classList.add('active');
+            });
+        });
+
+        async function loadData() {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'submissions'));
+                participants = [];
+                querySnapshot.forEach((doc) => {
+                    participants.push(doc.data());
+                });
+
+                const response = await fetch(`medals.json?t=${new Date().getTime()}`);
+                medalsData = await response.json();
+
+                renderParticipants();
+                renderCountries();
+                renderRecentResults();
+                updateLastUpdated();
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('participantsContent').innerHTML = 
+                    '<div class="error">Error loading data. Make sure medals.json is in the same folder.</div>';
+                document.getElementById('countriesContent').innerHTML = 
+                    '<div class="error">Error loading data.</div>';
+                document.getElementById('recentResults').innerHTML = 
+                    '<div class="error">Error loading results.</div>';
+            }
+        }
+
+        function calculateScore(participantCountries) {
+            let score = 0;
+            let medalBreakdown = { gold: 0, silver: 0, bronze: 0 };
+
+            participantCountries.forEach(country => {
+                if (medalsData.medals[country]) {
+                    const medals = medalsData.medals[country];
+                    score += medals.gold * 3;
+                    score += medals.silver * 2;
+                    score += medals.bronze * 1;
+                    
+                    medalBreakdown.gold += medals.gold;
+                    medalBreakdown.silver += medals.silver;
+                    medalBreakdown.bronze += medals.bronze;
+                }
+            });
+
+            return { score, medalBreakdown };
+        }
+
+        function renderParticipants() {
+            if (participants.length === 0) {
+                document.getElementById('participantsContent').innerHTML = 
+                    '<div class="empty-state">No participants yet. Be the first to submit!</div>';
+                return;
+            }
+
+            const participantsWithScores = participants.map(p => {
+                const { score, medalBreakdown } = calculateScore(p.countries);
+                return { ...p, score, medalBreakdown };
+            });
+
+            participantsWithScores.sort((a, b) => b.score - a.score);
+
+            let html = '';
+            participantsWithScores.forEach((p, index) => {
+                const rank = index + 1;
+                const rankClass = rank <= 3 ? `rank-${rank}` : '';
+                
+                html += `
+                    <div class="participant-card ${rankClass}">
+                        <div class="card-header">
+                            <div class="card-rank ${rankClass}">${rank}</div>
+                            <div class="card-info">
+                                <div class="team-name">${p.teamName}</div>
+                                <div class="participant-name">${p.name}</div>
+                            </div>
+                            <div class="card-score">${p.score}</div>
+                        </div>
+                        ${p.medalBreakdown.gold + p.medalBreakdown.silver + p.medalBreakdown.bronze > 0 ? `
+                            <div class="medal-row">
+                                ${p.medalBreakdown.gold > 0 ? `<span class="medal-badge gold-badge">🥇 ${p.medalBreakdown.gold}</span>` : ''}
+                                ${p.medalBreakdown.silver > 0 ? `<span class="medal-badge silver-badge">🥈 ${p.medalBreakdown.silver}</span>` : ''}
+                                ${p.medalBreakdown.bronze > 0 ? `<span class="medal-badge bronze-badge">🥉 ${p.medalBreakdown.bronze}</span>` : ''}
+                            </div>
+                        ` : ''}
+                        <div class="countries-list">${p.countries.join(' • ')}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('participantsContent').innerHTML = html;
+        }
+
+        function renderCountries() {
+            const countriesArray = Object.entries(medalsData.medals).map(([name, medals]) => {
+                const total = medals.gold + medals.silver + medals.bronze;
+                return { name, ...medals, total };
+            });
+
+            countriesArray.sort((a, b) => {
+                if (b.gold !== a.gold) return b.gold - a.gold;
+                if (b.silver !== a.silver) return b.silver - a.silver;
+                return b.bronze - a.bronze;
+            });
+
+            // Only show countries with medals
+            const countriesWithMedals = countriesArray.filter(c => c.total > 0);
+
+            if (countriesWithMedals.length === 0) {
+                document.getElementById('countriesContent').innerHTML = 
+                    '<div class="empty-state">No medals awarded yet. Check back soon!</div>';
+                return;
+            }
+
+            let html = '';
+            countriesWithMedals.forEach((country, index) => {
+                const rank = index + 1;
+                const rankClass = rank <= 3 ? `rank-${rank}` : '';
+                
+                html += `
+                    <div class="country-card ${rankClass}">
+                        <div class="country-info">
+                            <div style="display: flex; align-items: center;">
+                                <span class="country-rank ${rankClass}">${rank}</span>
+                                <div>
+                                    <div class="country-name">${country.name}</div>
+                                    <div class="country-medals">
+                                        <span class="medal-count">🥇 ${country.gold}</span>
+                                        <span class="medal-count">🥈 ${country.silver}</span>
+                                        <span class="medal-count">🥉 ${country.bronze}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="country-total">${country.total}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('countriesContent').innerHTML = html;
+        }
+
+        function renderRecentResults() {
+            if (!medalsData.recentResults || medalsData.recentResults.length === 0) {
+                document.getElementById('recentResults').innerHTML = 
+                    '<div class="empty-state">No recent results yet.</div>';
+                return;
+            }
+
+            const sorted = [...medalsData.recentResults].sort((a, b) => 
+                new Date(b.timestamp) - new Date(a.timestamp)
+            );
+
+            let html = '';
+            sorted.slice(0, 10).forEach(result => {
+                html += `
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-event">${result.event}</div>
+                            <div class="result-medal ${result.medal}">${result.medal}</div>
+                        </div>
+                        <div class="result-athlete">${result.athlete} • ${result.country}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('recentResults').innerHTML = html;
+        }
+
+        function updateLastUpdated() {
+            if (medalsData.metadata && medalsData.metadata.lastUpdated) {
+                const date = new Date(medalsData.metadata.lastUpdated);
+                document.getElementById('lastUpdated').textContent = 
+                    `Updated: ${date.toLocaleString()}`;
+            } else {
+                document.getElementById('lastUpdated').textContent = '';
+            }
+        }
+
+        loadData();
+        setInterval(loadData, 60000);
+    </script>
 </body>
 </html>

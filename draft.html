@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter Olympics Fantasy Draft</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🏅 Winter Olympics Fantasy Draft</h1>
+        <div class="subtitle">Milano Cortina 2026 • February 6-22</div>
+
+        <div id="successMessage" class="success-message">
+            <h2>✅ Draft Submitted Successfully!</h2>
+            <p>Your team has been saved. Good luck!</p>
+            <p style="margin-top: 15px;"><strong>Team:</strong> <span id="successTeamName"></span></p>
+        </div>
+
+        <form id="draftForm">
+            <div class="form-section">
+                <h2>Participant Information</h2>
+                <div class="input-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="teamName">Team Name *</label>
+                    <input type="text" id="teamName" name="teamName" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Draft Status</h2>
+                <div class="stats-bar">
+                    <div class="stat">
+                        <div class="stat-label">Points Spent</div>
+                        <div class="stat-value"><span id="pointsSpent">0</span> / 100</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Points Remaining</div>
+                        <div class="stat-value" id="pointsRemaining">100</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Countries Selected</div>
+                        <div class="stat-value" id="countriesCount">0</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar-label">
+                        <span>Budget Progress</span>
+                        <span id="pointsSpent2">0 / 100</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-bar-fill" style="width: 0%;">0 / 100</div>
+                    </div>
+                </div>
+
+                <div id="warningMessage" class="warning-message">
+                    ⚠️ Please select at least 3 countries
+                </div>
+
+                <div class="selected-countries-header">
+                    <h2>Your Team</h2>
+                    <button type="button" id="clearAllBtn" class="clear-all-btn" disabled>Clear All</button>
+                </div>
+                <div id="selectedCountries" class="selected-countries empty"></div>
+            </div>
+
+            <div class="form-section">
+                <h2>Select Countries</h2>
+
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search countries...">
+                </div>
+
+                <div class="sort-controls">
+                    <strong>Sort by:</strong>
+                    <label>
+                        <input type="radio" name="sort" value="name" checked> Name
+                    </label>
+                    <label>
+                        <input type="radio" name="sort" value="pointsHigh"> High
+                    </label>
+                    <label>
+                        <input type="radio" name="sort" value="pointsLow"> Low
+                    </label>
+                </div>
+                <div id="countryGrid" class="country-grid"></div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" id="submitBtn" disabled>Submit Draft</button>
+            </div>
+        </form>
+
+        <!-- Confirmation Dialog -->
+        <div id="confirmationOverlay" class="confirmation-overlay">
+            <div class="confirmation-dialog">
+                <h3>Confirm Your Draft</h3>
+                <p>Are you sure you want to submit this team?</p>
+                <div class="draft-summary">
+                    <strong>Team Name:</strong> <span id="confirmTeamName"></span><br>
+                    <strong>Total Points:</strong> <span id="confirmTotalPoints"></span> / 100<br><br>
+                    <strong>Countries:</strong>
+                    <div id="confirmCountryList" class="country-list"></div>
+                </div>
+                <div class="confirmation-buttons">
+                    <button type="button" id="cancelConfirm" class="btn-cancel">Cancel</button>
+                    <button type="button" id="confirmSubmit" class="btn-confirm">Yes, Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
