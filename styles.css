@@ -36,6 +36,58 @@ h1 {
     font-size: 13px;
 }
 
+.results-link-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.results-link {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.results-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.bookmark-hint {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.view-results-btn {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.view-results-btn:hover {
+    background: #5568d3;
+}
+
 .form-section {
     margin-bottom: 25px;
 }
