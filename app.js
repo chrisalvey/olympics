@@ -391,11 +391,7 @@ class OlympicsDraft {
             const submission = {
                 name: document.getElementById('name').value.trim(),
                 teamName: document.getElementById('teamName').value.trim(),
-                countries: this.selectedCountries.map(c => ({
-                    name: c.name,
-                    code: c.code,
-                    points: c.points
-                })),
+                countries: this.selectedCountries.map(c => c.name),
                 totalPointsSpent: this.pointsSpent,
                 timestamp: serverTimestamp()
             };
