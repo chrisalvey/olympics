@@ -11,6 +11,35 @@
         <h1>🏅 Winter Olympics Fantasy Draft</h1>
         <div class="subtitle">Milano Cortina 2026 • February 6-22</div>
 
+        <div id="countdownTimer" class="countdown-timer">
+            <div class="countdown-label">Draft Closes In:</div>
+            <div class="countdown-display">
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-text">Days</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-text">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-text">Mins</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-text">Secs</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="draftClosedBanner" class="draft-closed-banner" style="display: none;">
+            <h2>⏰ Draft Has Closed</h2>
+            <p>The deadline to submit your draft has passed.</p>
+            <p>The Olympics have begun! Follow the action on the leaderboard.</p>
+            <a href="/" class="view-results-btn">View Leaderboard →</a>
+        </div>
+
         <div class="results-link-banner">
             <div class="banner-content">
                 <strong>📊 Track the leaderboard:</strong>

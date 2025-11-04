@@ -13,6 +13,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Draft deadline - February 6, 2026 at midnight (Opening Ceremony day)
+const DRAFT_DEADLINE = new Date('2026-02-06T00:00:00');
+
 const countries = [
     { "name": "Albania", "code": "ALB", "points": 8 },
     { "name": "Andorra", "code": "AND", "points": 12 },
@@ -103,10 +106,82 @@ class OlympicsDraft {
         this.selectedCountries = [];
         this.pointsSpent = 0;
         this.searchQuery = '';
-        this.initializeFromLocalStorage();
-        this.setupEventListeners();
-        this.renderCountries();
-        this.updateUI();
+        this.countdownInterval = null;
+
+        // Check if deadline has passed
+        if (this.isDeadlinePassed()) {
+            this.showDeadlineClosed();
+        } else {
+            this.initializeFromLocalStorage();
+            this.setupEventListeners();
+            this.renderCountries();
+            this.updateUI();
+            this.startCountdown();
+        }
+    }
+
+    isDeadlinePassed() {
+        return new Date() >= DRAFT_DEADLINE;
+    }
+
+    showDeadlineClosed() {
+        // Hide the countdown timer
+        const countdownTimer = document.getElementById('countdownTimer');
+        if (countdownTimer) {
+            countdownTimer.style.display = 'none';
+        }
+
+        // Hide the form
+        const form = document.getElementById('draftForm');
+        if (form) {
+            form.style.display = 'none';
+        }
+
+        // Show the closed banner
+        const banner = document.getElementById('draftClosedBanner');
+        if (banner) {
+            banner.style.display = 'block';
+        }
+    }
+
+    startCountdown() {
+        this.updateCountdown(); // Initial update
+
+        // Update every second
+        this.countdownInterval = setInterval(() => {
+            this.updateCountdown();
+
+            // Check if deadline has passed
+            if (this.isDeadlinePassed()) {
+                clearInterval(this.countdownInterval);
+                this.showDeadlineClosed();
+            }
+        }, 1000);
+    }
+
+    updateCountdown() {
+        const now = new Date();
+        const timeRemaining = DRAFT_DEADLINE - now;
+
+        if (timeRemaining <= 0) {
+            document.getElementById('days').textContent = '00';
+            document.getElementById('hours').textContent = '00';
+            document.getElementById('minutes').textContent = '00';
+            document.getElementById('seconds').textContent = '00';
+            return;
+        }
+
+        // Calculate time units
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        // Update DOM with zero-padding
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
     }
 
     initializeFromLocalStorage() {
