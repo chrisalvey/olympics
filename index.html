@@ -469,6 +469,17 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Draft deadline - February 6, 2026 at midnight (Opening Ceremony day)
+        const DRAFT_DEADLINE = new Date('2026-02-06T00:00:00');
+
+        // Hide draft link banner if deadline has passed
+        if (new Date() >= DRAFT_DEADLINE) {
+            const draftBanner = document.querySelector('.draft-link-banner');
+            if (draftBanner) {
+                draftBanner.style.display = 'none';
+            }
+        }
+
         let participants = [];
         let medalsData = null;
 
