@@ -427,8 +427,8 @@ class OlympicsDraft {
     }
 }
 
-// Initialize the app when DOM is ready
-async function initializeApp() {
+// Initialize the draft app when DOM is ready
+async function initializeDraft() {
     // Load countries data first
     const loaded = await loadCountries();
     if (loaded) {
@@ -437,8 +437,8 @@ async function initializeApp() {
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeApp);
+    document.addEventListener('DOMContentLoaded', initializeDraft);
 } else {
     // DOM is already ready
-    initializeApp();
+    initializeDraft();
 }
