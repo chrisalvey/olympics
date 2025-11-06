@@ -269,6 +269,15 @@ class OlympicsDraft {
     }
 
     selectCountry(country) {
+        const MAX_COUNTRIES = 10;
+
+        // Check country limit first
+        if (this.selectedCountries.length >= MAX_COUNTRIES) {
+            alert(`You can only select up to ${MAX_COUNTRIES} countries.`);
+            return;
+        }
+
+        // Check point budget
         const pointsRemaining = 100 - this.pointsSpent;
         if (country.points <= pointsRemaining) {
             this.selectedCountries.push(country);
@@ -301,9 +310,10 @@ class OlympicsDraft {
 
     updateUI() {
         // Update stats
+        const MAX_COUNTRIES = 10;
         document.getElementById('pointsSpent').textContent = this.pointsSpent;
         document.getElementById('pointsRemaining').textContent = 100 - this.pointsSpent;
-        document.getElementById('countriesCount').textContent = this.selectedCountries.length;
+        document.getElementById('countriesCount').textContent = `${this.selectedCountries.length}/10`;
 
         // Update progress bar
         const progressFill = document.getElementById('progressFill');
@@ -358,12 +368,14 @@ class OlympicsDraft {
     }
 
     validateForm() {
+        const MAX_COUNTRIES = 10;
         const name = document.getElementById('name').value.trim();
         const teamName = document.getElementById('teamName').value.trim();
         const hasMinCountries = this.selectedCountries.length >= 3;
+        const hasMaxCountries = this.selectedCountries.length <= MAX_COUNTRIES;
         const withinBudget = this.pointsSpent <= 100;
 
-        const isValid = name && teamName && hasMinCountries && withinBudget;
+        const isValid = name && teamName && hasMinCountries && hasMaxCountries && withinBudget;
         document.getElementById('submitBtn').disabled = !isValid;
     }
 

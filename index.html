@@ -692,7 +692,18 @@
                                 ${p.medalBreakdown.bronze > 0 ? `<span class="medal-badge bronze-badge">🥉 ${p.medalBreakdown.bronze}</span>` : ''}
                             </div>
                         ` : ''}
-                        <div class="countries-list">${p.countries.join(' • ')}</div>
+                        <div class="countries-list">${p.countries.map(country => {
+                            const normalizedCountry = normalizeCountryName(country);
+                            const medals = medalsData.medals[normalizedCountry];
+                            let points = 0;
+                            if (medals) {
+                                const validGold = Math.max(0, Math.floor(Number(medals.gold) || 0));
+                                const validSilver = Math.max(0, Math.floor(Number(medals.silver) || 0));
+                                const validBronze = Math.max(0, Math.floor(Number(medals.bronze) || 0));
+                                points = validGold * 3 + validSilver * 2 + validBronze * 1;
+                            }
+                            return `${country} (${points})`;
+                        }).join(' • ')}</div>
                     </div>
                 `;
             });
