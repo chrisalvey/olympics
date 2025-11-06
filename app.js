@@ -22,7 +22,8 @@ let countries = [];
 // Load countries data from JSON file
 async function loadCountries() {
     try {
-        const response = await fetch('countries.json');
+        // Add cache-busting parameter to ensure fresh data
+        const response = await fetch(`countries.json?t=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`Failed to load countries: ${response.statusText}`);
         }
