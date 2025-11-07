@@ -549,6 +549,12 @@
                 return { ...p, score, medalBreakdown };
             });
 
+            // Create normalized lookup map for case-insensitive country matching
+            const medalsLookup = {};
+            Object.keys(medalsData.medals).forEach(country => {
+                medalsLookup[normalizeCountryName(country)] = medalsData.medals[country];
+            });
+
             // Sort with Olympic-standard tie-breaker rules
             participantsWithScores.sort((a, b) => {
                 // Primary: Total score
@@ -627,7 +633,7 @@
                         ` : ''}
                         <div class="countries-list">${p.countries.map(country => {
                             const normalizedCountry = normalizeCountryName(country);
-                            const medals = medalsData.medals[normalizedCountry];
+                            const medals = medalsLookup[normalizedCountry];
                             let points = 0;
                             if (medals) {
                                 const validGold = Math.max(0, Math.floor(Number(medals.gold) || 0));
