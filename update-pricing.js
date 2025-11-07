@@ -148,7 +148,7 @@ console.log('📖 Reading current countries.json...');
 const countriesData = JSON.parse(fs.readFileSync('countries.json', 'utf-8'));
 const oldPrices = {};
 countriesData.forEach(country => {
-    oldPrices[country.name] = country.cost;
+    oldPrices[country.name] = country.points;
 });
 console.log(`   Found ${countriesData.length} countries in current file`);
 console.log();
@@ -161,9 +161,14 @@ const priceChanges = [];
 countriesData.forEach(country => {
     const historicalPoints = countryPoints[country.name]?.total || 0;
     const newPrice = calculatePrice(historicalPoints, country.name, countryPoints);
-    const oldPrice = country.cost;
+    const oldPrice = country.points;
 
-    country.cost = newPrice;
+    country.points = newPrice;
+
+    // Remove the 'cost' field if it exists (cleanup from previous version)
+    if ('cost' in country) {
+        delete country.cost;
+    }
 
     if (oldPrice !== newPrice) {
         priceChanges.push({
@@ -182,7 +187,7 @@ if (!hasRussia && countryPoints['Russia']) {
     const russiaPrice = calculatePrice(countryPoints['Russia'].total, 'Russia', countryPoints);
     countriesData.push({
         name: 'Russia',
-        cost: russiaPrice
+        points: russiaPrice
     });
     priceChanges.push({
         name: 'Russia',
@@ -247,13 +252,13 @@ console.log('='.repeat(80));
 console.log('TOP 10 MOST EXPENSIVE COUNTRIES');
 console.log('='.repeat(80));
 const top10 = [...countriesData]
-    .sort((a, b) => b.cost - a.cost)
+    .sort((a, b) => b.points - a.points)
     .slice(0, 10);
 
 top10.forEach((country, index) => {
     const historicalPoints = countryPoints[country.name]?.total || 0;
     const rank = index + 1;
-    console.log(`   ${String(rank).padStart(2)}. ${country.name.padEnd(30)} ${String(country.cost).padStart(3)} points  [${historicalPoints} historical points]`);
+    console.log(`   ${String(rank).padStart(2)}. ${country.name.padEnd(30)} ${String(country.points).padStart(3)} points  [${historicalPoints} historical points]`);
 });
 console.log();
 
@@ -271,11 +276,11 @@ const distribution = {
 };
 
 countriesData.forEach(country => {
-    if (country.cost >= 30) distribution['Elite (30+)']++;
-    else if (country.cost >= 20) distribution['High (20-29)']++;
-    else if (country.cost >= 15) distribution['Mid (15-19)']++;
-    else if (country.cost >= 10) distribution['Low-Mid (10-14)']++;
-    else if (country.cost >= 5) distribution['Budget (5-9)']++;
+    if (country.points >= 30) distribution['Elite (30+)']++;
+    else if (country.points >= 20) distribution['High (20-29)']++;
+    else if (country.points >= 15) distribution['Mid (15-19)']++;
+    else if (country.points >= 10) distribution['Low-Mid (10-14)']++;
+    else if (country.points >= 5) distribution['Budget (5-9)']++;
     else distribution['Minimum (3-4)']++;
 });
 
