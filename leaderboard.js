@@ -232,20 +232,32 @@ function renderParticipants() {
 
 function renderCountries() {
     const countriesArray = Object.entries(medalsData.medals).map(([name, medals]) => {
-        const total = medals.gold + medals.silver + medals.bronze;
-        return { name, medals, total };
+        const validated = validateMedals(medals);
+        const points = calculateMedalPoints(validated);
+        const medalCount = validated.gold + validated.silver + validated.bronze;
+        return { name, medals: validated, points, medalCount };
     });
 
-    // Sort by total medals (desc), then by gold (desc)
+    // Sort by total points (desc), then by gold, silver, bronze, then alphabetically
     countriesArray.sort((a, b) => {
-        if (b.total !== a.total) return b.total - a.total;
+        // Primary: Total points
+        if (b.points !== a.points) return b.points - a.points;
+
+        // Tie-breaker 1: Most gold medals
         if (b.medals.gold !== a.medals.gold) return b.medals.gold - a.medals.gold;
+
+        // Tie-breaker 2: Most silver medals
         if (b.medals.silver !== a.medals.silver) return b.medals.silver - a.medals.silver;
-        return b.medals.bronze - a.medals.bronze;
+
+        // Tie-breaker 3: Most bronze medals
+        if (b.medals.bronze !== a.medals.bronze) return b.medals.bronze - a.medals.bronze;
+
+        // Tie-breaker 4: Alphabetical
+        return a.name.localeCompare(b.name);
     });
 
     // Filter to only show countries with medals
-    const countriesWithMedals = countriesArray.filter(c => c.total > 0);
+    const countriesWithMedals = countriesArray.filter(c => c.medalCount > 0);
 
     if (countriesWithMedals.length === 0) {
         document.getElementById('countriesContent').innerHTML =
@@ -253,35 +265,43 @@ function renderCountries() {
         return;
     }
 
-    let html = '';
+    let html = `
+        <div class="country-table-wrapper">
+            <table class="country-table">
+                <thead>
+                    <tr>
+                        <th class="rank-col">#</th>
+                        <th class="country-col">Country</th>
+                        <th class="medal-col">🥇</th>
+                        <th class="medal-col">🥈</th>
+                        <th class="medal-col">🥉</th>
+                        <th class="total-col">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
     countriesWithMedals.forEach((country, index) => {
         const rank = index + 1;
         const rankClass = rank <= 3 ? `rank-${rank}` : '';
 
         html += `
-            <div class="country-card ${rankClass}">
-                <div class="country-header">
-                    <div class="country-rank ${rankClass}">${rank}</div>
-                    <div class="country-name">${country.name}</div>
-                    <div class="country-total">${country.total}</div>
-                </div>
-                <div class="country-medals">
-                    <div class="country-medal">
-                        <span class="medal-icon gold">🥇</span>
-                        <span class="medal-count">${country.medals.gold}</span>
-                    </div>
-                    <div class="country-medal">
-                        <span class="medal-icon silver">🥈</span>
-                        <span class="medal-count">${country.medals.silver}</span>
-                    </div>
-                    <div class="country-medal">
-                        <span class="medal-icon bronze">🥉</span>
-                        <span class="medal-count">${country.medals.bronze}</span>
-                    </div>
-                </div>
-            </div>
+            <tr class="country-row ${rankClass}">
+                <td class="rank-cell ${rankClass}">${rank}</td>
+                <td class="country-cell">${country.name}</td>
+                <td class="medal-cell gold">${country.medals.gold}</td>
+                <td class="medal-cell silver">${country.medals.silver}</td>
+                <td class="medal-cell bronze">${country.medals.bronze}</td>
+                <td class="total-cell">${country.points}</td>
+            </tr>
         `;
     });
+
+    html += `
+                </tbody>
+            </table>
+        </div>
+    `;
 
     document.getElementById('countriesContent').innerHTML = html;
 }
