@@ -307,19 +307,11 @@ class OlympicsDraft {
         progressFill.style.width = percentage + '%';
         progressFill.textContent = this.pointsSpent + ' / ' + MAX_BUDGET;
 
-        if (this.pointsSpent > MAX_BUDGET) {
-            progressFill.classList.add('over-budget');
-        } else {
-            progressFill.classList.remove('over-budget');
-        }
+        progressFill.classList.toggle('over-budget', this.pointsSpent > MAX_BUDGET);
 
         // Update warning
         const warning = document.getElementById('warningMessage');
-        if (this.selectedCountries.length >= MIN_COUNTRIES) {
-            warning.classList.add('hidden');
-        } else {
-            warning.classList.remove('hidden');
-        }
+        warning.classList.toggle('hidden', this.selectedCountries.length >= MIN_COUNTRIES);
 
         // Update selected countries display
         const selectedDiv = document.getElementById('selectedCountries');
