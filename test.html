@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympics Fantasy Draft - Tests</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .summary {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .summary-item {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .summary-item.passed {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+
+        .summary-item.failed {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+
+        .summary-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .test-group {
+            margin-bottom: 30px;
+        }
+
+        .test-group h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .test {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            background: #f8f9fa;
+        }
+
+        .test.pass {
+            background: #d4edda;
+        }
+
+        .test.fail {
+            background: #f8d7da;
+        }
+
+        .test-icon {
+            font-size: 20px;
+            margin-right: 12px;
+            min-width: 24px;
+        }
+
+        .test-name {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .test-error {
+            font-size: 12px;
+            color: #dc3545;
+            margin-left: 36px;
+            margin-top: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Suite</h1>
+        <div class="subtitle">Winter Olympics Fantasy Draft - Unit Tests</div>
+
+        <div id="summary" class="summary" style="display: none;">
+            <div class="summary-item passed">
+                <div class="summary-number" id="passedCount">0</div>
+                <div class="summary-label">Passed</div>
+            </div>
+            <div class="summary-item failed">
+                <div class="summary-number" id="failedCount">0</div>
+                <div class="summary-label">Failed</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-number" id="totalCount">0</div>
+                <div class="summary-label">Total</div>
+            </div>
+        </div>
+
+        <div id="results">
+            <div class="loading">Running tests...</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import {
+            normalizeCountryName,
+            validateMedals,
+            calculateMedalPoints,
+            createNormalizedLookup
+        } from './utils.js';
+
+        let passedCount = 0;
+        let failedCount = 0;
+        const testResults = {};
+
+        function test(groupName, testName, fn) {
+            if (!testResults[groupName]) {
+                testResults[groupName] = [];
+            }
+
+            try {
+                fn();
+                testResults[groupName].push({ name: testName, passed: true });
+                passedCount++;
+            } catch (error) {
+                testResults[groupName].push({ name: testName, passed: false, error: error.message });
+                failedCount++;
+            }
+        }
+
+        function assertEqual(actual, expected, message) {
+            if (actual !== expected) {
+                throw new Error(message || `Expected ${expected}, got ${actual}`);
+            }
+        }
+
+        function assertDeepEqual(actual, expected, message) {
+            if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+                throw new Error(message || `Expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`);
+            }
+        }
+
+        // ========== calculateMedalPoints() Tests ==========
+        test('calculateMedalPoints()', 'Single gold medal = 3 points', () => {
+            assertEqual(calculateMedalPoints({ gold: 1, silver: 0, bronze: 0 }), 3);
+        });
+
+        test('calculateMedalPoints()', 'Single silver medal = 2 points', () => {
+            assertEqual(calculateMedalPoints({ gold: 0, silver: 1, bronze: 0 }), 2);
+        });
+
+        test('calculateMedalPoints()', 'Single bronze medal = 1 point', () => {
+            assertEqual(calculateMedalPoints({ gold: 0, silver: 0, bronze: 1 }), 1);
+        });
+
+        test('calculateMedalPoints()', 'No medals = 0 points', () => {
+            assertEqual(calculateMedalPoints({ gold: 0, silver: 0, bronze: 0 }), 0);
+        });
+
+        test('calculateMedalPoints()', 'Mixed medals calculated correctly', () => {
+            assertEqual(calculateMedalPoints({ gold: 2, silver: 3, bronze: 1 }), 13);
+            // 2*3 + 3*2 + 1*1 = 6 + 6 + 1 = 13
+        });
+
+        test('calculateMedalPoints()', 'Large numbers work correctly', () => {
+            assertEqual(calculateMedalPoints({ gold: 10, silver: 15, bronze: 20 }), 80);
+            // 10*3 + 15*2 + 20*1 = 30 + 30 + 20 = 80
+        });
+
+        test('calculateMedalPoints()', 'Handles invalid input gracefully', () => {
+            assertEqual(calculateMedalPoints({ gold: 'invalid', silver: null, bronze: undefined }), 0);
+        });
+
+        test('calculateMedalPoints()', 'Handles negative numbers', () => {
+            assertEqual(calculateMedalPoints({ gold: -1, silver: -2, bronze: -3 }), 0);
+        });
+
+        test('calculateMedalPoints()', 'Handles decimal numbers by flooring', () => {
+            assertEqual(calculateMedalPoints({ gold: 2.9, silver: 1.5, bronze: 0.9 }), 8);
+            // floor(2.9)*3 + floor(1.5)*2 + floor(0.9)*1 = 2*3 + 1*2 + 0*1 = 8
+        });
+
+        // ========== validateMedals() Tests ==========
+        test('validateMedals()', 'Valid medals remain unchanged', () => {
+            assertDeepEqual(
+                validateMedals({ gold: 5, silver: 3, bronze: 2 }),
+                { gold: 5, silver: 3, bronze: 2 }
+            );
+        });
+
+        test('validateMedals()', 'Converts strings to numbers', () => {
+            assertDeepEqual(
+                validateMedals({ gold: '5', silver: '3', bronze: '2' }),
+                { gold: 5, silver: 3, bronze: 2 }
+            );
+        });
+
+        test('validateMedals()', 'Converts null/undefined to 0', () => {
+            assertDeepEqual(
+                validateMedals({ gold: null, silver: undefined, bronze: 0 }),
+                { gold: 0, silver: 0, bronze: 0 }
+            );
+        });
+
+        test('validateMedals()', 'Converts NaN to 0', () => {
+            assertDeepEqual(
+                validateMedals({ gold: NaN, silver: 'invalid', bronze: {} }),
+                { gold: 0, silver: 0, bronze: 0 }
+            );
+        });
+
+        test('validateMedals()', 'Converts negative numbers to 0', () => {
+            assertDeepEqual(
+                validateMedals({ gold: -5, silver: -10, bronze: -1 }),
+                { gold: 0, silver: 0, bronze: 0 }
+            );
+        });
+
+        test('validateMedals()', 'Floors decimal numbers', () => {
+            assertDeepEqual(
+                validateMedals({ gold: 5.9, silver: 3.1, bronze: 2.5 }),
+                { gold: 5, silver: 3, bronze: 2 }
+            );
+        });
+
+        // ========== normalizeCountryName() Tests ==========
+        test('normalizeCountryName()', 'Converts to lowercase', () => {
+            assertEqual(normalizeCountryName('UNITED STATES'), 'united states');
+        });
+
+        test('normalizeCountryName()', 'Trims whitespace', () => {
+            assertEqual(normalizeCountryName('  Canada  '), 'canada');
+        });
+
+        test('normalizeCountryName()', 'Handles mixed case', () => {
+            assertEqual(normalizeCountryName('NoRwAy'), 'norway');
+        });
+
+        test('normalizeCountryName()', 'Handles empty string', () => {
+            assertEqual(normalizeCountryName(''), '');
+        });
+
+        test('normalizeCountryName()', 'Handles null/undefined', () => {
+            assertEqual(normalizeCountryName(null), '');
+            assertEqual(normalizeCountryName(undefined), '');
+        });
+
+        test('normalizeCountryName()', 'Handles non-string input', () => {
+            assertEqual(normalizeCountryName(123), '');
+        });
+
+        test('normalizeCountryName()', 'Preserves spaces within name', () => {
+            assertEqual(normalizeCountryName('Great Britain'), 'great britain');
+        });
+
+        // ========== createNormalizedLookup() Tests ==========
+        test('createNormalizedLookup()', 'Creates lowercase keys', () => {
+            const input = {
+                'United States': { gold: 1, silver: 0, bronze: 0 },
+                'Canada': { gold: 0, silver: 1, bronze: 0 }
+            };
+            const lookup = createNormalizedLookup(input);
+
+            assertEqual(lookup['united states'].gold, 1);
+            assertEqual(lookup['canada'].silver, 1);
+        });
+
+        test('createNormalizedLookup()', 'Handles empty object', () => {
+            const lookup = createNormalizedLookup({});
+            assertDeepEqual(lookup, {});
+        });
+
+        test('createNormalizedLookup()', 'Preserves medal data structure', () => {
+            const input = {
+                'Norway': { gold: 5, silver: 3, bronze: 2 }
+            };
+            const lookup = createNormalizedLookup(input);
+
+            assertDeepEqual(lookup['norway'], { gold: 5, silver: 3, bronze: 2 });
+        });
+
+        test('createNormalizedLookup()', 'Handles country names with spaces', () => {
+            const input = {
+                'Great Britain': { gold: 2, silver: 1, bronze: 3 },
+                'South Korea': { gold: 1, silver: 0, bronze: 1 }
+            };
+            const lookup = createNormalizedLookup(input);
+
+            assertEqual(lookup['great britain'].gold, 2);
+            assertEqual(lookup['south korea'].bronze, 1);
+        });
+
+        // ========== Integration Tests ==========
+        test('Integration', 'Full scoring workflow with normalized lookup', () => {
+            const medalsData = {
+                'United States': { gold: 5, silver: 3, bronze: 2 },
+                'Canada': { gold: 2, silver: 4, bronze: 3 }
+            };
+
+            const lookup = createNormalizedLookup(medalsData);
+
+            // Participant has "united states" (lowercase)
+            const usaMedals = lookup[normalizeCountryName('united states')];
+            const usaPoints = calculateMedalPoints(validateMedals(usaMedals));
+
+            assertEqual(usaPoints, 23); // 5*3 + 3*2 + 2*1 = 15 + 6 + 2 = 23
+        });
+
+        test('Integration', 'Handles typos in country names gracefully', () => {
+            const medalsData = {
+                'Norway': { gold: 10, silver: 5, bronze: 3 }
+            };
+
+            const lookup = createNormalizedLookup(medalsData);
+
+            // User types "  norway  " with extra spaces
+            const medals = lookup[normalizeCountryName('  norway  ')];
+            const points = calculateMedalPoints(validateMedals(medals));
+
+            assertEqual(points, 43); // 10*3 + 5*2 + 3*1 = 30 + 10 + 3 = 43
+        });
+
+        test('Integration', 'Missing country returns undefined (no crash)', () => {
+            const medalsData = {
+                'Canada': { gold: 1, silver: 1, bronze: 1 }
+            };
+
+            const lookup = createNormalizedLookup(medalsData);
+            const medals = lookup[normalizeCountryName('NonExistentCountry')];
+
+            assertEqual(medals, undefined);
+            // Should not crash when calculating points on undefined
+            const points = medals ? calculateMedalPoints(validateMedals(medals)) : 0;
+            assertEqual(points, 0);
+        });
+
+        // ========== Render Results ==========
+        function renderResults() {
+            const summaryDiv = document.getElementById('summary');
+            const resultsDiv = document.getElementById('results');
+
+            // Update summary
+            document.getElementById('passedCount').textContent = passedCount;
+            document.getElementById('failedCount').textContent = failedCount;
+            document.getElementById('totalCount').textContent = passedCount + failedCount;
+            summaryDiv.style.display = 'flex';
+
+            // Render test groups
+            let html = '';
+            for (const [groupName, tests] of Object.entries(testResults)) {
+                html += `<div class="test-group">`;
+                html += `<h2>${groupName}</h2>`;
+
+                tests.forEach(test => {
+                    const status = test.passed ? 'pass' : 'fail';
+                    const icon = test.passed ? '✅' : '❌';
+
+                    html += `<div class="test ${status}">`;
+                    html += `<span class="test-icon">${icon}</span>`;
+                    html += `<span class="test-name">${test.name}</span>`;
+                    html += `</div>`;
+
+                    if (test.error) {
+                        html += `<div class="test-error">Error: ${test.error}</div>`;
+                    }
+                });
+
+                html += `</div>`;
+            }
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // Run all tests and render
+        renderResults();
+    </script>
+</body>
+</html>
