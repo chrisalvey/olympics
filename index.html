@@ -299,65 +299,6 @@
             color: #667eea;
         }
 
-        .recent-results {
-            margin-top: 30px;
-        }
-
-        .recent-results h2 {
-            color: #667eea;
-            margin-bottom: 16px;
-            font-size: 18px;
-        }
-
-        .result-card {
-            background: #f8f9fa;
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-        }
-
-        .result-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .result-event {
-            font-weight: 600;
-            color: #333;
-            font-size: 15px;
-            flex: 1;
-        }
-
-        .result-medal {
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-        .result-medal.gold {
-            background: #FFD700;
-            color: #333;
-        }
-
-        .result-medal.silver {
-            background: #C0C0C0;
-            color: #333;
-        }
-
-        .result-medal.bronze {
-            background: #CD7F32;
-            color: white;
-        }
-
-        .result-athlete {
-            font-size: 13px;
-            color: #666;
-        }
-
         .loading, .error {
             text-align: center;
             padding: 40px 20px;
@@ -445,11 +386,6 @@
 
         <div id="countriesTab" class="tab-content">
             <div id="countriesContent" class="loading">Loading...</div>
-        </div>
-
-        <div class="recent-results">
-            <h2>🏆 Recent Results</h2>
-            <div id="recentResults">Loading...</div>
         </div>
     </div>
 
@@ -540,7 +476,6 @@
 
                 renderParticipants();
                 renderCountries();
-                renderRecentResults();
                 updateLastUpdated();
 
             } catch (error) {
@@ -549,8 +484,6 @@
                     `<div class="error">Error loading data: ${error.message}<br>Make sure medals.json is valid JSON.</div>`;
                 document.getElementById('countriesContent').innerHTML =
                     '<div class="error">Error loading data.</div>';
-                document.getElementById('recentResults').innerHTML =
-                    '<div class="error">Error loading results.</div>';
             }
         }
 
@@ -760,60 +693,6 @@
             document.getElementById('countriesContent').innerHTML = html;
         }
 
-        function renderRecentResults() {
-            if (!medalsData.recentResults || !Array.isArray(medalsData.recentResults) || medalsData.recentResults.length === 0) {
-                document.getElementById('recentResults').innerHTML =
-                    '<div class="empty-state">No recent results yet.</div>';
-                return;
-            }
-
-            // Filter out invalid results and ensure all required fields exist
-            const validResults = medalsData.recentResults.filter(result => {
-                return result &&
-                       typeof result === 'object' &&
-                       result.event &&
-                       result.country &&
-                       result.medal &&
-                       result.athlete &&
-                       result.timestamp;
-            });
-
-            if (validResults.length === 0) {
-                document.getElementById('recentResults').innerHTML =
-                    '<div class="empty-state">No valid results found.</div>';
-                return;
-            }
-
-            const sorted = [...validResults].sort((a, b) => {
-                const dateA = new Date(a.timestamp);
-                const dateB = new Date(b.timestamp);
-
-                // Handle invalid dates gracefully
-                if (isNaN(dateA.getTime())) return 1;
-                if (isNaN(dateB.getTime())) return -1;
-
-                return dateB - dateA;
-            });
-
-            let html = '';
-            sorted.slice(0, 10).forEach(result => {
-                // Sanitize medal type to ensure valid CSS class
-                const medal = String(result.medal).toLowerCase();
-                const validMedal = ['gold', 'silver', 'bronze'].includes(medal) ? medal : 'gold';
-
-                html += `
-                    <div class="result-card">
-                        <div class="result-header">
-                            <div class="result-event">${result.event}</div>
-                            <div class="result-medal ${validMedal}">${validMedal}</div>
-                        </div>
-                        <div class="result-athlete">${result.athlete} • ${result.country}</div>
-                    </div>
-                `;
-            });
-
-            document.getElementById('recentResults').innerHTML = html;
-        }
 
         function updateLastUpdated() {
             if (medalsData.metadata && medalsData.metadata.lastUpdated) {
