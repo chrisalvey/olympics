@@ -1,20 +1,9 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCtj1xbEbFkBbE2KSW7EudwItJjf2-HqN8",
-    authDomain: "fantasy-olympics-cb09d.firebaseapp.com",
-    projectId: "fantasy-olympics-cb09d",
-    storageBucket: "fantasy-olympics-cb09d.firebasestorage.app",
-    messagingSenderId: "757292812325",
-    appId: "1:757292812325:web:1dc9d1e98f2fc3599017cc"
-};
+import { firebaseConfig, DRAFT_DEADLINE, MAX_COUNTRIES, MIN_COUNTRIES, MAX_BUDGET } from './config.js';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// Draft deadline - February 6, 2026 at midnight (Opening Ceremony day)
-const DRAFT_DEADLINE = new Date('2026-02-06T00:00:00');
 
 // Countries data will be loaded from countries.json
 let countries = [];
@@ -269,8 +258,6 @@ class OlympicsDraft {
     }
 
     selectCountry(country) {
-        const MAX_COUNTRIES = 10;
-
         // Check country limit first
         if (this.selectedCountries.length >= MAX_COUNTRIES) {
             alert(`You can only select up to ${MAX_COUNTRIES} countries.`);
@@ -278,7 +265,7 @@ class OlympicsDraft {
         }
 
         // Check point budget
-        const pointsRemaining = 100 - this.pointsSpent;
+        const pointsRemaining = MAX_BUDGET - this.pointsSpent;
         if (country.points <= pointsRemaining) {
             this.selectedCountries.push(country);
             this.pointsSpent += country.points;
@@ -310,18 +297,17 @@ class OlympicsDraft {
 
     updateUI() {
         // Update stats
-        const MAX_COUNTRIES = 10;
         document.getElementById('pointsSpent').textContent = this.pointsSpent;
-        document.getElementById('pointsRemaining').textContent = 100 - this.pointsSpent;
-        document.getElementById('countriesCount').textContent = `${this.selectedCountries.length}/10`;
+        document.getElementById('pointsRemaining').textContent = MAX_BUDGET - this.pointsSpent;
+        document.getElementById('countriesCount').textContent = `${this.selectedCountries.length}/${MAX_COUNTRIES}`;
 
         // Update progress bar
         const progressFill = document.getElementById('progressFill');
-        const percentage = Math.min((this.pointsSpent / 100) * 100, 100);
+        const percentage = Math.min((this.pointsSpent / MAX_BUDGET) * 100, 100);
         progressFill.style.width = percentage + '%';
-        progressFill.textContent = this.pointsSpent + ' / 100';
+        progressFill.textContent = this.pointsSpent + ' / ' + MAX_BUDGET;
 
-        if (this.pointsSpent > 100) {
+        if (this.pointsSpent > MAX_BUDGET) {
             progressFill.classList.add('over-budget');
         } else {
             progressFill.classList.remove('over-budget');
@@ -329,7 +315,7 @@ class OlympicsDraft {
 
         // Update warning
         const warning = document.getElementById('warningMessage');
-        if (this.selectedCountries.length >= 3) {
+        if (this.selectedCountries.length >= MIN_COUNTRIES) {
             warning.classList.add('hidden');
         } else {
             warning.classList.remove('hidden');
@@ -368,12 +354,11 @@ class OlympicsDraft {
     }
 
     validateForm() {
-        const MAX_COUNTRIES = 10;
         const name = document.getElementById('name').value.trim();
         const teamName = document.getElementById('teamName').value.trim();
-        const hasMinCountries = this.selectedCountries.length >= 3;
+        const hasMinCountries = this.selectedCountries.length >= MIN_COUNTRIES;
         const hasMaxCountries = this.selectedCountries.length <= MAX_COUNTRIES;
-        const withinBudget = this.pointsSpent <= 100;
+        const withinBudget = this.pointsSpent <= MAX_BUDGET;
 
         const isValid = name && teamName && hasMinCountries && hasMaxCountries && withinBudget;
         document.getElementById('submitBtn').disabled = !isValid;
