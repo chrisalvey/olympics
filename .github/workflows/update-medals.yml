@@ -1,0 +1,59 @@
+name: Update Olympic Medals
+
+on:
+  # Run automatically every 6 hours during the Olympics (Feb 6-22, 2026)
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+
+  # Allow manual triggering from GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-medals:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install cheerio
+
+      - name: Run medal scraper
+        run: |
+          node scrape-medals.js
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet medals.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes to medals.json"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "medals.json has been updated"
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "Olympics Medal Bot"
+          git config user.email "bot@github-actions"
+          git add medals.json
+          git commit -m "🏅 Update medal counts - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: No updates needed
+        if: steps.check_changes.outputs.changed == 'false'
+        run: |
+          echo "✓ Medal counts are already up to date"
