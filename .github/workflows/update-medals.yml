@@ -57,3 +57,50 @@ jobs:
         if: steps.check_changes.outputs.changed == 'false'
         run: |
           echo "✓ Medal counts are already up to date"
+
+      - name: Send success email
+        if: steps.check_changes.outputs.changed == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "✅ Olympics Medal Update - ${{ github.run_number }}"
+          to: ${{ secrets.EMAIL_TO }}
+          from: Olympics Medal Bot
+          body: |
+            Medal counts have been updated successfully!
+
+            Run: ${{ github.run_number }}
+            Time: ${{ github.event.repository.updated_at }}
+
+            View the updated leaderboard:
+            https://chrisalvey.github.io/olympics
+
+            View the commit:
+            ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+
+      - name: Send error email
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "❌ Olympics Medal Scraper Failed - ${{ github.run_number }}"
+          to: ${{ secrets.EMAIL_TO }}
+          from: Olympics Medal Bot
+          body: |
+            The medal scraper encountered an error!
+
+            Run: ${{ github.run_number }}
+            Time: ${{ github.event.repository.updated_at }}
+
+            View the failed run:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Please check the logs and fix the issue.
