@@ -1,7 +1,7 @@
 // Leaderboard functionality for Winter Olympics Fantasy Draft
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-import { firebaseConfig, DRAFT_DEADLINE, MEDAL_POINTS } from './config.js';
+import { firebaseConfig, DRAFT_DEADLINE } from './config.js';
 import { normalizeCountryName, validateMedals, calculateMedalPoints, createNormalizedLookup } from './utils.js';
 
 const app = initializeApp(firebaseConfig);
@@ -13,28 +13,21 @@ let normalizedMedalsLookup = null;
 
 // Initialize app
 function init() {
-    // Hide draft link banner if deadline has passed
     if (new Date() >= DRAFT_DEADLINE) {
         const draftBanner = document.querySelector('.draft-link-banner');
-        if (draftBanner) {
-            draftBanner.style.display = 'none';
-        }
+        if (draftBanner) draftBanner.style.display = 'none';
     }
 
-    // Set up tab switching
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function() {
             const tabName = this.getAttribute('data-tab');
-
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
             this.classList.add('active');
             document.getElementById(tabName + 'Tab').classList.add('active');
         });
     });
 
-    // Load data and set up refresh
     loadData();
     setInterval(loadData, 60000);
 }
@@ -59,26 +52,14 @@ async function loadData() {
             throw new Error('Missing or invalid medals object in medals.json');
         }
 
-        // Validate and sanitize each country's medal structure
+        // Validate and sanitize each country's medal structure using utility function
         Object.keys(medalsData.medals).forEach(country => {
             const medals = medalsData.medals[country];
             if (!medals || typeof medals !== 'object') {
                 console.warn(`Invalid medal data for ${country}, resetting to zeros`);
                 medalsData.medals[country] = { gold: 0, silver: 0, bronze: 0 };
             } else {
-                // Ensure all medal properties exist with valid values
-                if (typeof medals.gold !== 'number' || isNaN(medals.gold)) {
-                    console.warn(`Invalid gold count for ${country}`);
-                    medals.gold = 0;
-                }
-                if (typeof medals.silver !== 'number' || isNaN(medals.silver)) {
-                    console.warn(`Invalid silver count for ${country}`);
-                    medals.silver = 0;
-                }
-                if (typeof medals.bronze !== 'number' || isNaN(medals.bronze)) {
-                    console.warn(`Invalid bronze count for ${country}`);
-                    medals.bronze = 0;
-                }
+                medalsData.medals[country] = validateMedals(medals);
             }
         });
 
@@ -107,12 +88,10 @@ function calculateScore(participantCountries) {
         const medals = normalizedMedalsLookup[normalizedCountry];
 
         if (medals) {
-            const validated = validateMedals(medals);
-            score += calculateMedalPoints(validated);
-
-            medalBreakdown.gold += validated.gold;
-            medalBreakdown.silver += validated.silver;
-            medalBreakdown.bronze += validated.bronze;
+            score += calculateMedalPoints(medals);
+            medalBreakdown.gold += medals.gold;
+            medalBreakdown.silver += medals.silver;
+            medalBreakdown.bronze += medals.bronze;
         } else {
             console.warn(`No medal data found for: "${country}"`);
         }
@@ -164,35 +143,21 @@ function renderParticipants() {
         return timeA - timeB;
     });
 
-    // Detect if there are ties in top positions
-    let hasTies = false;
-    for (let i = 0; i < participantsWithScores.length - 1; i++) {
-        if (participantsWithScores[i].score === participantsWithScores[i + 1].score) {
-            hasTies = true;
-            break;
-        }
-    }
+    const hasTies = participantsWithScores.some((p, i) =>
+        i < participantsWithScores.length - 1 && p.score === participantsWithScores[i + 1].score
+    );
 
-    // Build tie notification message if needed
-    let tieMessage = '';
-    if (hasTies && participantsWithScores.length > 1) {
-        tieMessage = `
-            <div class="tie-breaker-notice">
-                ℹ️ Tied teams are ranked by gold medals (then silver, bronze) - just like the real Olympics!
-            </div>
-        `;
-    }
+    const tieMessage = hasTies && participantsWithScores.length > 1 ? `
+        <div class="tie-breaker-notice">
+            ℹ️ Tied teams are ranked by gold medals (then silver, bronze) - just like the real Olympics!
+        </div>
+    ` : '';
 
     let html = tieMessage;
     participantsWithScores.forEach((p, index) => {
         const rank = index + 1;
         const rankClass = rank <= 3 ? `rank-${rank}` : '';
-
-        // Medal emojis for top 3
-        let medalEmoji = '';
-        if (rank === 1) medalEmoji = '🥇';
-        else if (rank === 2) medalEmoji = '🥈';
-        else if (rank === 3) medalEmoji = '🥉';
+        const medalEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
 
         html += `
             <div class="participant-card ${rankClass}">
@@ -217,10 +182,7 @@ function renderParticipants() {
                 <div class="countries-list">${p.countries.map(country => {
                     const normalizedCountry = normalizeCountryName(country);
                     const medals = normalizedMedalsLookup[normalizedCountry];
-                    let points = 0;
-                    if (medals) {
-                        points = calculateMedalPoints(validateMedals(medals));
-                    }
+                    const points = medals ? calculateMedalPoints(medals) : 0;
                     return `${country} (${points})`;
                 }).join(' • ')}</div>
             </div>
@@ -232,10 +194,9 @@ function renderParticipants() {
 
 function renderCountries() {
     const countriesArray = Object.entries(medalsData.medals).map(([name, medals]) => {
-        const validated = validateMedals(medals);
-        const points = calculateMedalPoints(validated);
-        const medalCount = validated.gold + validated.silver + validated.bronze;
-        return { name, medals: validated, points, medalCount };
+        const points = calculateMedalPoints(medals);
+        const medalCount = medals.gold + medals.silver + medals.bronze;
+        return { name, medals, points, medalCount };
     });
 
     // Sort by total points (desc), then by gold, silver, bronze, then alphabetically

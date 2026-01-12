@@ -49,23 +49,9 @@ class OlympicsDraft {
     }
 
     showDeadlineClosed() {
-        // Hide the countdown timer
-        const countdownTimer = document.getElementById('countdownTimer');
-        if (countdownTimer) {
-            countdownTimer.style.display = 'none';
-        }
-
-        // Hide the form
-        const form = document.getElementById('draftForm');
-        if (form) {
-            form.style.display = 'none';
-        }
-
-        // Show the closed banner
-        const banner = document.getElementById('draftClosedBanner');
-        if (banner) {
-            banner.style.display = 'block';
-        }
+        document.getElementById('countdownTimer').style.display = 'none';
+        document.getElementById('draftForm').style.display = 'none';
+        document.getElementById('draftClosedBanner').style.display = 'block';
     }
 
     startCountdown() {
@@ -109,43 +95,33 @@ class OlympicsDraft {
     }
 
     initializeFromLocalStorage() {
-        try {
-            const saved = localStorage.getItem('olympicsDraft');
-            if (saved) {
+        const saved = localStorage.getItem('olympicsDraft');
+        if (saved) {
+            try {
                 const data = JSON.parse(saved);
                 this.selectedCountries = data.selectedCountries || [];
                 this.pointsSpent = data.pointsSpent || 0;
-
-                // Restore form fields
                 if (data.name) document.getElementById('name').value = data.name;
                 if (data.teamName) document.getElementById('teamName').value = data.teamName;
+            } catch (error) {
+                console.error('Error loading from localStorage:', error);
             }
-        } catch (error) {
-            console.error('Error loading from localStorage:', error);
         }
     }
 
     saveToLocalStorage() {
-        try {
-            const data = {
-                selectedCountries: this.selectedCountries,
-                pointsSpent: this.pointsSpent,
-                name: document.getElementById('name').value,
-                teamName: document.getElementById('teamName').value,
-                timestamp: Date.now()
-            };
-            localStorage.setItem('olympicsDraft', JSON.stringify(data));
-        } catch (error) {
-            console.error('Error saving to localStorage:', error);
-        }
+        const data = {
+            selectedCountries: this.selectedCountries,
+            pointsSpent: this.pointsSpent,
+            name: document.getElementById('name').value,
+            teamName: document.getElementById('teamName').value,
+            timestamp: Date.now()
+        };
+        localStorage.setItem('olympicsDraft', JSON.stringify(data));
     }
 
     clearLocalStorage() {
-        try {
-            localStorage.removeItem('olympicsDraft');
-        } catch (error) {
-            console.error('Error clearing localStorage:', error);
-        }
+        localStorage.removeItem('olympicsDraft');
     }
 
     setupEventListeners() {
@@ -258,15 +234,12 @@ class OlympicsDraft {
     }
 
     selectCountry(country) {
-        // Check country limit first
         if (this.selectedCountries.length >= MAX_COUNTRIES) {
             alert(`You can only select up to ${MAX_COUNTRIES} countries.`);
             return;
         }
 
-        // Check point budget
-        const pointsRemaining = MAX_BUDGET - this.pointsSpent;
-        if (country.points <= pointsRemaining) {
+        if (country.points <= MAX_BUDGET - this.pointsSpent) {
             this.selectedCountries.push(country);
             this.pointsSpent += country.points;
             this.updateUI();
@@ -285,9 +258,8 @@ class OlympicsDraft {
     }
 
     clearAll() {
-        if (this.selectedCountries.length === 0) return;
-
-        if (confirm('Are you sure you want to clear all selected countries?')) {
+        if (this.selectedCountries.length > 0 &&
+            confirm('Are you sure you want to clear all selected countries?')) {
             this.selectedCountries = [];
             this.pointsSpent = 0;
             this.updateUI();
@@ -357,19 +329,12 @@ class OlympicsDraft {
     }
 
     showConfirmation() {
-        const overlay = document.getElementById('confirmationOverlay');
-        const countryList = document.getElementById('confirmCountryList');
-        const totalPoints = document.getElementById('confirmTotalPoints');
-        const teamName = document.getElementById('teamName').value.trim();
-
-        document.getElementById('confirmTeamName').textContent = teamName;
-        totalPoints.textContent = this.pointsSpent;
-
-        countryList.innerHTML = this.selectedCountries
+        document.getElementById('confirmTeamName').textContent = document.getElementById('teamName').value.trim();
+        document.getElementById('confirmTotalPoints').textContent = this.pointsSpent;
+        document.getElementById('confirmCountryList').innerHTML = this.selectedCountries
             .map(c => `${c.name} (${c.points} pts)`)
             .join('<br>');
-
-        overlay.classList.add('show');
+        document.getElementById('confirmationOverlay').classList.add('show');
     }
 
     hideConfirmation() {
@@ -387,22 +352,18 @@ class OlympicsDraft {
         form.classList.add('loading');
 
         try {
-            const submission = {
+            await addDoc(collection(db, 'submissions'), {
                 name: document.getElementById('name').value.trim(),
                 teamName: document.getElementById('teamName').value.trim(),
                 countries: this.selectedCountries.map(c => c.name),
                 totalPointsSpent: this.pointsSpent,
                 timestamp: serverTimestamp()
-            };
+            });
 
-            await addDoc(collection(db, 'submissions'), submission);
-
-            document.getElementById('successTeamName').textContent = submission.teamName;
+            document.getElementById('successTeamName').textContent = document.getElementById('teamName').value.trim();
             document.getElementById('successMessage').classList.add('show');
             this.hideConfirmation();
             form.style.display = 'none';
-
-            // Clear localStorage after successful submission
             this.clearLocalStorage();
 
         } catch (error) {
