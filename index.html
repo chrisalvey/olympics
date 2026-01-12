@@ -523,6 +523,55 @@
                 justify-content: center;
             }
         }
+
+        .donation-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            text-align: center;
+        }
+
+        .donation-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .donation-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .donation-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .donation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .paypal-btn {
+            background: #0070ba;
+            color: white;
+        }
+
+        .venmo-btn {
+            background: #008CFF;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -547,6 +596,18 @@
 
         <div id="countriesTab" class="tab-content">
             <div id="countriesContent" class="loading">Loading...</div>
+        </div>
+
+        <div class="donation-section">
+            <div class="donation-title">Enjoying the game? Buy me a coffee!</div>
+            <div class="donation-buttons">
+                <a href="https://paypal.me/ThomasAlvey" target="_blank" rel="noopener noreferrer" class="donation-btn paypal-btn">
+                    PayPal
+                </a>
+                <a href="https://venmo.com/u/Thomas-Alvey-2" target="_blank" rel="noopener noreferrer" class="donation-btn venmo-btn">
+                    Venmo
+                </a>
+            </div>
         </div>
     </div>
 
