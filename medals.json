@@ -84,7 +84,8 @@
     "Uzbekistan": { "gold": 0, "silver": 0, "bronze": 0 }
   },
   "metadata": {
-    "lastUpdated": "2026-02-08T15:00:00Z",
-    "totalMedalsAwarded": 2
+    "lastUpdated": "2026-01-12T20:00:00Z",
+    "totalMedalsAwarded": 2,
+    "note": "Test for email notifications"
   }
 }
