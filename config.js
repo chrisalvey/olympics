@@ -10,8 +10,9 @@ export const firebaseConfig = {
     appId: "1:757292812325:web:1dc9d1e98f2fc3599017cc"
 };
 
-// Draft deadline - February 6, 2026 at midnight (Opening Ceremony day)
-export const DRAFT_DEADLINE = new Date('2026-02-06T00:00:00');
+// Draft deadline - February 6, 2026 at 2:00 PM ET (right before Opening Ceremony at 8pm CET)
+// Opening Ceremony: Feb 6, 2026 at 8:00 PM CET / 2:00 PM ET
+export const DRAFT_DEADLINE = new Date('2026-02-06T19:00:00Z'); // 2:00 PM ET = 19:00 UTC
 
 // Draft constraints
 export const MAX_COUNTRIES = 10;
