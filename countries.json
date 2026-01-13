@@ -40,6 +40,11 @@
     "points": 3
   },
   {
+    "name": "Benin",
+    "code": "BEN",
+    "points": 3
+  },
+  {
     "name": "Bolivia",
     "code": "BOL",
     "points": 3
@@ -105,6 +110,11 @@
     "points": 3
   },
   {
+    "name": "Ecuador",
+    "code": "ECU",
+    "points": 3
+  },
+  {
     "name": "Eritrea",
     "code": "ERI",
     "points": 3
@@ -142,6 +152,11 @@
   {
     "name": "Greece",
     "code": "GRE",
+    "points": 3
+  },
+  {
+    "name": "Guinea-Bissau",
+    "code": "GBS",
     "points": 3
   },
   {
@@ -198,6 +213,11 @@
     "name": "Japan",
     "code": "JPN",
     "points": 13
+  },
+  {
+    "name": "Jamaica",
+    "code": "JAM",
+    "points": 3
   },
   {
     "name": "Kazakhstan",
@@ -265,6 +285,11 @@
     "points": 3
   },
   {
+    "name": "Moldova",
+    "code": "MDA",
+    "points": 3
+  },
+  {
     "name": "Monaco",
     "code": "MON",
     "points": 3
@@ -277,6 +302,11 @@
   {
     "name": "Montenegro",
     "code": "MNE",
+    "points": 3
+  },
+  {
+    "name": "Morocco",
+    "code": "MAR",
     "points": 3
   },
   {
@@ -305,6 +335,11 @@
     "points": 37
   },
   {
+    "name": "Pakistan",
+    "code": "PAK",
+    "points": 3
+  },
+  {
     "name": "Philippines",
     "code": "PHI",
     "points": 3
@@ -325,12 +360,13 @@
     "points": 3
   },
   {
-    "name": "Russia",
-    "points": 20
-  },
-  {
     "name": "Saudi Arabia",
     "code": "KSA",
+    "points": 3
+  },
+  {
+    "name": "San Marino",
+    "code": "SMR",
     "points": 3
   },
   {
@@ -411,6 +447,16 @@
   {
     "name": "Uzbekistan",
     "code": "UZB",
+    "points": 3
+  },
+  {
+    "name": "Uruguay",
+    "code": "URU",
+    "points": 3
+  },
+  {
+    "name": "Venezuela",
+    "code": "VEN",
     "points": 3
   }
 ]
