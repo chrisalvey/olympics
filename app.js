@@ -225,7 +225,9 @@ class OlympicsDraft {
             card.appendChild(nameSpan);
             card.appendChild(pointsSpan);
 
-            if (!isSelected && canAfford) {
+            if (isSelected) {
+                card.addEventListener('click', () => this.deselectCountry(country.name));
+            } else if (canAfford) {
                 card.addEventListener('click', () => this.selectCountry(country));
             }
 
