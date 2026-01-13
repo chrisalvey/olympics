@@ -4,8 +4,7 @@
   "description": "Winter Olympics Fantasy Draft - Milano Cortina 2026",
   "scripts": {
     "scrape": "node scrape-medals.js",
-    "update-pricing": "node update-pricing.js",
-    "clear-db": "node clear-firestore.js"
+    "update-pricing": "node update-pricing.js"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
