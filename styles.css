@@ -1625,3 +1625,367 @@ body.leaderboard-page .draft-link:hover {
 body.leaderboard-page .container {
     max-width: 600px;
 }
+
+/* ============================================
+   DRAFT PAGE DARK MODE STYLES
+   ============================================ */
+
+/* Dark mode: Page background */
+body.draft-page {
+    background: linear-gradient(135deg, var(--dark-bg-primary) 0%, var(--dark-bg-secondary) 100%);
+}
+
+/* Dark mode: Container */
+body.draft-page .container {
+    background: var(--dark-bg-secondary);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* Dark mode: Typography */
+body.draft-page h1 {
+    color: var(--text-primary);
+}
+
+body.draft-page .subtitle {
+    color: var(--text-secondary);
+}
+
+body.draft-page h2 {
+    color: var(--text-primary);
+}
+
+/* Dark mode: Countdown timer */
+body.draft-page .countdown-timer {
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+}
+
+body.draft-page .countdown-number {
+    color: var(--neon-cyan);
+}
+
+body.draft-page .countdown-text {
+    color: var(--text-secondary);
+}
+
+/* Dark mode: Results link banner */
+body.draft-page .results-link-banner {
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+}
+
+body.draft-page .results-link {
+    color: var(--neon-cyan);
+}
+
+body.draft-page .results-link:hover {
+    color: var(--neon-blue);
+}
+
+body.draft-page .bookmark-hint {
+    color: var(--text-muted);
+}
+
+/* Dark mode: Instructions section */
+body.draft-page .instructions-section {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 242, 254, 0.08) 100%);
+    border-left-color: var(--neon-cyan);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+}
+
+body.draft-page .instructions-section h2 {
+    color: var(--neon-cyan);
+}
+
+body.draft-page .instruction-item strong {
+    color: var(--text-primary);
+}
+
+body.draft-page .instruction-item p {
+    color: var(--text-secondary);
+}
+
+/* Dark mode: Form sections */
+body.draft-page .form-section {
+    background: rgba(15, 52, 96, 0.3);
+    border-color: rgba(0, 212, 255, 0.2);
+}
+
+body.draft-page .form-section h2 {
+    color: var(--neon-cyan);
+}
+
+/* Dark mode: Form inputs */
+body.draft-page input[type="text"],
+body.draft-page input[type="email"] {
+    background: var(--dark-card);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: var(--text-primary);
+}
+
+body.draft-page input[type="text"]:focus,
+body.draft-page input[type="email"]:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+body.draft-page input[type="text"]::placeholder,
+body.draft-page input[type="email"]::placeholder {
+    color: var(--text-muted);
+}
+
+body.draft-page label {
+    color: var(--text-secondary);
+}
+
+/* Dark mode: Stats bar */
+body.draft-page .stats-bar {
+    background: rgba(15, 52, 96, 0.4);
+}
+
+body.draft-page .stat-label {
+    color: var(--text-secondary);
+}
+
+body.draft-page .stat-value {
+    color: var(--neon-cyan);
+}
+
+/* Dark mode: Progress bar */
+body.draft-page .progress-bar {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+body.draft-page .progress-bar-fill {
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
+    color: var(--dark-bg-primary);
+}
+
+body.draft-page .progress-bar-label {
+    color: var(--text-secondary);
+}
+
+/* Dark mode: Warning message */
+body.draft-page .warning-message {
+    background: rgba(255, 140, 66, 0.15);
+    border-color: var(--bronze-color);
+    color: #ffb380;
+}
+
+/* Dark mode: Selected countries */
+body.draft-page .selected-countries-header {
+    color: var(--text-primary);
+}
+
+body.draft-page .clear-all-btn {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+}
+
+body.draft-page .clear-all-btn:hover:not(:disabled) {
+    background: rgba(255, 107, 107, 0.3);
+}
+
+body.draft-page .selected-countries.empty::before {
+    color: var(--text-muted);
+}
+
+body.draft-page .selected-country {
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%);
+    border-color: var(--neon-cyan);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2);
+}
+
+body.draft-page .selected-country:hover {
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+body.draft-page .country-cost {
+    color: var(--neon-cyan);
+}
+
+body.draft-page .remove-btn {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+}
+
+body.draft-page .remove-btn:hover {
+    background: rgba(255, 107, 107, 0.4);
+}
+
+/* Dark mode: Search box */
+body.draft-page .search-input {
+    background: var(--dark-card);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: var(--text-primary);
+}
+
+body.draft-page .search-input:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+body.draft-page .search-input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Dark mode: Sort controls */
+body.draft-page .sort-controls {
+    color: var(--text-secondary);
+}
+
+body.draft-page .sort-controls label {
+    color: var(--text-secondary);
+}
+
+/* Dark mode: Country grid cards */
+body.draft-page .country-card {
+    background: var(--dark-card);
+    border-color: rgba(0, 212, 255, 0.2);
+    color: var(--text-primary);
+}
+
+body.draft-page .country-card:hover:not(.selected):not(.disabled) {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+body.draft-page .country-card.selected {
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+body.draft-page .country-card.selected:hover {
+    opacity: 0.9;
+    border-color: var(--neon-blue);
+}
+
+body.draft-page .country-card.disabled {
+    background: rgba(15, 52, 96, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+body.draft-page .country-name {
+    color: var(--text-primary);
+}
+
+body.draft-page .country-points {
+    color: var(--neon-cyan);
+}
+
+/* Dark mode: Submit button */
+body.draft-page #submitBtn {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
+    color: var(--dark-bg-primary);
+}
+
+body.draft-page #submitBtn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+body.draft-page #submitBtn:disabled {
+    background: rgba(107, 122, 153, 0.3);
+    color: var(--text-muted);
+}
+
+/* Dark mode: Confirmation dialog */
+body.draft-page .confirmation-overlay {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+body.draft-page .confirmation-dialog {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+}
+
+body.draft-page .confirmation-dialog h3 {
+    color: var(--neon-cyan);
+}
+
+body.draft-page .confirmation-dialog p {
+    color: var(--text-secondary);
+}
+
+body.draft-page .draft-summary {
+    background: rgba(15, 52, 96, 0.4);
+    color: var(--text-primary);
+}
+
+body.draft-page .country-list {
+    color: var(--text-secondary);
+}
+
+body.draft-page .btn-cancel {
+    background: rgba(107, 122, 153, 0.2);
+    color: var(--text-secondary);
+    border-color: rgba(107, 122, 153, 0.4);
+}
+
+body.draft-page .btn-cancel:hover {
+    background: rgba(107, 122, 153, 0.3);
+}
+
+body.draft-page .btn-confirm {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
+    color: var(--dark-bg-primary);
+}
+
+body.draft-page .btn-confirm:hover {
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+}
+
+/* Dark mode: Success message */
+body.draft-page .success-message {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 242, 254, 0.08) 100%);
+    border-color: var(--neon-cyan);
+}
+
+body.draft-page .success-message h2 {
+    color: var(--neon-cyan);
+}
+
+body.draft-page .success-message p {
+    color: var(--text-secondary);
+}
+
+body.draft-page .success-team {
+    margin-top: 15px;
+}
+
+body.draft-page .success-action {
+    margin-top: 15px;
+}
+
+body.draft-page .view-results-btn {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
+    color: var(--dark-bg-primary);
+}
+
+body.draft-page .view-results-btn:hover {
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Dark mode: Draft closed banner */
+body.draft-page .draft-closed-banner {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(255, 107, 107, 0.1) 100%);
+    border-color: #ff6b6b;
+}
+
+body.draft-page .draft-closed-banner h2 {
+    color: #ff6b6b;
+}
+
+body.draft-page .draft-closed-banner p {
+    color: var(--text-secondary);
+}
