@@ -2,9 +2,28 @@
 
 /* CSS Custom Properties for consistent colors and gradients */
 :root {
-    --gold-color: #FFD700;
-    --silver-color: #C0C0C0;
-    --bronze-color: #CD7F32;
+    /* Medal colors (saturated) */
+    --gold-color: #ffd700;
+    --silver-color: #e5e5e5;
+    --bronze-color: #ff8c42;
+
+    /* Dark mode backgrounds */
+    --dark-bg-primary: #1a1a2e;
+    --dark-bg-secondary: #16213e;
+    --dark-card: #0f3460;
+    --dark-card-hover: #1a4d7a;
+
+    /* Accent colors */
+    --neon-cyan: #00d4ff;
+    --neon-blue: #00f2fe;
+    --bright-purple: #a855f7;
+
+    /* Text colors */
+    --text-primary: #ffffff;
+    --text-secondary: #a8b2d1;
+    --text-muted: #6b7a99;
+
+    /* Legacy (for draft page compatibility) */
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --primary-color: #667eea;
     --primary-dark: #764ba2;
@@ -24,6 +43,11 @@ body {
     padding-top: 90px;
 }
 
+/* Dark mode for leaderboard page */
+body.leaderboard-page {
+    background: linear-gradient(135deg, var(--dark-bg-primary) 0%, var(--dark-bg-secondary) 100%);
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -33,6 +57,12 @@ body {
     box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
 
+/* Dark container for leaderboard */
+body.leaderboard-page .container {
+    background: var(--dark-bg-secondary);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
 h1 {
     text-align: center;
     color: #333;
@@ -40,11 +70,19 @@ h1 {
     font-size: 24px;
 }
 
+body.leaderboard-page h1 {
+    color: var(--text-primary);
+}
+
 .subtitle {
     text-align: center;
     color: #666;
     margin-bottom: 20px;
     font-size: 13px;
+}
+
+body.leaderboard-page .subtitle {
+    color: var(--text-secondary);
 }
 
 /* Countdown timer styles */
@@ -766,16 +804,33 @@ button[type="submit"]:disabled {
     text-align: center;
 }
 
+/* Dark mode: Prize pool section */
+body.leaderboard-page .prize-pool-section {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 242, 254, 0.08) 100%);
+    border-left: 4px solid var(--neon-cyan);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+}
+
 .prize-pool-section h3 {
     color: #1565c0;
     margin: 0 0 8px 0;
     font-size: 18px;
 }
 
+/* Dark mode: Prize pool heading */
+body.leaderboard-page .prize-pool-section h3 {
+    color: var(--neon-cyan);
+}
+
 .prize-description {
     color: #1565c0;
     font-size: 14px;
     margin: 0 0 12px 0;
+}
+
+/* Dark mode: Prize description */
+body.leaderboard-page .prize-description {
+    color: var(--text-secondary);
 }
 
 .prize-breakdown {
@@ -795,11 +850,22 @@ button[type="submit"]:disabled {
     font-size: 14px;
 }
 
+/* Dark mode: Prize places */
+body.leaderboard-page .prize-place {
+    background: rgba(0, 212, 255, 0.2);
+    color: var(--text-primary);
+}
+
 .prize-note {
     color: #1976d2;
     font-size: 12px;
     font-style: italic;
     margin: 0;
+}
+
+/* Dark mode: Prize note */
+body.leaderboard-page .prize-note {
+    color: var(--text-muted);
 }
 
 /* Donation section styles */
@@ -810,11 +876,21 @@ button[type="submit"]:disabled {
     text-align: center;
 }
 
+/* Dark mode: Donation section */
+body.leaderboard-page .donation-section {
+    border-top: 2px solid rgba(0, 212, 255, 0.3);
+}
+
 .donation-title {
     font-size: 14px;
     color: #666;
     margin-bottom: 12px;
     font-weight: 600;
+}
+
+/* Dark mode: Donation title */
+body.leaderboard-page .donation-title {
+    color: var(--text-secondary);
 }
 
 .donation-buttons {
@@ -860,6 +936,10 @@ button[type="submit"]:disabled {
     margin-bottom: 20px;
 }
 
+body.leaderboard-page .last-updated {
+    color: var(--text-muted);
+}
+
 .tabs {
     display: flex;
     gap: 8px;
@@ -869,9 +949,13 @@ button[type="submit"]:disabled {
     padding: 4px;
 }
 
+body.leaderboard-page .tabs {
+    background: rgba(15, 52, 96, 0.6);
+}
+
 .tab {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -880,12 +964,23 @@ button[type="submit"]:disabled {
     color: #666;
     border-radius: 8px;
     transition: all 0.3s;
+    min-height: 48px;
+}
+
+body.leaderboard-page .tab {
+    color: var(--text-secondary);
 }
 
 .tab.active {
     background: white;
     color: #667eea;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body.leaderboard-page .tab.active {
+    background: var(--dark-card);
+    color: var(--text-primary);
+    border-bottom: 3px solid var(--neon-cyan);
 }
 
 .tab-content {
@@ -905,6 +1000,19 @@ button[type="submit"]:disabled {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+body.leaderboard-page .participant-card {
+    background: var(--dark-card);
+    border-left-color: var(--neon-cyan);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+body.leaderboard-page .participant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 212, 255, 0.25);
+}
+
 .participant-card.rank-1 {
     border-left-color: #FFD700;
     border-left-width: 6px;
@@ -913,6 +1021,15 @@ button[type="submit"]:disabled {
     box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
     margin-bottom: 16px;
     animation: goldShimmer 3s ease-in-out infinite;
+}
+
+body.leaderboard-page .participant-card.rank-1 {
+    background: linear-gradient(135deg, #2d1f0d 0%, #4a3517 100%);
+    border-left-color: var(--gold-color);
+    border-left-width: 6px;
+    padding: 24px;
+    margin-bottom: 24px;
+    animation: goldShimmerDark 3s ease-in-out infinite;
 }
 
 .participant-card.rank-2 {
@@ -924,6 +1041,15 @@ button[type="submit"]:disabled {
     margin-bottom: 14px;
 }
 
+body.leaderboard-page .participant-card.rank-2 {
+    background: linear-gradient(135deg, #1f2326 0%, #2d3338 100%);
+    border-left-color: var(--silver-color);
+    border-left-width: 6px;
+    padding: 22px;
+    box-shadow: 0 5px 20px rgba(229, 229, 229, 0.3);
+    margin-bottom: 22px;
+}
+
 .participant-card.rank-3 {
     border-left-color: #CD7F32;
     border-left-width: 6px;
@@ -933,12 +1059,30 @@ button[type="submit"]:disabled {
     margin-bottom: 14px;
 }
 
+body.leaderboard-page .participant-card.rank-3 {
+    background: linear-gradient(135deg, #2d1f17 0%, #4a3527 100%);
+    border-left-color: var(--bronze-color);
+    border-left-width: 6px;
+    padding: 22px;
+    box-shadow: 0 5px 20px rgba(255, 140, 66, 0.3);
+    margin-bottom: 22px;
+}
+
 @keyframes goldShimmer {
     0%, 100% {
         box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
     }
     50% {
         box-shadow: 0 8px 24px rgba(255, 215, 0, 0.5);
+    }
+}
+
+@keyframes goldShimmerDark {
+    0%, 100% {
+        box-shadow: 0 6px 24px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 28px rgba(255, 215, 0, 0.6);
     }
 }
 
@@ -956,9 +1100,17 @@ button[type="submit"]:disabled {
     line-height: 1;
 }
 
+body.leaderboard-page .card-rank {
+    color: var(--neon-cyan);
+}
+
 .card-rank.rank-1 { color: #FFD700; }
 .card-rank.rank-2 { color: #C0C0C0; }
 .card-rank.rank-3 { color: #CD7F32; }
+
+body.leaderboard-page .card-rank.rank-1 { color: var(--gold-color); }
+body.leaderboard-page .card-rank.rank-2 { color: var(--silver-color); }
+body.leaderboard-page .card-rank.rank-3 { color: var(--bronze-color); }
 
 .card-info {
     flex: 1;
@@ -973,18 +1125,36 @@ button[type="submit"]:disabled {
     display: flex;
     align-items: center;
     gap: 8px;
+    line-height: 1.6;
+}
+
+body.leaderboard-page .team-name {
+    font-size: 20px;
+    color: var(--text-primary);
 }
 
 .rank-1 .team-name {
     font-size: 20px;
 }
 
+body.leaderboard-page .rank-1 .team-name {
+    font-size: 22px;
+}
+
 .rank-2 .team-name {
     font-size: 19px;
 }
 
+body.leaderboard-page .rank-2 .team-name {
+    font-size: 21px;
+}
+
 .rank-3 .team-name {
     font-size: 19px;
+}
+
+body.leaderboard-page .rank-3 .team-name {
+    font-size: 21px;
 }
 
 .medal-emoji {
@@ -997,11 +1167,20 @@ button[type="submit"]:disabled {
     color: #666;
 }
 
+body.leaderboard-page .participant-name {
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
 .card-score {
     font-size: 32px;
     font-weight: bold;
     color: #667eea;
     line-height: 1;
+}
+
+body.leaderboard-page .card-score {
+    color: var(--neon-cyan);
 }
 
 .rank-1 .card-score {
@@ -1010,14 +1189,30 @@ button[type="submit"]:disabled {
     text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
 }
 
+body.leaderboard-page .rank-1 .card-score {
+    font-size: 44px;
+    color: var(--gold-color);
+    text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+}
+
 .rank-2 .card-score {
     font-size: 36px;
     color: #C0C0C0;
 }
 
+body.leaderboard-page .rank-2 .card-score {
+    font-size: 40px;
+    color: var(--silver-color);
+}
+
 .rank-3 .card-score {
     font-size: 36px;
     color: #CD7F32;
+}
+
+body.leaderboard-page .rank-3 .card-score {
+    font-size: 40px;
+    color: var(--bronze-color);
 }
 
 .medal-row {
@@ -1051,10 +1246,35 @@ button[type="submit"]:disabled {
     color: white;
 }
 
+/* Dark mode: Medal badges */
+body.leaderboard-page .gold-badge {
+    background: linear-gradient(135deg, #b8860b 0%, #ffd700 100%);
+    color: #1a1a2e;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+body.leaderboard-page .silver-badge {
+    background: linear-gradient(135deg, #a0a0a0 0%, #e5e5e5 100%);
+    color: #1a1a2e;
+    box-shadow: 0 2px 8px rgba(229, 229, 229, 0.3);
+}
+
+body.leaderboard-page .bronze-badge {
+    background: linear-gradient(135deg, #a0522d 0%, #ff8c42 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(255, 140, 66, 0.3);
+}
+
 .countries-list {
     font-size: 12px;
     color: #666;
     line-height: 1.6;
+}
+
+/* Dark mode: Countries list */
+body.leaderboard-page .countries-list {
+    color: var(--text-muted);
+    font-size: 13px;
 }
 
 .country-card {
@@ -1112,6 +1332,12 @@ button[type="submit"]:disabled {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Dark mode: Table wrapper */
+body.leaderboard-page .country-table-wrapper {
+    background: var(--dark-card);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+}
+
 .country-table {
     width: 100%;
     border-collapse: collapse;
@@ -1123,6 +1349,11 @@ button[type="submit"]:disabled {
     position: sticky;
     top: 0;
     z-index: 10;
+}
+
+/* Dark mode: Table header */
+body.leaderboard-page .country-table thead {
+    background: linear-gradient(135deg, #0f3460 0%, #1a4d7a 100%);
 }
 
 .country-table th {
@@ -1140,6 +1371,11 @@ button[type="submit"]:disabled {
     border-bottom: 1px solid #e9ecef;
 }
 
+/* Dark mode: Table cells */
+body.leaderboard-page .country-table td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .country-row:last-child td {
     border-bottom: none;
 }
@@ -1147,6 +1383,11 @@ button[type="submit"]:disabled {
 .country-row:hover {
     background: #ffffff;
     cursor: pointer;
+}
+
+/* Dark mode: Table row hover */
+body.leaderboard-page .country-row:hover {
+    background: rgba(0, 212, 255, 0.1);
 }
 
 .rank-col, .rank-cell {
@@ -1164,6 +1405,11 @@ button[type="submit"]:disabled {
     font-weight: 600;
     color: #333;
     font-size: 15px;
+}
+
+/* Dark mode: Country cell */
+body.leaderboard-page .country-cell {
+    color: var(--text-primary);
 }
 
 .medal-col, .medal-cell {
@@ -1192,6 +1438,12 @@ button[type="submit"]:disabled {
     color: var(--primary-color);
 }
 
+/* Dark mode: Total cell */
+body.leaderboard-page .total-cell {
+    color: var(--neon-cyan);
+    font-weight: bold;
+}
+
 /* Top 3 styling */
 .rank-cell.rank-1 {
     color: var(--gold-color);
@@ -1214,6 +1466,15 @@ button[type="submit"]:disabled {
 
 .country-row.rank-1:hover {
     background: linear-gradient(135deg, #fff7d6 0%, #fffae0 100%);
+}
+
+/* Dark mode: Top ranked country row */
+body.leaderboard-page .country-row.rank-1 {
+    background: linear-gradient(135deg, #2d1f0d 0%, #4a3517 100%);
+}
+
+body.leaderboard-page .country-row.rank-1:hover {
+    background: linear-gradient(135deg, #3d2f1d 0%, #5a4527 100%);
 }
 
 /* Mobile responsive */
@@ -1261,8 +1522,17 @@ button[type="submit"]:disabled {
     color: #666;
 }
 
+/* Dark mode: Loading and error */
+body.leaderboard-page .loading {
+    color: var(--text-secondary);
+}
+
 .error {
     color: #d32f2f;
+}
+
+body.leaderboard-page .error {
+    color: #ff6b6b;
 }
 
 .empty-state {
@@ -1270,6 +1540,11 @@ button[type="submit"]:disabled {
     padding: 40px 20px;
     color: #999;
     font-size: 14px;
+}
+
+/* Dark mode: Empty state */
+body.leaderboard-page .empty-state {
+    color: var(--text-secondary);
 }
 
 .tie-breaker-notice {
@@ -1281,6 +1556,13 @@ button[type="submit"]:disabled {
     font-size: 13px;
     color: #1565c0;
     line-height: 1.5;
+}
+
+/* Dark mode: Tie-breaker notice */
+body.leaderboard-page .tie-breaker-notice {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 242, 254, 0.1) 100%);
+    border-left: 4px solid var(--neon-cyan);
+    color: var(--neon-blue);
 }
 
 .draft-link-banner {
@@ -1296,6 +1578,13 @@ button[type="submit"]:disabled {
     align-items: center;
 }
 
+/* Dark mode: Draft link banner */
+body.leaderboard-page .draft-link-banner {
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+}
+
 .draft-link {
     color: white;
     font-size: 15px;
@@ -1308,8 +1597,21 @@ button[type="submit"]:disabled {
     transition: background 0.3s;
 }
 
+/* Dark mode: Draft link */
+body.leaderboard-page .draft-link {
+    background: var(--neon-cyan);
+    color: var(--dark-bg-primary);
+}
+
 .draft-link:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode: Draft link hover */
+body.leaderboard-page .draft-link:hover {
+    background: var(--neon-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
 }
 
 @media (min-width: 500px) {
