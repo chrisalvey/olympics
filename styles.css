@@ -1704,7 +1704,7 @@ body.draft-page .instruction-item strong {
 }
 
 body.draft-page .instruction-item p {
-    color: var(--text-secondary);
+    color: var(--text-primary);
 }
 
 /* Dark mode: Form sections */
