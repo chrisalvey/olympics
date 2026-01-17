@@ -1318,3 +1318,15 @@ button[type="submit"]:disabled {
         justify-content: center;
     }
 }
+
+/* Leaderboard page specific container width */
+.container:has(.tabs) {
+    max-width: 600px;
+}
+
+/* Fallback for browsers that don't support :has() */
+@supports not (selector(:has(*))) {
+    body:has(.tabs) .container {
+        max-width: 600px;
+    }
+}
