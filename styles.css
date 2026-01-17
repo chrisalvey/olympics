@@ -559,23 +559,29 @@ input[type="text"]:focus {
 
 .submit-section {
     text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
 }
 
 button[type="submit"] {
     background: #667eea;
     color: white;
     border: none;
-    padding: 15px 40px;
-    border-radius: 8px;
-    font-size: 18px;
+    padding: 20px 50px;
+    border-radius: 12px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s;
     width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 button[type="submit"]:hover:not(:disabled) {
     background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
 }
 
 button[type="submit"]:active:not(:disabled) {
@@ -1885,11 +1891,17 @@ body.draft-page .country-points {
 body.draft-page #submitBtn {
     background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
     color: var(--dark-bg-primary);
+    font-size: 20px;
+    padding: 20px 50px;
+    border-radius: 12px;
+    max-width: 400px;
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
+    font-weight: bold;
 }
 
 body.draft-page #submitBtn:hover:not(:disabled) {
-    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.5);
+    transform: translateY(-3px);
 }
 
 body.draft-page #submitBtn:disabled {
