@@ -153,11 +153,16 @@ function renderParticipants() {
         </div>
     ` : '';
 
+    // Check if any medals have been awarded yet
+    const totalMedalsAwarded = medalsData.metadata?.totalMedalsAwarded || 0;
+    const hasMedals = totalMedalsAwarded > 0;
+
     let html = tieMessage;
     participantsWithScores.forEach((p, index) => {
         const rank = index + 1;
         const rankClass = rank <= 3 ? `rank-${rank}` : '';
-        const medalEmoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+        // Only show medal emojis once Olympics have started
+        const medalEmoji = hasMedals ? (rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '') : '';
 
         html += `
             <div class="participant-card ${rankClass}">

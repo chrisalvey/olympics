@@ -1320,13 +1320,6 @@ button[type="submit"]:disabled {
 }
 
 /* Leaderboard page specific container width */
-.container:has(.tabs) {
+body.leaderboard-page .container {
     max-width: 600px;
-}
-
-/* Fallback for browsers that don't support :has() */
-@supports not (selector(:has(*))) {
-    body:has(.tabs) .container {
-        max-width: 600px;
-    }
 }
