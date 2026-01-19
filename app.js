@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-import { firebaseConfig, DRAFT_DEADLINE, MAX_COUNTRIES, MIN_COUNTRIES, MAX_BUDGET } from './config.js';
+import { firebaseConfig, DRAFT_DEADLINE, REDIRECT_TIME, MAX_COUNTRIES, MIN_COUNTRIES, MAX_BUDGET } from './config.js';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -32,6 +32,12 @@ class OlympicsDraft {
         this.searchQuery = '';
         this.countdownInterval = null;
 
+        // Check if we should redirect to leaderboard
+        if (new Date() >= REDIRECT_TIME) {
+            window.location.replace('index.html');
+            return; // Stop execution
+        }
+
         // Check if deadline has passed
         if (this.isDeadlinePassed()) {
             this.showDeadlineClosed();
@@ -60,6 +66,13 @@ class OlympicsDraft {
         // Update every second
         this.countdownInterval = setInterval(() => {
             this.updateCountdown();
+
+            // Check if redirect time has passed
+            if (new Date() >= REDIRECT_TIME) {
+                window.location.replace('index.html');
+                clearInterval(this.countdownInterval);
+                return;
+            }
 
             // Check if deadline has passed
             if (this.isDeadlinePassed()) {
