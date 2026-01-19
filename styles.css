@@ -85,6 +85,53 @@ body.leaderboard-page .subtitle {
     color: var(--text-secondary);
 }
 
+/* Bookmark button */
+.bookmark-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.bookmark-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.bookmark-btn:active {
+    transform: translateY(0);
+}
+
+.bookmark-icon {
+    font-size: 16px;
+}
+
+.bookmark-text {
+    font-size: 14px;
+}
+
+/* Dark mode: Bookmark button */
+body.leaderboard-page .bookmark-btn {
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+}
+
+body.leaderboard-page .bookmark-btn:hover {
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+    border-color: var(--neon-blue);
+}
+
 /* Countdown timer styles */
 .countdown-timer {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1986,6 +2033,17 @@ body.draft-page .success-message p {
 
 body.draft-page .success-team {
     margin-top: 15px;
+}
+
+body.draft-page .bookmark-reminder {
+    margin-top: 15px;
+    padding: 12px 16px;
+    background: rgba(0, 212, 255, 0.15);
+    border-left: 3px solid var(--neon-cyan);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 body.draft-page .success-action {

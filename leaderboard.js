@@ -28,6 +28,29 @@ function init() {
         });
     });
 
+    // Bookmark button handler
+    const bookmarkBtn = document.getElementById('bookmarkBtn');
+    if (bookmarkBtn) {
+        bookmarkBtn.addEventListener('click', () => {
+            const pageTitle = 'Winter Olympics Fantasy - Leaderboard';
+            const pageUrl = window.location.href;
+
+            // Try modern browser bookmark API (limited support)
+            if (window.sidebar && window.sidebar.addPanel) {
+                // Firefox
+                window.sidebar.addPanel(pageTitle, pageUrl, '');
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                // IE
+                window.external.AddFavorite(pageUrl, pageTitle);
+            } else {
+                // Fallback: Show instructions
+                const isMac = /Mac/i.test(navigator.userAgent);
+                const shortcut = isMac ? 'Cmd+D' : 'Ctrl+D';
+                alert(`Press ${shortcut} to bookmark this page!\n\nOr copy this URL to save:\n${pageUrl}`);
+            }
+        });
+    }
+
     loadData();
     setInterval(loadData, 60000);
 }
