@@ -16,6 +16,9 @@ function init() {
     if (new Date() >= DRAFT_DEADLINE) {
         const draftBanner = document.querySelector('.draft-link-banner');
         if (draftBanner) draftBanner.style.display = 'none';
+
+        const instructionsSection = document.getElementById('instructionsSection');
+        if (instructionsSection) instructionsSection.style.display = 'none';
     }
 
     document.querySelectorAll('.tab').forEach(tab => {
