@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import { firebaseConfig, DRAFT_DEADLINE, MAX_COUNTRIES, MIN_COUNTRIES, MAX_BUDGET } from './config.js';
 
 const app = initializeApp(firebaseConfig);
@@ -210,8 +210,13 @@ class OlympicsDraft {
 
             if (isSelected) {
                 card.classList.add('selected');
+                card.title = 'Click to remove from your team';
             } else if (!canAfford) {
                 card.classList.add('disabled');
+                const needed = country.points - pointsRemaining;
+                card.title = `Can't afford - need ${needed} more point${needed > 1 ? 's' : ''} (${country.points} required, ${pointsRemaining} remaining)`;
+            } else {
+                card.title = 'Click to add to your team';
             }
 
             const nameSpan = document.createElement('span');
@@ -347,6 +352,8 @@ class OlympicsDraft {
         const submitBtn = document.getElementById('confirmSubmit');
         const cancelBtn = document.getElementById('cancelConfirm');
         const form = document.getElementById('draftForm');
+        const name = document.getElementById('name').value.trim();
+        const teamName = document.getElementById('teamName').value.trim();
 
         submitBtn.textContent = 'Submitting...';
         submitBtn.disabled = true;
@@ -354,15 +361,33 @@ class OlympicsDraft {
         form.classList.add('loading');
 
         try {
+            // Check for duplicate submissions by name
+            const q = query(
+                collection(db, 'submissions'),
+                where('name', '==', name)
+            );
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                // Duplicate found
+                alert(`A team has already been submitted by "${name}". Each person can only submit one team. If you need to update your team, please contact the organizer.`);
+                submitBtn.textContent = 'Yes, Submit';
+                submitBtn.disabled = false;
+                cancelBtn.disabled = false;
+                form.classList.remove('loading');
+                return;
+            }
+
+            // No duplicate, proceed with submission
             await addDoc(collection(db, 'submissions'), {
-                name: document.getElementById('name').value.trim(),
-                teamName: document.getElementById('teamName').value.trim(),
+                name: name,
+                teamName: teamName,
                 countries: this.selectedCountries.map(c => c.name),
                 totalPointsSpent: this.pointsSpent,
                 timestamp: serverTimestamp()
             });
 
-            document.getElementById('successTeamName').textContent = document.getElementById('teamName').value.trim();
+            document.getElementById('successTeamName').textContent = teamName;
             document.getElementById('successMessage').classList.add('show');
             this.hideConfirmation();
             form.style.display = 'none';

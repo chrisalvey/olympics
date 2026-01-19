@@ -3,13 +3,32 @@
 import { MEDAL_POINTS } from './config.js';
 
 /**
+ * Country name aliases for matching between different data sources
+ * Maps alternative names to the canonical name used in countries.json
+ */
+const COUNTRY_NAME_ALIASES = {
+    'united kingdom': 'great britain',
+    'uk': 'great britain',
+    'gb': 'great britain',
+    'taiwan': 'chinese taipei',
+    'republic of china': 'chinese taipei',
+    'roc': 'individual neutral athletes',
+    'olympic athletes from russia': 'individual neutral athletes',
+    'neutral athletes': 'individual neutral athletes',
+    'korea': 'south korea',
+    'republic of korea': 'south korea',
+};
+
+/**
  * Normalize country name for matching (handles typos, spaces, case differences)
  * @param {string} name - Country name to normalize
  * @returns {string} Normalized country name (lowercase, trimmed)
  */
 export function normalizeCountryName(name) {
     if (!name || typeof name !== 'string') return '';
-    return name.trim().toLowerCase();
+    const normalized = name.trim().toLowerCase();
+    // Check if this is an alias and return the canonical name
+    return COUNTRY_NAME_ALIASES[normalized] || normalized;
 }
 
 /**
