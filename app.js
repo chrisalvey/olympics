@@ -8,6 +8,60 @@ const db = getFirestore(app);
 // Countries data will be loaded from countries.json
 let countries = [];
 
+// Olympic-themed team names for random generator
+const TEAM_NAMES = [
+    "❄️ Ice Ice Baby",
+    "🥇 Gold Diggers",
+    "🎿 Slalom Shalom",
+    "🏂 Board to Death",
+    "⛸️ Skate Expectations",
+    "🥌 Curl Power",
+    "🎿 Downhill from Here",
+    "🏅 Medal Detector",
+    "❄️ Snow Big Deal",
+    "🥇 Frozen Assets",
+    "🏔️ Peak Performance",
+    "⛷️ Slope Stars",
+    "🥈 Silver Linings",
+    "🥉 Bronze Age",
+    "🏂 Shred Zeppelin",
+    "⛸️ Figure It Out",
+    "🎿 Alpine Supremacy",
+    "❄️ Winter is Coming",
+    "🏅 Medal of Honor",
+    "🥌 Stone Cold Curlers",
+    "🏂 Snowboard of Directors",
+    "⛸️ Ice to Meet You",
+    "🎿 Ski You Later",
+    "🥇 Going for Gold",
+    "❄️ Frostbite Club",
+    "🏔️ Summit or Nothing",
+    "🥈 Second to None",
+    "🏂 Wax On Wax Off",
+    "⛷️ Slope-a-Dopes",
+    "🎿 Nordic Ninjas",
+    "❄️ Chill Out",
+    "🥇 Gold Standard",
+    "🏅 Podium Chasers",
+    "⛸️ Blade Runners",
+    "🥌 Sweeping Champions",
+    "🏂 Halfpipe Heroes",
+    "🎿 Schuss or Bust",
+    "❄️ Avalanche!",
+    "🥇 Triple Threat",
+    "⛷️ Mountain Goats",
+    "🏅 Medal Mania",
+    "🥌 Rock Stars",
+    "⛸️ Spinning Victors",
+    "🏂 Air Raid",
+    "🎿 Powder Hounds",
+    "❄️ Ice Breakers",
+    "🥇 Crown Jewels",
+    "🏔️ Snow Joke",
+    "⛷️ Fast & Furious",
+    "🥈 Shiny Happy Medalists"
+];
+
 // Load countries data from JSON file
 async function loadCountries() {
     try {
@@ -179,6 +233,54 @@ class OlympicsDraft {
         document.getElementById('confirmSubmit').addEventListener('click', () => {
             this.submitDraft();
         });
+
+        // Team name generator
+        document.getElementById('generateNameBtn').addEventListener('click', () => {
+            this.generateTeamName();
+        });
+    }
+
+    async generateTeamName() {
+        const button = document.getElementById('generateNameBtn');
+        const teamNameInput = document.getElementById('teamName');
+
+        // Disable button during generation
+        button.disabled = true;
+        button.textContent = '🎲 ...';
+
+        try {
+            // Fetch all existing team names from database
+            const querySnapshot = await getDocs(collection(db, 'submissions'));
+            const existingNames = new Set();
+            querySnapshot.forEach(doc => {
+                existingNames.add(doc.data().teamName);
+            });
+
+            // Filter out already-taken names
+            const availableNames = TEAM_NAMES.filter(name => !existingNames.has(name));
+
+            if (availableNames.length === 0) {
+                alert('All pre-generated team names have been taken! Please create your own unique team name.');
+                button.disabled = false;
+                button.textContent = '🎲 Random';
+                return;
+            }
+
+            // Pick random available name
+            const randomName = availableNames[Math.floor(Math.random() * availableNames.length)];
+            teamNameInput.value = randomName;
+
+            // Trigger validation and save
+            this.validateForm();
+            this.saveToLocalStorage();
+
+        } catch (error) {
+            console.error('Error generating team name:', error);
+            alert('Failed to generate team name. Please try again.');
+        } finally {
+            button.disabled = false;
+            button.textContent = '🎲 Random';
+        }
     }
 
     sortCountries(sortType) {
