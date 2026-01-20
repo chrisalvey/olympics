@@ -256,9 +256,10 @@ body.leaderboard-page .bookmark-btn:hover {
 }
 
 .instruction-item {
-    background: rgba(255, 255, 255, 0.7);
+    background: white;
     padding: 12px;
     border-radius: 6px;
+    border: 2px solid #ddd;
 }
 
 .instruction-item strong {
@@ -1757,12 +1758,31 @@ body.draft-page .instructions-section h2 {
     color: var(--neon-cyan);
 }
 
+body.draft-page .instruction-item {
+    background: white;
+    border: 2px solid var(--neon-cyan);
+}
+
 body.draft-page .instruction-item strong {
-    color: var(--text-primary);
+    color: var(--dark-card);
 }
 
 body.draft-page .instruction-item p {
-    color: var(--text-primary);
+    color: #333;
+}
+
+/* Dark mode: Leaderboard instructions */
+body.leaderboard-page .instruction-item {
+    background: white;
+    border: 2px solid var(--neon-cyan);
+}
+
+body.leaderboard-page .instruction-item strong {
+    color: var(--dark-card);
+}
+
+body.leaderboard-page .instruction-item p {
+    color: #333;
 }
 
 /* Dark mode: Form sections */
