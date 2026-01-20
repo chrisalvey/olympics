@@ -175,7 +175,7 @@ function renderParticipants() {
 
     const tieMessage = hasTies && participantsWithScores.length > 1 ? `
         <div class="tie-breaker-notice">
-            ℹ️ Tied teams are ranked by gold medals (then silver, bronze) - just like the real Olympics!
+            ℹ️ Tied teams are ranked by gold medals (then silver, bronze). If still tied, those positions split their prizes equally.
         </div>
     ` : '';
 
