@@ -21,8 +21,8 @@ export const DRAFT_DEADLINE = new Date('2026-02-07T06:00:00Z'); // 12:00 AM CST 
 export const REDIRECT_TIME = new Date('2026-02-07T12:00:00Z'); // 6:00 AM CST = 12:00 PM UTC
 
 // Draft constraints
-export const MAX_COUNTRIES = 10;
-export const MIN_COUNTRIES = 3;
+export const MAX_COUNTRIES = 15;
+export const MIN_COUNTRIES = 5;
 export const MAX_BUDGET = 100;
 
 // Medal point values

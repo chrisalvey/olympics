@@ -4,7 +4,7 @@ A fantasy sports game for the **Milano Cortina 2026 Winter Olympics** (February 
 
 ## How It Works
 
-1. **Draft Your Team**: Select 3-10 countries with a budget of 100 points
+1. **Draft Your Team**: Select 5-15 countries with a budget of 100 points
 2. **Countries are Priced**: Based on historical performance (2018 & 2022 Olympics)
 3. **Earn Points**: Your countries earn points for every medal they win:
    - 🥇 Gold = 3 points
