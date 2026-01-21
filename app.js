@@ -451,7 +451,14 @@ class OlympicsDraft {
     }
 
     showConfirmation() {
-        document.getElementById('confirmTeamName').textContent = document.getElementById('teamName').value.trim();
+        const teamName = document.getElementById('teamName').value.trim();
+        const confirmTeamNameEl = document.getElementById('confirmTeamName');
+        confirmTeamNameEl.textContent = teamName;
+
+        // Apply dynamic sizing class based on name length
+        const nameLength = teamName.length;
+        confirmTeamNameEl.className = nameLength > 30 ? 'very-long-name' : nameLength > 20 ? 'long-name' : '';
+
         document.getElementById('confirmTotalPoints').textContent = this.pointsSpent;
         document.getElementById('confirmCountryList').innerHTML = this.selectedCountries
             .map(c => `${c.name} (${c.points} pts)`)
@@ -502,7 +509,13 @@ class OlympicsDraft {
                 timestamp: serverTimestamp()
             });
 
-            document.getElementById('successTeamName').textContent = teamName;
+            const successTeamNameEl = document.getElementById('successTeamName');
+            successTeamNameEl.textContent = teamName;
+
+            // Apply dynamic sizing class based on name length
+            const nameLength = teamName.length;
+            successTeamNameEl.className = nameLength > 30 ? 'very-long-name' : nameLength > 20 ? 'long-name' : '';
+
             document.getElementById('successMessage').classList.add('show');
             this.hideConfirmation();
             form.style.display = 'none';

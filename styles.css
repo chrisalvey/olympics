@@ -1235,6 +1235,70 @@ body.leaderboard-page .card-rank.rank-3 { color: var(--bronze-color); }
     line-height: 1.6;
 }
 
+/* Dynamic font sizing for long team names */
+.team-name.long-name {
+    font-size: 15px;
+}
+
+.team-name.very-long-name {
+    font-size: 13px;
+}
+
+body.leaderboard-page .team-name.long-name {
+    font-size: 17px;
+}
+
+body.leaderboard-page .team-name.very-long-name {
+    font-size: 15px;
+}
+
+.rank-1 .team-name.long-name {
+    font-size: 17px;
+}
+
+.rank-1 .team-name.very-long-name {
+    font-size: 15px;
+}
+
+body.leaderboard-page .rank-1 .team-name.long-name {
+    font-size: 19px;
+}
+
+body.leaderboard-page .rank-1 .team-name.very-long-name {
+    font-size: 17px;
+}
+
+.rank-2 .team-name.long-name,
+.rank-3 .team-name.long-name {
+    font-size: 16px;
+}
+
+.rank-2 .team-name.very-long-name,
+.rank-3 .team-name.very-long-name {
+    font-size: 14px;
+}
+
+body.leaderboard-page .rank-2 .team-name.long-name,
+body.leaderboard-page .rank-3 .team-name.long-name {
+    font-size: 18px;
+}
+
+body.leaderboard-page .rank-2 .team-name.very-long-name,
+body.leaderboard-page .rank-3 .team-name.very-long-name {
+    font-size: 16px;
+}
+
+/* Long name styling for confirmation and success messages */
+#confirmTeamName.long-name,
+#successTeamName.long-name {
+    font-size: 0.9em;
+}
+
+#confirmTeamName.very-long-name,
+#successTeamName.very-long-name {
+    font-size: 0.8em;
+}
+
 body.leaderboard-page .team-name {
     font-size: 20px;
     color: var(--text-primary);

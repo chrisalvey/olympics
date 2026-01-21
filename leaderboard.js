@@ -190,12 +190,16 @@ function renderParticipants() {
         // Only show medal emojis once Olympics have started
         const medalEmoji = hasMedals ? (rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '') : '';
 
+        // Apply dynamic sizing class based on team name length
+        const nameLength = p.teamName.length;
+        const nameLengthClass = nameLength > 30 ? 'very-long-name' : nameLength > 20 ? 'long-name' : '';
+
         html += `
             <div class="participant-card ${rankClass}">
                 <div class="card-header">
                     <div class="card-rank ${rankClass}">${rank}</div>
                     <div class="card-info">
-                        <div class="team-name">
+                        <div class="team-name ${nameLengthClass}">
                             ${medalEmoji ? `<span class="medal-emoji">${medalEmoji}</span>` : ''}
                             <span>${p.teamName}</span>
                         </div>
