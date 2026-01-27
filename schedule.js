@@ -7,7 +7,7 @@ const SCHEDULE_DATA = {
     feb6: {
         date: 'Thursday, February 6',
         events: [
-            { time: '20:00', event: 'Opening Ceremony', venue: 'Milano San Siro', sport: '🎆 Ceremony', isMedal: false }
+            { time: '20:00 CET (1:00 PM Central)', event: 'Opening Ceremony', venue: 'Milano San Siro', sport: '🎆 Ceremony', isMedal: false }
         ]
     },
     feb7: {
@@ -203,7 +203,7 @@ const SCHEDULE_DATA = {
             { time: '15:00-20:30', event: "Men's Semifinals & Gold Medal 🥇", venue: 'Cortina', sport: '🥌 Curling', isMedal: true },
             { time: '14:00-16:00', event: "Men's Cross Finals 🥇", venue: 'Livigno', sport: '🎿 Freestyle Skiing', isMedal: true },
             { time: '12:00-14:30', event: "Men's 50km Mass Start 🥇", venue: 'Tesero', sport: '⛷️ Cross-Country Skiing', isMedal: true },
-            { time: '20:00', event: 'Closing Ceremony', venue: 'Verona Arena', sport: '🎆 Ceremony', isMedal: false }
+            { time: '20:00 CET (1:00 PM Central)', event: 'Closing Ceremony', venue: 'Verona Arena', sport: '🎆 Ceremony', isMedal: false }
         ]
     }
 };
