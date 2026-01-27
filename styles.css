@@ -2208,6 +2208,15 @@ body.schedule-page .subtitle {
     color: var(--text-secondary);
 }
 
+/* Timezone note */
+.timezone-note {
+    text-align: center;
+    color: var(--neon-cyan);
+    font-size: 13px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
 /* Page Navigation */
 .page-nav {
     display: flex;
@@ -2332,6 +2341,16 @@ body.schedule-page .subtitle {
 .event-item:hover {
     background: rgba(15, 52, 96, 0.7);
     transform: translateX(5px);
+}
+
+/* Medal events - highlighted with gold accent */
+.event-item.medal-event {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 140, 0, 0.08) 100%);
+    border-left: 4px solid #FFD700;
+}
+
+.event-item.medal-event:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.25) 0%, rgba(255, 140, 0, 0.15) 100%);
 }
 
 .event-time {
