@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter Olympics Schedule</title>
+    <link rel="stylesheet" href="styles.css?v=15">
+</head>
+<body class="schedule-page">
+    <div class="container">
+        <h1>🗓️ Competition Schedule</h1>
+        <div class="subtitle">Milano Cortina 2026 • Feb 6-22</div>
+
+        <!-- Navigation Links -->
+        <div class="page-nav">
+            <a href="index.html">Leaderboard</a>
+            <a href="draft.html">Submit Team</a>
+        </div>
+
+        <!-- Day Filter -->
+        <div class="day-filter">
+            <button class="day-btn active" data-day="all">All Days</button>
+            <button class="day-btn" data-day="feb6">Feb 6</button>
+            <button class="day-btn" data-day="feb7">Feb 7</button>
+            <button class="day-btn" data-day="feb8">Feb 8</button>
+            <button class="day-btn" data-day="feb9">Feb 9</button>
+            <button class="day-btn" data-day="feb10">Feb 10</button>
+            <button class="day-btn" data-day="feb11">Feb 11</button>
+            <button class="day-btn" data-day="feb12">Feb 12</button>
+            <button class="day-btn" data-day="feb13">Feb 13</button>
+            <button class="day-btn" data-day="feb14">Feb 14</button>
+            <button class="day-btn" data-day="feb15">Feb 15</button>
+            <button class="day-btn" data-day="feb16">Feb 16</button>
+            <button class="day-btn" data-day="feb17">Feb 17</button>
+            <button class="day-btn" data-day="feb18">Feb 18</button>
+            <button class="day-btn" data-day="feb19">Feb 19</button>
+            <button class="day-btn" data-day="feb20">Feb 20</button>
+            <button class="day-btn" data-day="feb21">Feb 21</button>
+            <button class="day-btn" data-day="feb22">Feb 22</button>
+        </div>
+
+        <!-- Daily Schedule Cards -->
+        <div id="scheduleContent">
+            <!-- Dynamically populated by schedule.js -->
+        </div>
+
+        <!-- PDF Download Button -->
+        <div class="pdf-download-section">
+            <h3>📄 Full Detailed Schedule</h3>
+            <p>View complete session times, venues, and all events</p>
+            <a href="OLY_CS_BySession_V.12.pdf"
+               target="_blank"
+               class="pdf-btn">
+                View Full Schedule PDF
+            </a>
+        </div>
+    </div>
+
+    <script type="module" src="schedule.js"></script>
+</body>
+</html>

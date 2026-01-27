@@ -2185,3 +2185,264 @@ body.draft-page .draft-closed-banner h2 {
 body.draft-page .draft-closed-banner p {
     color: var(--text-secondary);
 }
+
+/* ==============================================
+   SCHEDULE PAGE STYLES
+   ============================================== */
+
+/* Schedule page dark mode background */
+body.schedule-page {
+    background: linear-gradient(135deg, var(--dark-bg-primary) 0%, var(--dark-bg-secondary) 100%);
+}
+
+body.schedule-page .container {
+    background: var(--dark-bg-secondary);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+body.schedule-page h1 {
+    color: var(--text-primary);
+}
+
+body.schedule-page .subtitle {
+    color: var(--text-secondary);
+}
+
+/* Page Navigation */
+.page-nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.page-nav a {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.page-nav a:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--neon-cyan);
+    transform: translateY(-2px);
+}
+
+/* Day Filter */
+.day-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.day-filter::-webkit-scrollbar {
+    height: 6px;
+}
+
+.day-filter::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.day-filter::-webkit-scrollbar-thumb {
+    background: var(--neon-cyan);
+    border-radius: 3px;
+}
+
+.day-btn {
+    padding: 10px 16px;
+    background: var(--dark-card);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 20px;
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.day-btn:hover {
+    background: var(--dark-card-hover);
+    border-color: var(--neon-cyan);
+}
+
+.day-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+/* Daily Schedule Cards */
+.day-card {
+    background: var(--dark-card);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.day-card:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.2);
+}
+
+.day-card.hidden {
+    display: none;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.day-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.event-list {
+    display: grid;
+    gap: 12px;
+}
+
+.event-item {
+    background: rgba(15, 52, 96, 0.5);
+    border-left: 4px solid var(--neon-cyan);
+    padding: 12px 15px;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.event-item:hover {
+    background: rgba(15, 52, 96, 0.7);
+    transform: translateX(5px);
+}
+
+.event-time {
+    font-size: 14px;
+    color: var(--neon-cyan);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.event-name {
+    font-size: 16px;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.event-meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* PDF Download Section */
+.pdf-download-section {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 242, 254, 0.08) 100%);
+    border-left: 4px solid var(--neon-cyan);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pdf-download-section h3 {
+    color: var(--neon-cyan);
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.pdf-download-section p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.pdf-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    font-size: 15px;
+}
+
+.pdf-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* Mobile Responsive for Schedule Page */
+@media (max-width: 768px) {
+    .page-nav {
+        gap: 10px;
+    }
+
+    .page-nav a {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .day-filter {
+        justify-content: flex-start;
+    }
+
+    .day-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .day-card {
+        padding: 15px;
+    }
+
+    .day-title {
+        font-size: 18px;
+    }
+
+    .event-item {
+        padding: 10px 12px;
+    }
+
+    .event-name {
+        font-size: 15px;
+    }
+
+    .event-meta {
+        font-size: 12px;
+    }
+
+    .pdf-download-section {
+        padding: 20px;
+    }
+
+    .pdf-download-section h3 {
+        font-size: 18px;
+    }
+
+    .pdf-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+}
