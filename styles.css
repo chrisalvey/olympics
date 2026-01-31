@@ -658,6 +658,58 @@ input[type="email"]:focus {
     background: #999;
 }
 
+/* Validation Error Banner */
+.validation-error-banner {
+    display: none; /* Hidden by default */
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    border: 3px solid #ff0000;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0 20px 0;
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.validation-error-banner .error-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.validation-error-banner .error-content h3 {
+    color: white;
+    font-size: 22px;
+    margin: 0 0 15px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.validation-error-banner #validationErrorList {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 20px 20px 20px 45px;
+    margin: 0;
+    list-style-position: outside;
+}
+
+.validation-error-banner #validationErrorList li {
+    color: #cc0000;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.validation-error-banner #validationErrorList li:last-child {
+    margin-bottom: 0;
+}
+
 .submit-section {
     text-align: center;
     margin-bottom: 40px;
@@ -2034,30 +2086,33 @@ body.draft-page .sort-controls label {
 
 /* Dark mode: Country grid cards */
 body.draft-page .country-card {
-    background: var(--dark-card);
+    background: var(--dark-card) !important;
     border-color: rgba(0, 212, 255, 0.2);
     color: var(--text-primary);
 }
 
 body.draft-page .country-card:hover:not(.selected):not(.disabled) {
     border-color: var(--neon-cyan);
+    background: var(--dark-card) !important;
     box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
     transform: translateY(-2px);
 }
 
 body.draft-page .country-card.selected {
-    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%);
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%) !important;
     border-color: var(--neon-cyan);
     box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+    opacity: 1;
 }
 
 body.draft-page .country-card.selected:hover {
+    background: linear-gradient(135deg, var(--dark-card) 0%, #1a4d7a 100%) !important;
     opacity: 0.9;
     border-color: var(--neon-blue);
 }
 
 body.draft-page .country-card.disabled {
-    background: rgba(15, 52, 96, 0.3);
+    background: rgba(15, 52, 96, 0.3) !important;
     border-color: rgba(255, 255, 255, 0.1);
     color: var(--text-muted);
     opacity: 0.5;

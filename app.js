@@ -222,7 +222,19 @@ class OlympicsDraft {
         // Form submission
         document.getElementById('draftForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            this.showConfirmation();
+            if (this.checkValidation()) {
+                this.showConfirmation();
+            } else {
+                this.showValidationErrors();
+            }
+        });
+
+        // Also handle clicks on disabled submit button
+        document.getElementById('submitBtn').addEventListener('click', (e) => {
+            if (e.target.disabled) {
+                e.preventDefault();
+                this.showValidationErrors();
+            }
         });
 
         // Confirmation dialog
@@ -448,6 +460,53 @@ class OlympicsDraft {
 
         const isValid = name && teamName && hasMinCountries && hasMaxCountries && withinBudget;
         document.getElementById('submitBtn').disabled = !isValid;
+
+        // Hide error banner if validation passes
+        if (isValid) {
+            document.getElementById('validationError').style.display = 'none';
+        }
+    }
+
+    checkValidation() {
+        const name = document.getElementById('name').value.trim();
+        const teamName = document.getElementById('teamName').value.trim();
+        const hasMinCountries = this.selectedCountries.length >= MIN_COUNTRIES;
+        const hasMaxCountries = this.selectedCountries.length <= MAX_COUNTRIES;
+        const withinBudget = this.pointsSpent <= MAX_BUDGET;
+
+        return name && teamName && hasMinCountries && hasMaxCountries && withinBudget;
+    }
+
+    showValidationErrors() {
+        const name = document.getElementById('name').value.trim();
+        const teamName = document.getElementById('teamName').value.trim();
+        const countryCount = this.selectedCountries.length;
+        const withinBudget = this.pointsSpent <= MAX_BUDGET;
+
+        const errors = [];
+
+        if (!name) {
+            errors.push('Enter your name');
+        }
+        if (!teamName) {
+            errors.push('Enter a team name');
+        }
+        if (countryCount < MIN_COUNTRIES) {
+            errors.push(`Select at least ${MIN_COUNTRIES} countries (currently ${countryCount} selected)`);
+        }
+        if (countryCount > MAX_COUNTRIES) {
+            errors.push(`Select no more than ${MAX_COUNTRIES} countries (currently ${countryCount} selected)`);
+        }
+        if (!withinBudget) {
+            const over = this.pointsSpent - MAX_BUDGET;
+            errors.push(`Reduce points spent by ${over} (currently ${this.pointsSpent}/100)`);
+        }
+
+        if (errors.length > 0) {
+            const errorList = document.getElementById('validationErrorList');
+            errorList.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
+            document.getElementById('validationError').style.display = 'flex';
+        }
     }
 
     showConfirmation() {

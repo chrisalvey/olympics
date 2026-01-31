@@ -161,6 +161,15 @@
                 <div id="countryGrid" class="country-grid"></div>
             </div>
 
+            <!-- Validation Error Banner - Positioned right before submit button -->
+            <div id="validationError" class="validation-error-banner" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <div class="error-content">
+                    <h3>Cannot Submit - Please Complete the Following:</h3>
+                    <ul id="validationErrorList"></ul>
+                </div>
+            </div>
+
             <div class="submit-section">
                 <button type="submit" id="submitBtn" disabled>Submit Draft</button>
             </div>
