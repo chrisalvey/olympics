@@ -746,6 +746,20 @@ button[type="submit"]:disabled {
     cursor: not-allowed;
 }
 
+/* Visually disabled submit button (button remains clickable for validation errors) */
+button[type="submit"].btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #888;
+    border-color: #666;
+}
+
+button[type="submit"].btn-disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    background: #888;
+}
+
 .success-message {
     display: none;
     background: #d4edda;

@@ -229,14 +229,6 @@ class OlympicsDraft {
             }
         });
 
-        // Also handle clicks on disabled submit button
-        document.getElementById('submitBtn').addEventListener('click', (e) => {
-            if (e.target.disabled) {
-                e.preventDefault();
-                this.showValidationErrors();
-            }
-        });
-
         // Confirmation dialog
         document.getElementById('cancelConfirm').addEventListener('click', () => {
             this.hideConfirmation();
@@ -459,11 +451,14 @@ class OlympicsDraft {
         const withinBudget = this.pointsSpent <= MAX_BUDGET;
 
         const isValid = name && teamName && hasMinCountries && hasMaxCountries && withinBudget;
-        document.getElementById('submitBtn').disabled = !isValid;
+        const submitBtn = document.getElementById('submitBtn');
 
-        // Hide error banner if validation passes
         if (isValid) {
+            submitBtn.classList.remove('btn-disabled');
+            submitBtn.removeAttribute('disabled'); // Keep for accessibility
             document.getElementById('validationError').style.display = 'none';
+        } else {
+            submitBtn.classList.add('btn-disabled');
         }
     }
 
