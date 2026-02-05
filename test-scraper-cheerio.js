@@ -13,7 +13,11 @@ const COUNTRY_NAME_MAPPING = {
     'Team GB': 'Great Britain',
     'ROC': 'Individual Neutral Athletes',
     'Russian Olympic Committee': 'Individual Neutral Athletes',
-    'Taiwan': 'Chinese Taipei'
+    'Taiwan': 'Chinese Taipei',
+    'Hong Kong, China': 'Hong Kong',
+    'Hong Kong (China)': 'Hong Kong',
+    'United States of America': 'United States',
+    'USA': 'United States'
 };
 
 function fetchHTML(url) {
