@@ -132,8 +132,11 @@ function calculateScore(participantCountries) {
 }
 
 function renderParticipants() {
+    const participantsContent = document.getElementById('participantsContent');
+    participantsContent.classList.remove('loading');
+
     if (participants.length === 0) {
-        document.getElementById('participantsContent').innerHTML =
+        participantsContent.innerHTML =
             '<div class="empty-state">No participants yet. Be the first to submit!</div>';
         return;
     }
@@ -261,7 +264,7 @@ function renderParticipants() {
         `;
     });
 
-    document.getElementById('participantsContent').innerHTML = html;
+    participantsContent.innerHTML = html;
 
     // Add click handlers for expand/collapse
     document.querySelectorAll('.expand-btn').forEach(btn => {
@@ -288,6 +291,9 @@ function renderParticipants() {
 }
 
 function renderCountries() {
+    const countriesContent = document.getElementById('countriesContent');
+    countriesContent.classList.remove('loading');
+
     const countriesArray = Object.entries(medalsData.medals).map(([name, medals]) => {
         const points = calculateMedalPoints(medals);
         const medalCount = medals.gold + medals.silver + medals.bronze;
@@ -316,7 +322,7 @@ function renderCountries() {
     const countriesWithMedals = countriesArray.filter(c => c.medalCount > 0);
 
     if (countriesWithMedals.length === 0) {
-        document.getElementById('countriesContent').innerHTML =
+        countriesContent.innerHTML =
             '<div class="empty-state">No medals awarded yet.</div>';
         return;
     }
@@ -359,7 +365,7 @@ function renderCountries() {
         </div>
     `;
 
-    document.getElementById('countriesContent').innerHTML = html;
+    countriesContent.innerHTML = html;
 }
 
 function updateLastUpdated() {
