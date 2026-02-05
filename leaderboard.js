@@ -220,11 +220,71 @@ function renderParticipants() {
                     const points = medals ? calculateMedalPoints(medals) : 0;
                     return `${country} (${points})`;
                 }).join(' • ')}</div>
+                <button class="expand-btn" data-participant-index="${index}">
+                    <span class="expand-text">View Details</span>
+                    <span class="expand-icon">▼</span>
+                </button>
+                <div class="country-breakdown" data-participant-index="${index}" style="display: none;">
+                    <div class="breakdown-header">Country Performance</div>
+                    <table class="breakdown-table">
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th class="medals-col">Medals</th>
+                                <th class="points-col">Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${p.countries.map(country => {
+                                const normalizedCountry = normalizeCountryName(country);
+                                const medals = normalizedMedalsLookup[normalizedCountry] || { gold: 0, silver: 0, bronze: 0 };
+                                const points = calculateMedalPoints(medals);
+                                const totalMedals = medals.gold + medals.silver + medals.bronze;
+
+                                return `
+                                    <tr class="${totalMedals > 0 ? 'has-medals' : 'no-medals'}">
+                                        <td class="country-name-cell">${country}</td>
+                                        <td class="medals-cell">
+                                            ${medals.gold > 0 ? `<span class="mini-medal gold">🥇${medals.gold}</span>` : ''}
+                                            ${medals.silver > 0 ? `<span class="mini-medal silver">🥈${medals.silver}</span>` : ''}
+                                            ${medals.bronze > 0 ? `<span class="mini-medal bronze">🥉${medals.bronze}</span>` : ''}
+                                            ${totalMedals === 0 ? '<span class="no-medals-text">—</span>' : ''}
+                                        </td>
+                                        <td class="points-cell ${points > 0 ? 'has-points' : ''}">${points}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         `;
     });
 
     document.getElementById('participantsContent').innerHTML = html;
+
+    // Add click handlers for expand/collapse
+    document.querySelectorAll('.expand-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const index = this.getAttribute('data-participant-index');
+            const breakdown = document.querySelector(`.country-breakdown[data-participant-index="${index}"]`);
+            const icon = this.querySelector('.expand-icon');
+            const text = this.querySelector('.expand-text');
+
+            if (breakdown.style.display === 'none') {
+                breakdown.style.display = 'block';
+                icon.textContent = '▲';
+                text.textContent = 'Hide Details';
+                this.classList.add('expanded');
+            } else {
+                breakdown.style.display = 'none';
+                icon.textContent = '▼';
+                text.textContent = 'View Details';
+                this.classList.remove('expanded');
+            }
+        });
+    });
 }
 
 function renderCountries() {

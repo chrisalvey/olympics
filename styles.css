@@ -1514,6 +1514,288 @@ body.leaderboard-page .countries-list {
     font-size: 13px;
 }
 
+/* Expand/Collapse Button */
+.expand-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 16px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    color: #667eea;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+body.leaderboard-page .expand-btn {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: var(--neon-cyan);
+}
+
+.expand-btn:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.5);
+    transform: translateY(-1px);
+}
+
+body.leaderboard-page .expand-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--neon-cyan);
+}
+
+.expand-btn:active {
+    transform: translateY(0);
+}
+
+.expand-btn.expanded {
+    background: rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+}
+
+body.leaderboard-page .expand-btn.expanded {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--neon-cyan);
+}
+
+.expand-icon {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Country Breakdown Section */
+.country-breakdown {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    animation: slideDown 0.3s ease-out;
+}
+
+body.leaderboard-page .country-breakdown {
+    border-top-color: rgba(255,255,255,0.1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 1000px;
+    }
+}
+
+.breakdown-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+body.leaderboard-page .breakdown-header {
+    color: var(--text-primary);
+}
+
+.breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.breakdown-table thead th {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 8px 6px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #667eea;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+body.leaderboard-page .breakdown-table thead th {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--neon-cyan);
+    border-bottom-color: rgba(0, 212, 255, 0.3);
+}
+
+.breakdown-table tbody tr {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: background 0.2s ease;
+}
+
+body.leaderboard-page .breakdown-table tbody tr {
+    border-bottom-color: rgba(255,255,255,0.05);
+}
+
+.breakdown-table tbody tr:hover {
+    background: rgba(102, 126, 234, 0.05);
+}
+
+body.leaderboard-page .breakdown-table tbody tr:hover {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.breakdown-table tbody tr.has-medals {
+    background: rgba(102, 126, 234, 0.03);
+}
+
+body.leaderboard-page .breakdown-table tbody tr.has-medals {
+    background: rgba(0, 212, 255, 0.03);
+}
+
+.breakdown-table tbody tr.no-medals {
+    opacity: 0.5;
+}
+
+.breakdown-table td {
+    padding: 10px 6px;
+    vertical-align: middle;
+}
+
+.country-name-cell {
+    font-weight: 500;
+    color: #333;
+    font-size: 13px;
+}
+
+body.leaderboard-page .country-name-cell {
+    color: var(--text-primary);
+}
+
+.medals-cell {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.mini-medal {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.mini-medal.gold {
+    background: rgba(255, 215, 0, 0.15);
+    color: #b8860b;
+}
+
+body.leaderboard-page .mini-medal.gold {
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--gold-color);
+}
+
+.mini-medal.silver {
+    background: rgba(192, 192, 192, 0.15);
+    color: #808080;
+}
+
+body.leaderboard-page .mini-medal.silver {
+    background: rgba(192, 192, 192, 0.2);
+    color: var(--silver-color);
+}
+
+.mini-medal.bronze {
+    background: rgba(205, 127, 50, 0.15);
+    color: #8b4513;
+}
+
+body.leaderboard-page .mini-medal.bronze {
+    background: rgba(255, 140, 66, 0.2);
+    color: var(--bronze-color);
+}
+
+.no-medals-text {
+    color: #999;
+    font-size: 12px;
+}
+
+body.leaderboard-page .no-medals-text {
+    color: var(--text-muted);
+}
+
+.points-cell {
+    text-align: right;
+    font-weight: 600;
+    color: #999;
+    font-size: 14px;
+}
+
+body.leaderboard-page .points-cell {
+    color: var(--text-muted);
+}
+
+.points-cell.has-points {
+    color: #667eea;
+    font-size: 16px;
+}
+
+body.leaderboard-page .points-cell.has-points {
+    color: var(--neon-cyan);
+}
+
+.medals-col {
+    text-align: center;
+    width: 90px;
+}
+
+.points-col {
+    text-align: right;
+    width: 50px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+    .breakdown-table {
+        font-size: 12px;
+    }
+
+    .breakdown-table thead th {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+
+    .breakdown-table td {
+        padding: 8px 4px;
+    }
+
+    .country-name-cell {
+        font-size: 12px;
+    }
+
+    .mini-medal {
+        font-size: 10px;
+        padding: 2px 4px;
+    }
+
+    .points-cell.has-points {
+        font-size: 14px;
+    }
+
+    .medals-col {
+        width: 80px;
+    }
+
+    .points-col {
+        width: 40px;
+    }
+}
+
 .country-card {
     background: #f8f9fa;
     border-radius: 12px;
