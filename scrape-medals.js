@@ -181,7 +181,9 @@ async function scrapeMedals() {
         }
 
         // Check for unmapped countries (WARNING - potential data loss!)
+        let hasValidationErrors = false;
         if (unmappedCountries.length > 0) {
+            hasValidationErrors = true;
             console.log('⚠️  WARNING: Found countries in Wikipedia that are NOT in countries.json:');
             console.log('   These medals will NOT be attributed correctly!');
             console.log();
@@ -221,6 +223,7 @@ async function scrapeMedals() {
 
         // VALIDATION: Check for medal count mismatch
         if (scrapedTotalMedals !== totalMedals) {
+            hasValidationErrors = true;
             console.log('='.repeat(80));
             console.log('⚠️  VALIDATION WARNING: MEDAL COUNT MISMATCH!');
             console.log('='.repeat(80));
@@ -271,6 +274,18 @@ async function scrapeMedals() {
 
         console.log();
         console.log('='.repeat(80));
+
+        // Exit with error if validation failed
+        if (hasValidationErrors) {
+            console.log('❌ MEDAL SCRAPER COMPLETED WITH VALIDATION ERRORS');
+            console.log('='.repeat(80));
+            console.log();
+            console.log('The scraper found data quality issues that need attention.');
+            console.log('Check the warnings above and fix the country name mappings.');
+            console.log();
+            process.exit(1);
+        }
+
         console.log('✅ MEDAL SCRAPER COMPLETED SUCCESSFULLY');
         console.log('='.repeat(80));
         console.log();

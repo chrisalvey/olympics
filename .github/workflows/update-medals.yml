@@ -29,7 +29,8 @@ jobs:
 
       - name: Run medal scraper
         run: |
-          node scrape-medals.js
+          node scrape-medals.js | tee scraper-output.log
+          echo "SCRAPER_EXIT_CODE=$?" >> $GITHUB_ENV
 
       - name: Check for changes
         id: check_changes
@@ -58,6 +59,32 @@ jobs:
         run: |
           echo "✓ Medal counts are already up to date"
 
+      - name: Prepare email body
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          echo "## Medal Update Summary" > email-body.txt
+          echo "" >> email-body.txt
+          echo "Medal counts have been updated successfully!" >> email-body.txt
+          echo "" >> email-body.txt
+          echo "**Run:** ${{ github.run_number }}" >> email-body.txt
+          echo "**Time:** $(date -u +'%Y-%m-%d %H:%M UTC')" >> email-body.txt
+          echo "" >> email-body.txt
+          echo "---" >> email-body.txt
+          echo "" >> email-body.txt
+          echo "## Scraper Output" >> email-body.txt
+          echo "" >> email-body.txt
+          echo '```' >> email-body.txt
+          tail -50 scraper-output.log >> email-body.txt
+          echo '```' >> email-body.txt
+          echo "" >> email-body.txt
+          echo "---" >> email-body.txt
+          echo "" >> email-body.txt
+          echo "**View the updated leaderboard:**" >> email-body.txt
+          echo "https://chrisalvey.github.io/olympics" >> email-body.txt
+          echo "" >> email-body.txt
+          echo "**View full logs:**" >> email-body.txt
+          echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> email-body.txt
+
       - name: Send success email
         if: steps.check_changes.outputs.changed == 'true'
         uses: dawidd6/action-send-mail@v3
@@ -70,17 +97,40 @@ jobs:
           subject: "✅ Olympics Medal Update - ${{ github.run_number }}"
           to: ${{ secrets.EMAIL_TO }}
           from: Olympics Medal Bot
-          body: |
-            Medal counts have been updated successfully!
+          body: file://email-body.txt
+          convert_markdown: true
 
-            Run: ${{ github.run_number }}
-            Time: ${{ github.event.repository.updated_at }}
-
-            View the updated leaderboard:
-            https://chrisalvey.github.io/olympics
-
-            View the commit:
-            ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+      - name: Prepare error email body
+        if: failure()
+        run: |
+          echo "## Medal Scraper Failed" > error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo "⚠️ The medal scraper encountered an error or validation failure!" >> error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo "**Run:** ${{ github.run_number }}" >> error-email-body.txt
+          echo "**Time:** $(date -u +'%Y-%m-%d %H:%M UTC')" >> error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo "---" >> error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo "## Scraper Output (Last 100 lines)" >> error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo '```' >> error-email-body.txt
+          if [ -f scraper-output.log ]; then
+            tail -100 scraper-output.log >> error-email-body.txt
+          else
+            echo "No scraper output available" >> error-email-body.txt
+          fi
+          echo '```' >> error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo "---" >> error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo "**View full logs:**" >> error-email-body.txt
+          echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> error-email-body.txt
+          echo "" >> error-email-body.txt
+          echo "**Action Required:**" >> error-email-body.txt
+          echo "1. Check the scraper output above for validation errors" >> error-email-body.txt
+          echo "2. Update COUNTRY_NAME_MAPPING in scrape-medals.js if needed" >> error-email-body.txt
+          echo "3. Re-run the workflow manually after fixing" >> error-email-body.txt
 
       - name: Send error email
         if: failure()
@@ -94,13 +144,5 @@ jobs:
           subject: "❌ Olympics Medal Scraper Failed - ${{ github.run_number }}"
           to: ${{ secrets.EMAIL_TO }}
           from: Olympics Medal Bot
-          body: |
-            The medal scraper encountered an error!
-
-            Run: ${{ github.run_number }}
-            Time: ${{ github.event.repository.updated_at }}
-
-            View the failed run:
-            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-            Please check the logs and fix the issue.
+          body: file://error-email-body.txt
+          convert_markdown: true
