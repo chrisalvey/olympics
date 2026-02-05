@@ -41,17 +41,20 @@ function fetchHTML(url) {
 
 /**
  * Parse Wikipedia medal table and extract medal counts
+ * Returns an object with medals data and validation metadata
  */
-function parseMedalTable(html) {
+function parseMedalTable(html, knownCountries = []) {
     const $ = cheerio.load(html);
     const medals = {};
+    const unmappedCountries = [];
+    let scrapedTotalMedals = 0;
 
     // Find medal table - typically has class "wikitable"
     const table = $('table.wikitable').first();
 
     if (!table.length) {
         console.warn('Medal table not found on Wikipedia page');
-        return medals;
+        return { medals, scrapedTotalMedals, unmappedCountries };
     }
 
     // Parse rows
@@ -75,6 +78,9 @@ function parseMedalTable(html) {
             country = link.text().trim();
         }
 
+        // Store original country name before mapping
+        const originalCountry = country;
+
         // Normalize country name using mapping (handle IOC vs Wikipedia naming differences)
         country = COUNTRY_NAME_MAPPING[country] || country;
 
@@ -88,11 +94,23 @@ function parseMedalTable(html) {
 
         // Only add countries with medals
         if (gold > 0 || silver > 0 || bronze > 0) {
+            const medalCount = gold + silver + bronze;
+            scrapedTotalMedals += medalCount;
+
             medals[country] = { gold, silver, bronze };
+
+            // Check if this country exists in our known countries list
+            if (knownCountries.length > 0 && !knownCountries.includes(country)) {
+                unmappedCountries.push({
+                    wikipedia: originalCountry,
+                    mapped: country,
+                    medals: medalCount
+                });
+            }
         }
     });
 
-    return medals;
+    return { medals, scrapedTotalMedals, unmappedCountries };
 }
 
 /**
@@ -127,21 +145,8 @@ async function scrapeMedals() {
         console.log(`   ✓ Page fetched successfully`);
         console.log();
 
-        // Parse medal table
-        console.log('📊 Parsing medal table...');
-        const scrapedMedals = parseMedalTable(html);
-        const medalCount = Object.keys(scrapedMedals).length;
-        console.log(`   ✓ Found ${medalCount} countries with medals`);
-        console.log();
-
-        if (medalCount === 0) {
-            console.log('⚠️  No medals found. Olympics may not have started yet.');
-            console.log('   Keeping existing medal data.');
-            return;
-        }
-
-        // Load existing medals.json
-        console.log('📖 Loading existing medals.json...');
+        // Load existing medals.json and countries.json first
+        console.log('📖 Loading existing data files...');
         let medalsData;
         try {
             medalsData = JSON.parse(fs.readFileSync('medals.json', 'utf-8'));
@@ -150,13 +155,42 @@ async function scrapeMedals() {
             medalsData = { medals: {}, metadata: {} };
         }
 
-        // Ensure all countries from countries.json exist in medals
         let countriesData = [];
+        let knownCountryNames = [];
         try {
             countriesData = JSON.parse(fs.readFileSync('countries.json', 'utf-8'));
+            knownCountryNames = countriesData.map(c => c.name);
             console.log(`   ✓ Loaded ${countriesData.length} countries from countries.json`);
         } catch (error) {
             console.log('   ⚠️  Could not read countries.json');
+        }
+
+        // Parse medal table
+        console.log();
+        console.log('📊 Parsing medal table...');
+        const { medals: scrapedMedals, scrapedTotalMedals, unmappedCountries } = parseMedalTable(html, knownCountryNames);
+        const countryCount = Object.keys(scrapedMedals).length;
+        console.log(`   ✓ Found ${countryCount} countries with medals`);
+        console.log(`   ✓ Total medals scraped from Wikipedia: ${scrapedTotalMedals}`);
+        console.log();
+
+        if (countryCount === 0) {
+            console.log('⚠️  No medals found. Olympics may not have started yet.');
+            console.log('   Keeping existing medal data.');
+            return;
+        }
+
+        // Check for unmapped countries (WARNING - potential data loss!)
+        if (unmappedCountries.length > 0) {
+            console.log('⚠️  WARNING: Found countries in Wikipedia that are NOT in countries.json:');
+            console.log('   These medals will NOT be attributed correctly!');
+            console.log();
+            unmappedCountries.forEach(country => {
+                console.log(`   ❌ "${country.wikipedia}" → "${country.mapped}" (${country.medals} medals)`);
+            });
+            console.log();
+            console.log('   ACTION REQUIRED: Add these countries to countries.json or update COUNTRY_NAME_MAPPING');
+            console.log();
         }
 
         // Initialize all countries with 0 medals if they don't exist
@@ -167,7 +201,6 @@ async function scrapeMedals() {
         });
 
         // Merge scraped data with existing data
-        console.log();
         console.log('🔄 Merging medal data...');
         medalsData.medals = mergeMedals(medalsData.medals, scrapedMedals);
 
@@ -179,11 +212,30 @@ async function scrapeMedals() {
         medalsData.metadata = {
             lastUpdated: new Date().toISOString(),
             totalMedalsAwarded: totalMedals,
+            scrapedTotalMedals: scrapedTotalMedals,
             source: 'Wikipedia'
         };
 
-        console.log(`   ✓ Total medals awarded: ${totalMedals}`);
+        console.log(`   ✓ Total medals in medals.json: ${totalMedals}`);
         console.log();
+
+        // VALIDATION: Check for medal count mismatch
+        if (scrapedTotalMedals !== totalMedals) {
+            console.log('='.repeat(80));
+            console.log('⚠️  VALIDATION WARNING: MEDAL COUNT MISMATCH!');
+            console.log('='.repeat(80));
+            console.log(`   Wikipedia total: ${scrapedTotalMedals} medals`);
+            console.log(`   medals.json total: ${totalMedals} medals`);
+            console.log(`   Difference: ${Math.abs(scrapedTotalMedals - totalMedals)} medals`);
+            console.log();
+            console.log('   This indicates country name mapping issues!');
+            console.log('   Check COUNTRY_NAME_MAPPING or countries.json for missing/incorrect names.');
+            console.log('='.repeat(80));
+            console.log();
+        } else {
+            console.log('   ✅ Validation passed: Medal counts match!');
+            console.log();
+        }
 
         // Write updated medals.json
         console.log('💾 Writing updated medals.json...');

@@ -35,13 +35,14 @@ function fetchHTML(url) {
 function parseMedalTable(html) {
     const $ = cheerio.load(html);
     const medals = {};
+    let scrapedTotalMedals = 0;
 
     // Find medal table - typically has class "wikitable" and contains "Gold", "Silver", "Bronze" headers
     const table = $('table.wikitable').first();
 
     if (!table.length) {
         console.warn('Medal table not found');
-        return medals;
+        return { medals, scrapedTotalMedals };
     }
 
     // Parse rows
@@ -77,11 +78,12 @@ function parseMedalTable(html) {
         const bronze = parseInt($(cells[4]).text().trim()) || 0;
 
         if (gold > 0 || silver > 0 || bronze > 0) {
+            scrapedTotalMedals += gold + silver + bronze;
             medals[country] = { gold, silver, bronze };
         }
     });
 
-    return medals;
+    return { medals, scrapedTotalMedals };
 }
 
 async function testScraper() {
@@ -103,9 +105,10 @@ async function testScraper() {
         }
 
         console.log('📊 Parsing medal table...');
-        const medals = parseMedalTable(html);
+        const { medals, scrapedTotalMedals } = parseMedalTable(html);
         const medalCount = Object.keys(medals).length;
         console.log(`   ✓ Found ${medalCount} countries with medals`);
+        console.log(`   ✓ Total medals scraped: ${scrapedTotalMedals}`);
         console.log();
 
         if (medalCount === 0) {
@@ -137,6 +140,27 @@ async function testScraper() {
             const emoji = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '  ';
             console.log(`   ${emoji} ${String(rank).padStart(2)}. ${country.name.padEnd(25)} G:${String(country.gold).padStart(2)} S:${String(country.silver).padStart(2)} B:${String(country.bronze).padStart(2)} (Total: ${country.total})`);
         });
+
+        console.log();
+
+        // Validation check - sum ALL countries, not just top 10
+        const allCountries = Object.entries(medals).map(([name, m]) => ({
+            name,
+            ...m,
+            total: m.gold + m.silver + m.bronze
+        }));
+        const calculatedTotal = allCountries.reduce((sum, c) => sum + c.total, 0);
+
+        console.log('='.repeat(80));
+        console.log('VALIDATION CHECK');
+        console.log('='.repeat(80));
+        console.log(`   Scraped from Wikipedia: ${scrapedTotalMedals} medals`);
+        console.log(`   Calculated from countries: ${calculatedTotal} medals`);
+        if (scrapedTotalMedals === calculatedTotal) {
+            console.log('   ✅ Medal counts match!');
+        } else {
+            console.log(`   ❌ MISMATCH! Difference: ${Math.abs(scrapedTotalMedals - calculatedTotal)} medals`);
+        }
 
         console.log();
         console.log('='.repeat(80));
