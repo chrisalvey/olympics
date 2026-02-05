@@ -4,6 +4,18 @@ const cheerio = require('cheerio');
 
 const TEST_URL = 'https://en.wikipedia.org/wiki/2022_Winter_Olympics_medal_table';
 
+// Country name mapping to handle Wikipedia vs IOC naming differences
+const COUNTRY_NAME_MAPPING = {
+    'Czechia': 'Czech Republic',
+    'Korea': 'South Korea',
+    'Republic of Korea': 'South Korea',
+    'United Kingdom': 'Great Britain',
+    'Team GB': 'Great Britain',
+    'ROC': 'Individual Neutral Athletes',
+    'Russian Olympic Committee': 'Individual Neutral Athletes',
+    'Taiwan': 'Chinese Taipei'
+};
+
 function fetchHTML(url) {
     return new Promise((resolve, reject) => {
         const options = {
@@ -52,6 +64,9 @@ function parseMedalTable(html) {
         if (link.length) {
             country = link.text().trim();
         }
+
+        // Normalize country name using mapping (handle IOC vs Wikipedia naming differences)
+        country = COUNTRY_NAME_MAPPING[country] || country;
 
         // Skip invalid/empty country names or totals row
         if (!country || country.toLowerCase().includes('total')) return;
