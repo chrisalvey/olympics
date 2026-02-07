@@ -1232,6 +1232,8 @@ body.leaderboard-page .progress-bar-fill {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
+/* Shimmer animation disabled for better visibility at low percentages */
+/*
 .progress-bar-fill::after {
     content: '';
     position: absolute;
@@ -1247,6 +1249,7 @@ body.leaderboard-page .progress-bar-fill {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
 }
+*/
 
 /* Tie-breaker notice section at bottom */
 .tie-breaker-notice-section {
