@@ -50,10 +50,9 @@ jobs:
         run: |
           git config user.name "Olympics Medal Bot"
           git config user.email "bot@github-actions"
+          git pull --rebase origin main
           git add medals.json
           git commit -m "🏅 Update medal counts - $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git fetch origin
-          git rebase origin/main
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
