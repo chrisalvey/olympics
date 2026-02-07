@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Winter Olympics Fantasy Results</title>
     <!-- Deployment trigger -->
-    <link rel="stylesheet" href="styles.css?v=17">
+    <link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body class="leaderboard-page">
     <div class="container">
@@ -18,15 +18,7 @@
             <button class="tab" data-tab="countries">Medal Count</button>
         </div>
 
-        <div class="medal-progress-section" id="medalProgressSection">
-            <div class="progress-header">
-                <span class="progress-label">Olympics Progress</span>
-                <span class="progress-stats" id="progressStats">Loading...</span>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill" id="progressBarFill" style="width: 0%"></div>
-            </div>
-        </div>
+        <div class="medal-progress-text" id="progressStats">Loading...</div>
 
         <div id="participantsTab" class="tab-content active">
             <div id="participantsContent" class="loading">Loading...</div>
@@ -89,6 +81,6 @@
 
     </div>
 
-    <script type="module" src="leaderboard.js?v=3"></script>
+    <script type="module" src="leaderboard.js?v=4"></script>
 </body>
 </html>
