@@ -395,10 +395,12 @@ function updateMedalProgress() {
     // Calculate percentage
     const percentage = Math.min((totalMedalsAwarded / TOTAL_MEDALS) * 100, 100);
 
-    // Update progress bar
+    // Update progress bar with minimum width for visibility
     const progressBarFill = document.getElementById('progressBarFill');
     if (progressBarFill) {
-        progressBarFill.style.width = `${percentage}%`;
+        // Use minimum of 2% width when there are medals, to ensure bar is visible
+        const displayPercentage = totalMedalsAwarded > 0 ? Math.max(percentage, 2) : 0;
+        progressBarFill.style.width = `${displayPercentage}%`;
     }
 
     // Update stats text
