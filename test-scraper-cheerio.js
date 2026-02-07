@@ -58,14 +58,23 @@ function parseMedalTable(html) {
 
         if (cells.length < 5) return;
 
-        // Get country name (usually in 2nd column)
-        let country = $(cells[1]).text().trim();
+        // Detect table structure: Wikipedia uses rowspan for rank numbers
+        // - 6 cells: [rank, country, gold, silver, bronze, total]
+        // - 5 cells: [country, gold, silver, bronze, total] (rank cell uses rowspan from above)
+        const hasRankCell = cells.length >= 6;
+        const countryIndex = hasRankCell ? 1 : 0;
+        const goldIndex = hasRankCell ? 2 : 1;
+        const silverIndex = hasRankCell ? 3 : 2;
+        const bronzeIndex = hasRankCell ? 4 : 3;
 
-        // Clean up country name
-        country = country.replace(/^\d+\s*/, '').replace(/\[\w+\]/g, '').trim();
+        // Get country name
+        let country = $(cells[countryIndex]).text().trim();
+
+        // Clean up country name - remove rank prefixes and footnotes
+        country = country.replace(/^\d+\s*/, '').replace(/\[\w+\]/g, '').replace(/\*/g, '').trim();
 
         // Try to get from link if available
-        const link = $(cells[1]).find('a').first();
+        const link = $(cells[countryIndex]).find('a').first();
         if (link.length) {
             country = link.text().trim();
         }
@@ -77,9 +86,9 @@ function parseMedalTable(html) {
         if (!country || country.toLowerCase().includes('total')) return;
 
         // Get medal counts
-        const gold = parseInt($(cells[2]).text().trim()) || 0;
-        const silver = parseInt($(cells[3]).text().trim()) || 0;
-        const bronze = parseInt($(cells[4]).text().trim()) || 0;
+        const gold = parseInt($(cells[goldIndex]).text().trim()) || 0;
+        const silver = parseInt($(cells[silverIndex]).text().trim()) || 0;
+        const bronze = parseInt($(cells[bronzeIndex]).text().trim()) || 0;
 
         if (gold > 0 || silver > 0 || bronze > 0) {
             scrapedTotalMedals += gold + silver + bronze;

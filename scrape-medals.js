@@ -68,16 +68,25 @@ function parseMedalTable(html, knownCountries = []) {
         const $row = $(row);
         const cells = $row.find('td, th');
 
-        if (cells.length < 5) return; // Need at least: Rank, Country, Gold, Silver, Bronze
+        if (cells.length < 5) return; // Need at least: Country, Gold, Silver, Bronze, Total
 
-        // Get country name (usually in 2nd column)
-        let country = $(cells[1]).text().trim();
+        // Detect table structure: Wikipedia uses rowspan for rank numbers
+        // - 6 cells: [rank, country, gold, silver, bronze, total]
+        // - 5 cells: [country, gold, silver, bronze, total] (rank cell uses rowspan from above)
+        const hasRankCell = cells.length >= 6;
+        const countryIndex = hasRankCell ? 1 : 0;
+        const goldIndex = hasRankCell ? 2 : 1;
+        const silverIndex = hasRankCell ? 3 : 2;
+        const bronzeIndex = hasRankCell ? 4 : 3;
+
+        // Get country name
+        let country = $(cells[countryIndex]).text().trim();
 
         // Clean up country name - remove rank prefixes and footnotes
-        country = country.replace(/^\d+\s*/, '').replace(/\[\w+\]/g, '').trim();
+        country = country.replace(/^\d+\s*/, '').replace(/\[\w+\]/g, '').replace(/\*/g, '').trim();
 
         // Try to get from link if available (more reliable)
-        const link = $(cells[1]).find('a').first();
+        const link = $(cells[countryIndex]).find('a').first();
         if (link.length) {
             country = link.text().trim();
         }
@@ -92,9 +101,9 @@ function parseMedalTable(html, knownCountries = []) {
         if (!country || country.toLowerCase().includes('total')) return;
 
         // Get medal counts
-        const gold = parseInt($(cells[2]).text().trim()) || 0;
-        const silver = parseInt($(cells[3]).text().trim()) || 0;
-        const bronze = parseInt($(cells[4]).text().trim()) || 0;
+        const gold = parseInt($(cells[goldIndex]).text().trim()) || 0;
+        const silver = parseInt($(cells[silverIndex]).text().trim()) || 0;
+        const bronze = parseInt($(cells[bronzeIndex]).text().trim()) || 0;
 
         // Only add countries with medals
         if (gold > 0 || silver > 0 || bronze > 0) {

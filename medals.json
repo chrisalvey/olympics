@@ -78,7 +78,7 @@
     "China": {
       "gold": 0,
       "silver": 0,
-      "bronze": 0
+      "bronze": 1
     },
     "Chinese Taipei": {
       "gold": 0,
@@ -216,9 +216,9 @@
       "bronze": 0
     },
     "Japan": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
+      "gold": 1,
+      "silver": 1,
+      "bronze": 1
     },
     "Kazakhstan": {
       "gold": 0,
@@ -331,7 +331,7 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 0,
+      "gold": 1,
       "silver": 1,
       "bronze": 1
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-07T20:19:03.654Z",
-    "totalMedalsAwarded": 10,
-    "scrapedTotalMedals": 8,
+    "lastUpdated": "2026-02-07T20:30:34.400Z",
+    "totalMedalsAwarded": 15,
+    "scrapedTotalMedals": 15,
     "source": "Wikipedia"
   }
 }
