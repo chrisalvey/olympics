@@ -17,6 +17,16 @@
             <button class="tab" data-tab="countries">Medal Count</button>
         </div>
 
+        <div class="medal-progress-section" id="medalProgressSection">
+            <div class="progress-header">
+                <span class="progress-label">Olympics Progress</span>
+                <span class="progress-stats" id="progressStats">Loading...</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBarFill" style="width: 0%"></div>
+            </div>
+        </div>
+
         <div id="participantsTab" class="tab-content active">
             <div id="participantsContent" class="loading">Loading...</div>
         </div>
@@ -64,6 +74,8 @@
                 </div>
             </div>
         </div>
+
+        <div class="tie-breaker-notice-section" id="tieBreakerNotice" style="display: none;"></div>
 
         <div class="page-nav-section" style="text-align: center; margin-bottom: 20px;">
             <a href="schedule.html" class="nav-link" style="display: inline-block; padding: 10px 20px; background: rgba(0, 212, 255, 0.15); border: 2px solid var(--neon-cyan); border-radius: 8px; color: var(--neon-cyan); text-decoration: none; font-weight: 600; transition: all 0.3s;">📅 View Competition Schedule</a>

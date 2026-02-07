@@ -94,6 +94,7 @@ async function loadData() {
         renderParticipants();
         renderCountries();
         updateLastUpdated();
+        updateMedalProgress();
 
     } catch (error) {
         console.error('Error loading data:', error);
@@ -175,17 +176,26 @@ function renderParticipants() {
         i < participantsWithScores.length - 1 && p.score === participantsWithScores[i + 1].score
     );
 
-    const tieMessage = hasTies && participantsWithScores.length > 1 ? `
-        <div class="tie-breaker-notice">
-            ℹ️ Tied teams are ranked by gold medals (then silver, bronze). If still tied, those positions split their prizes equally.
-        </div>
-    ` : '';
+    // Render tie-breaker notice at the bottom of the page instead
+    const tieBreakerNotice = document.getElementById('tieBreakerNotice');
+    if (tieBreakerNotice) {
+        if (hasTies && participantsWithScores.length > 1) {
+            tieBreakerNotice.innerHTML = `
+                <div class="tie-breaker-notice">
+                    ℹ️ Tied teams are ranked by gold medals (then silver, bronze). If still tied, those positions split their prizes equally.
+                </div>
+            `;
+            tieBreakerNotice.style.display = 'block';
+        } else {
+            tieBreakerNotice.style.display = 'none';
+        }
+    }
 
     // Check if any medals have been awarded yet
     const totalMedalsAwarded = medalsData.metadata?.totalMedalsAwarded || 0;
     const hasMedals = totalMedalsAwarded > 0;
 
-    let html = tieMessage;
+    let html = '';
     participantsWithScores.forEach((p, index) => {
         const rank = index + 1;
         const rankClass = rank <= 3 ? `rank-${rank}` : '';
@@ -374,6 +384,27 @@ function updateLastUpdated() {
             `Updated: ${date.toLocaleString()}`;
     } else {
         document.getElementById('lastUpdated').textContent = '';
+    }
+}
+
+function updateMedalProgress() {
+    // Total medals for 2026 Winter Olympics (109 events × 3 medals = 327 total)
+    const TOTAL_MEDALS = 327;
+    const totalMedalsAwarded = medalsData.metadata?.totalMedalsAwarded || 0;
+
+    // Calculate percentage
+    const percentage = Math.min((totalMedalsAwarded / TOTAL_MEDALS) * 100, 100);
+
+    // Update progress bar
+    const progressBarFill = document.getElementById('progressBarFill');
+    if (progressBarFill) {
+        progressBarFill.style.width = `${percentage}%`;
+    }
+
+    // Update stats text
+    const progressStats = document.getElementById('progressStats');
+    if (progressStats) {
+        progressStats.textContent = `${totalMedalsAwarded} / ${TOTAL_MEDALS} medals awarded (${percentage.toFixed(1)}%)`;
     }
 }
 
