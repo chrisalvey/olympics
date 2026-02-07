@@ -1210,15 +1210,17 @@ body.leaderboard-page .progress-stats {
     border-radius: 12px;
     overflow: hidden;
     position: relative;
+    border: 2px solid #ccc;
 }
 
 body.leaderboard-page .progress-bar-container {
     background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(0, 212, 255, 0.4);
 }
 
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: #667eea;
     border-radius: 12px;
     transition: width 0.8s ease-in-out;
     position: relative;
@@ -1226,8 +1228,8 @@ body.leaderboard-page .progress-bar-container {
 }
 
 body.leaderboard-page .progress-bar-fill {
-    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    background: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .progress-bar-fill::after {
