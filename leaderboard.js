@@ -388,8 +388,8 @@ function updateLastUpdated() {
 }
 
 function updateMedalProgress() {
-    // Total medals for 2026 Winter Olympics (109 events × 3 medals = 327 total)
-    const TOTAL_MEDALS = 327;
+    // Total medals for 2026 Winter Olympics (116 events × 3 medals = 348 total)
+    const TOTAL_MEDALS = 348;
     const totalMedalsAwarded = medalsData.metadata?.totalMedalsAwarded || 0;
 
     // Calculate percentage
