@@ -17,8 +17,7 @@ function init() {
         const draftBanner = document.querySelector('.draft-link-banner');
         if (draftBanner) draftBanner.style.display = 'none';
 
-        const instructionsSection = document.getElementById('instructionsSection');
-        if (instructionsSection) instructionsSection.style.display = 'none';
+        // Note: instructionsSection now stays visible (moved to bottom in index.html)
     }
 
     document.querySelectorAll('.tab').forEach(tab => {

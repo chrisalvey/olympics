@@ -220,13 +220,20 @@ class OlympicsDraft {
         });
 
         // Form submission
+        // DRAFT CLOSED - Disable form submission
         document.getElementById('draftForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            alert('The draft has closed. Submissions are no longer accepted.');
+            return false;
+
+            // Original submission code commented out below
+            /*
             if (this.checkValidation()) {
                 this.showConfirmation();
             } else {
                 this.showValidationErrors();
             }
+            */
         });
 
         // Confirmation dialog
@@ -525,6 +532,12 @@ class OlympicsDraft {
     }
 
     async submitDraft() {
+        // DRAFT CLOSED - Block all submissions
+        alert('The draft has closed. No new submissions are allowed.');
+        return;
+
+        // Original code commented out...
+        /*
         const submitBtn = document.getElementById('confirmSubmit');
         const cancelBtn = document.getElementById('cancelConfirm');
         const form = document.getElementById('draftForm');
@@ -583,6 +596,7 @@ class OlympicsDraft {
             cancelBtn.disabled = false;
             form.classList.remove('loading');
         }
+        */
     }
 }
 
