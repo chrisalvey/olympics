@@ -398,8 +398,8 @@ function updateMedalProgress() {
     // Update progress bar with minimum width for visibility
     const progressBarFill = document.getElementById('progressBarFill');
     if (progressBarFill) {
-        // Use minimum of 5% width when there are medals, to ensure bar is visible
-        const displayPercentage = totalMedalsAwarded > 0 ? Math.max(percentage, 5) : 0;
+        // Use minimum of 15% width when there are medals, to ensure bar is visible
+        const displayPercentage = totalMedalsAwarded > 0 ? Math.max(percentage, 15) : 0;
         progressBarFill.style.width = `${displayPercentage}%`;
         console.log(`Progress bar updated: ${totalMedalsAwarded} medals, ${percentage.toFixed(1)}% actual, ${displayPercentage}% displayed`);
     } else {
