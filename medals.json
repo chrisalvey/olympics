@@ -208,7 +208,7 @@
     "Italy": {
       "gold": 1,
       "silver": 2,
-      "bronze": 5
+      "bronze": 6
     },
     "Jamaica": {
       "gold": 0,
@@ -217,7 +217,7 @@
     },
     "Japan": {
       "gold": 1,
-      "silver": 1,
+      "silver": 2,
       "bronze": 1
     },
     "Kazakhstan": {
@@ -441,7 +441,7 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 1,
+      "gold": 2,
       "silver": 0,
       "bronze": 0
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-08T21:20:13.012Z",
-    "totalMedalsAwarded": 36,
-    "scrapedTotalMedals": 36,
+    "lastUpdated": "2026-02-08T22:20:06.325Z",
+    "totalMedalsAwarded": 39,
+    "scrapedTotalMedals": 39,
     "source": "Wikipedia"
   }
 }
