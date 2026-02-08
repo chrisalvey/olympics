@@ -26,7 +26,7 @@
       "bronze": 0
     },
     "Austria": {
-      "gold": 0,
+      "gold": 1,
       "silver": 1,
       "bronze": 0
     },
@@ -63,7 +63,7 @@
     "Bulgaria": {
       "gold": 0,
       "silver": 0,
-      "bronze": 0
+      "bronze": 1
     },
     "Canada": {
       "gold": 0,
@@ -131,7 +131,7 @@
       "bronze": 0
     },
     "France": {
-      "gold": 0,
+      "gold": 1,
       "silver": 1,
       "bronze": 0
     },
@@ -143,7 +143,7 @@
     "Germany": {
       "gold": 0,
       "silver": 1,
-      "bronze": 0
+      "bronze": 1
     },
     "Great Britain": {
       "gold": 0,
@@ -207,7 +207,7 @@
     },
     "Italy": {
       "gold": 1,
-      "silver": 1,
+      "silver": 2,
       "bronze": 3
     },
     "Jamaica": {
@@ -397,7 +397,7 @@
     },
     "South Korea": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Spain": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-08T13:39:24.249Z",
-    "totalMedalsAwarded": 24,
-    "scrapedTotalMedals": 24,
+    "lastUpdated": "2026-02-08T14:21:23.754Z",
+    "totalMedalsAwarded": 30,
+    "scrapedTotalMedals": 30,
     "source": "Wikipedia"
   }
 }
