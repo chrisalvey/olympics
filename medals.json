@@ -102,7 +102,7 @@
     },
     "Czech Republic": {
       "gold": 1,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Denmark": {
@@ -208,7 +208,7 @@
     "Italy": {
       "gold": 1,
       "silver": 2,
-      "bronze": 3
+      "bronze": 4
     },
     "Jamaica": {
       "gold": 0,
@@ -331,7 +331,7 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 2,
+      "gold": 3,
       "silver": 1,
       "bronze": 2
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-08T16:21:34.829Z",
-    "totalMedalsAwarded": 30,
-    "scrapedTotalMedals": 30,
+    "lastUpdated": "2026-02-08T17:20:25.680Z",
+    "totalMedalsAwarded": 33,
+    "scrapedTotalMedals": 33,
     "source": "Wikipedia"
   }
 }
