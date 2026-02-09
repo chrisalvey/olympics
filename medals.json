@@ -27,7 +27,7 @@
     },
     "Austria": {
       "gold": 1,
-      "silver": 2,
+      "silver": 3,
       "bronze": 0
     },
     "Azerbaijan": {
@@ -411,8 +411,8 @@
       "bronze": 0
     },
     "Switzerland": {
-      "gold": 2,
-      "silver": 0,
+      "gold": 3,
+      "silver": 1,
       "bronze": 0
     },
     "Thailand": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-09T12:53:07.805Z",
-    "totalMedalsAwarded": 42,
-    "scrapedTotalMedals": 42,
+    "lastUpdated": "2026-02-09T14:11:23.879Z",
+    "totalMedalsAwarded": 45,
+    "scrapedTotalMedals": 45,
     "source": "Wikipedia"
   }
 }
