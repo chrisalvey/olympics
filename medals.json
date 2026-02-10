@@ -26,8 +26,8 @@
       "bronze": 0
     },
     "Austria": {
-      "gold": 0,
-      "silver": 0,
+      "gold": 2,
+      "silver": 3,
       "bronze": 0
     },
     "Azerbaijan": {
@@ -38,7 +38,7 @@
     "Belgium": {
       "gold": 0,
       "silver": 0,
-      "bronze": 0
+      "bronze": 1
     },
     "Benin": {
       "gold": 0,
@@ -63,12 +63,12 @@
     "Bulgaria": {
       "gold": 0,
       "silver": 0,
-      "bronze": 0
+      "bronze": 1
     },
     "Canada": {
       "gold": 0,
-      "silver": 0,
-      "bronze": 1
+      "silver": 1,
+      "bronze": 2
     },
     "Chile": {
       "gold": 0,
@@ -77,7 +77,7 @@
     },
     "China": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 1
     },
     "Chinese Taipei": {
@@ -101,8 +101,8 @@
       "bronze": 0
     },
     "Czech Republic": {
-      "gold": 0,
-      "silver": 0,
+      "gold": 1,
+      "silver": 1,
       "bronze": 0
     },
     "Denmark": {
@@ -131,8 +131,8 @@
       "bronze": 0
     },
     "France": {
-      "gold": 0,
-      "silver": 0,
+      "gold": 1,
+      "silver": 2,
       "bronze": 0
     },
     "Georgia": {
@@ -141,9 +141,9 @@
       "bronze": 0
     },
     "Germany": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
+      "gold": 3,
+      "silver": 2,
+      "bronze": 1
     },
     "Great Britain": {
       "gold": 0,
@@ -206,9 +206,9 @@
       "bronze": 0
     },
     "Italy": {
-      "gold": 1,
-      "silver": 1,
-      "bronze": 1
+      "gold": 2,
+      "silver": 2,
+      "bronze": 7
     },
     "Jamaica": {
       "gold": 0,
@@ -216,9 +216,9 @@
       "bronze": 0
     },
     "Japan": {
-      "gold": 1,
-      "silver": 1,
-      "bronze": 1
+      "gold": 2,
+      "silver": 2,
+      "bronze": 3
     },
     "Kazakhstan": {
       "gold": 0,
@@ -242,7 +242,7 @@
     },
     "Latvia": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Lebanon": {
@@ -311,14 +311,14 @@
       "bronze": 0
     },
     "Netherlands": {
-      "gold": 0,
-      "silver": 0,
+      "gold": 1,
+      "silver": 1,
       "bronze": 0
     },
     "New Zealand": {
       "gold": 0,
-      "silver": 0,
-      "bronze": 0
+      "silver": 1,
+      "bronze": 1
     },
     "Nigeria": {
       "gold": 0,
@@ -331,9 +331,9 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 1,
+      "gold": 6,
       "silver": 1,
-      "bronze": 1
+      "bronze": 4
     },
     "Pakistan": {
       "gold": 0,
@@ -347,7 +347,7 @@
     },
     "Poland": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Portugal": {
@@ -397,8 +397,8 @@
     },
     "South Korea": {
       "gold": 0,
-      "silver": 0,
-      "bronze": 0
+      "silver": 1,
+      "bronze": 1
     },
     "Spain": {
       "gold": 0,
@@ -406,14 +406,14 @@
       "bronze": 0
     },
     "Sweden": {
-      "gold": 1,
-      "silver": 1,
-      "bronze": 0
+      "gold": 3,
+      "silver": 2,
+      "bronze": 1
     },
     "Switzerland": {
-      "gold": 1,
-      "silver": 0,
-      "bronze": 0
+      "gold": 3,
+      "silver": 1,
+      "bronze": 1
     },
     "Thailand": {
       "gold": 0,
@@ -441,9 +441,9 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 0,
-      "silver": 0,
-      "bronze": 0
+      "gold": 2,
+      "silver": 3,
+      "bronze": 2
     },
     "Uruguay": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-07T20:30:34.400Z",
-    "totalMedalsAwarded": 15,
-    "scrapedTotalMedals": 15,
+    "lastUpdated": "2026-02-10T19:23:30.357Z",
+    "totalMedalsAwarded": 79,
+    "scrapedTotalMedals": 79,
     "source": "Wikipedia"
   }
 }
