@@ -208,7 +208,7 @@
     "Italy": {
       "gold": 2,
       "silver": 2,
-      "bronze": 6
+      "bronze": 7
     },
     "Jamaica": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-10T14:20:48.064Z",
-    "totalMedalsAwarded": 73,
-    "scrapedTotalMedals": 73,
+    "lastUpdated": "2026-02-10T16:00:15.192Z",
+    "totalMedalsAwarded": 74,
+    "scrapedTotalMedals": 74,
     "source": "Wikipedia"
   }
 }
