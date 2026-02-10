@@ -141,7 +141,7 @@
       "bronze": 0
     },
     "Germany": {
-      "gold": 2,
+      "gold": 3,
       "silver": 2,
       "bronze": 1
     },
@@ -242,7 +242,7 @@
     },
     "Latvia": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Lebanon": {
@@ -406,7 +406,7 @@
       "bronze": 0
     },
     "Sweden": {
-      "gold": 2,
+      "gold": 3,
       "silver": 2,
       "bronze": 1
     },
@@ -442,8 +442,8 @@
     },
     "United States": {
       "gold": 2,
-      "silver": 2,
-      "bronze": 1
+      "silver": 3,
+      "bronze": 2
     },
     "Uruguay": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-10T17:55:41.764Z",
-    "totalMedalsAwarded": 74,
-    "scrapedTotalMedals": 74,
+    "lastUpdated": "2026-02-10T18:58:26.810Z",
+    "totalMedalsAwarded": 79,
+    "scrapedTotalMedals": 79,
     "source": "Wikipedia"
   }
 }
