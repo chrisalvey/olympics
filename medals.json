@@ -411,9 +411,9 @@
       "bronze": 1
     },
     "Switzerland": {
-      "gold": 3,
+      "gold": 4,
       "silver": 1,
-      "bronze": 1
+      "bronze": 2
     },
     "Thailand": {
       "gold": 0,
@@ -442,7 +442,7 @@
     },
     "United States": {
       "gold": 2,
-      "silver": 3,
+      "silver": 4,
       "bronze": 2
     },
     "Uruguay": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-11T11:39:25.104Z",
-    "totalMedalsAwarded": 82,
-    "scrapedTotalMedals": 82,
+    "lastUpdated": "2026-02-11T12:52:51.975Z",
+    "totalMedalsAwarded": 85,
+    "scrapedTotalMedals": 85,
     "source": "Wikipedia"
   }
 }
