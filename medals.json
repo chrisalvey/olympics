@@ -27,7 +27,7 @@
     },
     "Austria": {
       "gold": 2,
-      "silver": 4,
+      "silver": 5,
       "bronze": 1
     },
     "Azerbaijan": {
@@ -143,7 +143,7 @@
     "Germany": {
       "gold": 3,
       "silver": 3,
-      "bronze": 1
+      "bronze": 2
     },
     "Great Britain": {
       "gold": 0,
@@ -206,7 +206,7 @@
       "bronze": 0
     },
     "Italy": {
-      "gold": 3,
+      "gold": 4,
       "silver": 2,
       "bronze": 7
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-11T18:56:54.229Z",
-    "totalMedalsAwarded": 100,
-    "scrapedTotalMedals": 100,
+    "lastUpdated": "2026-02-11T19:54:27.920Z",
+    "totalMedalsAwarded": 103,
+    "scrapedTotalMedals": 103,
     "source": "Wikipedia"
   }
 }
