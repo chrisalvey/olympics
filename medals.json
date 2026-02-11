@@ -63,7 +63,7 @@
     "Bulgaria": {
       "gold": 0,
       "silver": 0,
-      "bronze": 1
+      "bronze": 2
     },
     "Canada": {
       "gold": 0,
@@ -131,9 +131,9 @@
       "bronze": 1
     },
     "France": {
-      "gold": 1,
-      "silver": 2,
-      "bronze": 0
+      "gold": 2,
+      "silver": 3,
+      "bronze": 1
     },
     "Georgia": {
       "gold": 0,
@@ -441,8 +441,8 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 2,
-      "silver": 4,
+      "gold": 3,
+      "silver": 5,
       "bronze": 2
     },
     "Uruguay": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-11T14:12:48.149Z",
-    "totalMedalsAwarded": 88,
-    "scrapedTotalMedals": 88,
+    "lastUpdated": "2026-02-11T15:54:37.894Z",
+    "totalMedalsAwarded": 94,
+    "scrapedTotalMedals": 94,
     "source": "Wikipedia"
   }
 }
