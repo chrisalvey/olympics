@@ -26,9 +26,9 @@
       "bronze": 0
     },
     "Austria": {
-      "gold": 2,
+      "gold": 3,
       "silver": 5,
-      "bronze": 2
+      "bronze": 3
     },
     "Azerbaijan": {
       "gold": 0,
@@ -67,7 +67,7 @@
     },
     "Canada": {
       "gold": 0,
-      "silver": 2,
+      "silver": 3,
       "bronze": 3
     },
     "Chile": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-12T14:07:17.600Z",
-    "totalMedalsAwarded": 115,
-    "scrapedTotalMedals": 115,
+    "lastUpdated": "2026-02-12T15:43:53.759Z",
+    "totalMedalsAwarded": 118,
+    "scrapedTotalMedals": 118,
     "source": "Wikipedia"
   }
 }
