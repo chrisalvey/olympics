@@ -406,8 +406,8 @@
       "bronze": 0
     },
     "Sweden": {
-      "gold": 3,
-      "silver": 2,
+      "gold": 4,
+      "silver": 3,
       "bronze": 1
     },
     "Switzerland": {
@@ -443,7 +443,7 @@
     "United States": {
       "gold": 4,
       "silver": 6,
-      "bronze": 2
+      "bronze": 3
     },
     "Uruguay": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-12T12:47:12.208Z",
-    "totalMedalsAwarded": 112,
-    "scrapedTotalMedals": 112,
+    "lastUpdated": "2026-02-12T14:07:17.600Z",
+    "totalMedalsAwarded": 115,
+    "scrapedTotalMedals": 115,
     "source": "Wikipedia"
   }
 }
