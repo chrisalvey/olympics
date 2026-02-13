@@ -142,11 +142,11 @@
     },
     "Germany": {
       "gold": 4,
-      "silver": 3,
-      "bronze": 2
+      "silver": 4,
+      "bronze": 3
     },
     "Great Britain": {
-      "gold": 0,
+      "gold": 1,
       "silver": 0,
       "bronze": 0
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-13T20:29:36.179Z",
-    "totalMedalsAwarded": 148,
-    "scrapedTotalMedals": 148,
+    "lastUpdated": "2026-02-13T21:28:22.915Z",
+    "totalMedalsAwarded": 151,
+    "scrapedTotalMedals": 151,
     "source": "Wikipedia"
   }
 }
