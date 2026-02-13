@@ -132,7 +132,7 @@
     },
     "France": {
       "gold": 3,
-      "silver": 4,
+      "silver": 5,
       "bronze": 1
     },
     "Georgia": {
@@ -331,9 +331,9 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 7,
+      "gold": 8,
       "silver": 2,
-      "bronze": 5
+      "bronze": 6
     },
     "Pakistan": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-13T11:25:50.412Z",
-    "totalMedalsAwarded": 133,
-    "scrapedTotalMedals": 133,
+    "lastUpdated": "2026-02-13T12:41:08.581Z",
+    "totalMedalsAwarded": 136,
+    "scrapedTotalMedals": 136,
     "source": "Wikipedia"
   }
 }
