@@ -56,7 +56,7 @@
       "bronze": 0
     },
     "Brazil": {
-      "gold": 0,
+      "gold": 1,
       "silver": 0,
       "bronze": 0
     },
@@ -412,8 +412,8 @@
     },
     "Switzerland": {
       "gold": 4,
-      "silver": 1,
-      "bronze": 2
+      "silver": 2,
+      "bronze": 3
     },
     "Thailand": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-14T12:31:36.876Z",
-    "totalMedalsAwarded": 160,
-    "scrapedTotalMedals": 160,
+    "lastUpdated": "2026-02-14T13:39:16.232Z",
+    "totalMedalsAwarded": 163,
+    "scrapedTotalMedals": 163,
     "source": "Wikipedia"
   }
 }
