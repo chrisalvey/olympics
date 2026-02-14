@@ -132,8 +132,8 @@
     },
     "France": {
       "gold": 4,
-      "silver": 5,
-      "bronze": 1
+      "silver": 6,
+      "bronze": 2
     },
     "Georgia": {
       "gold": 0,
@@ -331,7 +331,7 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 9,
+      "gold": 10,
       "silver": 3,
       "bronze": 7
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-14T14:20:17.879Z",
-    "totalMedalsAwarded": 163,
-    "scrapedTotalMedals": 163,
+    "lastUpdated": "2026-02-14T15:18:56.604Z",
+    "totalMedalsAwarded": 166,
+    "scrapedTotalMedals": 166,
     "source": "Wikipedia"
   }
 }
