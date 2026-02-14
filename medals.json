@@ -68,7 +68,7 @@
     "Canada": {
       "gold": 0,
       "silver": 3,
-      "bronze": 4
+      "bronze": 5
     },
     "Chile": {
       "gold": 0,
@@ -312,7 +312,7 @@
     },
     "Netherlands": {
       "gold": 3,
-      "silver": 3,
+      "silver": 4,
       "bronze": 1
     },
     "New Zealand": {
@@ -441,7 +441,7 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 4,
+      "gold": 5,
       "silver": 8,
       "bronze": 4
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-14T16:21:12.037Z",
-    "totalMedalsAwarded": 166,
-    "scrapedTotalMedals": 166,
+    "lastUpdated": "2026-02-14T17:21:07.191Z",
+    "totalMedalsAwarded": 169,
+    "scrapedTotalMedals": 169,
     "source": "Wikipedia"
   }
 }
