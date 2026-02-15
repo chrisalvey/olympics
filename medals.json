@@ -132,7 +132,7 @@
     },
     "France": {
       "gold": 4,
-      "silver": 6,
+      "silver": 7,
       "bronze": 3
     },
     "Georgia": {
@@ -208,7 +208,7 @@
     "Italy": {
       "gold": 6,
       "silver": 3,
-      "bronze": 9
+      "bronze": 10
     },
     "Jamaica": {
       "gold": 0,
@@ -331,7 +331,7 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 10,
+      "gold": 11,
       "silver": 4,
       "bronze": 7
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-15T11:16:58.389Z",
-    "totalMedalsAwarded": 184,
-    "scrapedTotalMedals": 184,
+    "lastUpdated": "2026-02-15T12:33:48.136Z",
+    "totalMedalsAwarded": 187,
+    "scrapedTotalMedals": 187,
     "source": "Wikipedia"
   }
 }
