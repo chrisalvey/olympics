@@ -331,8 +331,8 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 11,
-      "silver": 6,
+      "gold": 12,
+      "silver": 7,
       "bronze": 7
     },
     "Pakistan": {
@@ -388,7 +388,7 @@
     "Slovenia": {
       "gold": 2,
       "silver": 1,
-      "bronze": 0
+      "bronze": 1
     },
     "South Africa": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-15T19:19:55.168Z",
-    "totalMedalsAwarded": 202,
-    "scrapedTotalMedals": 202,
+    "lastUpdated": "2026-02-15T20:18:14.995Z",
+    "totalMedalsAwarded": 205,
+    "scrapedTotalMedals": 205,
     "source": "Wikipedia"
   }
 }
