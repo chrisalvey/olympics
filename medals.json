@@ -206,7 +206,7 @@
       "bronze": 0
     },
     "Italy": {
-      "gold": 6,
+      "gold": 7,
       "silver": 3,
       "bronze": 10
     },
@@ -332,7 +332,7 @@
     },
     "Norway": {
       "gold": 11,
-      "silver": 4,
+      "silver": 5,
       "bronze": 7
     },
     "Pakistan": {
@@ -407,7 +407,7 @@
     },
     "Sweden": {
       "gold": 5,
-      "silver": 4,
+      "silver": 5,
       "bronze": 1
     },
     "Switzerland": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-15T12:33:48.136Z",
-    "totalMedalsAwarded": 187,
-    "scrapedTotalMedals": 187,
+    "lastUpdated": "2026-02-15T13:40:35.030Z",
+    "totalMedalsAwarded": 190,
+    "scrapedTotalMedals": 190,
     "source": "Wikipedia"
   }
 }
