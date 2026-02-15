@@ -218,7 +218,7 @@
     "Japan": {
       "gold": 3,
       "silver": 5,
-      "bronze": 8
+      "bronze": 9
     },
     "Kazakhstan": {
       "gold": 1,
@@ -311,8 +311,8 @@
       "bronze": 0
     },
     "Netherlands": {
-      "gold": 4,
-      "silver": 4,
+      "gold": 5,
+      "silver": 5,
       "bronze": 1
     },
     "New Zealand": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-15T16:20:34.564Z",
-    "totalMedalsAwarded": 196,
-    "scrapedTotalMedals": 196,
+    "lastUpdated": "2026-02-15T17:20:08.571Z",
+    "totalMedalsAwarded": 199,
+    "scrapedTotalMedals": 199,
     "source": "Wikipedia"
   }
 }
