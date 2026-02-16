@@ -26,7 +26,7 @@
       "bronze": 1
     },
     "Austria": {
-      "gold": 4,
+      "gold": 5,
       "silver": 7,
       "bronze": 3
     },
@@ -333,7 +333,7 @@
     "Norway": {
       "gold": 12,
       "silver": 7,
-      "bronze": 8
+      "bronze": 9
     },
     "Pakistan": {
       "gold": 0,
@@ -347,7 +347,7 @@
     },
     "Poland": {
       "gold": 0,
-      "silver": 2,
+      "silver": 3,
       "bronze": 1
     },
     "Portugal": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-16T19:28:06.245Z",
-    "totalMedalsAwarded": 211,
-    "scrapedTotalMedals": 211,
+    "lastUpdated": "2026-02-16T20:22:00.591Z",
+    "totalMedalsAwarded": 214,
+    "scrapedTotalMedals": 214,
     "source": "Wikipedia"
   }
 }
