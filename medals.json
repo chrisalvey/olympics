@@ -28,7 +28,7 @@
     "Austria": {
       "gold": 5,
       "silver": 8,
-      "bronze": 3
+      "bronze": 4
     },
     "Azerbaijan": {
       "gold": 0,
@@ -331,7 +331,7 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 13,
+      "gold": 14,
       "silver": 8,
       "bronze": 9
     },
@@ -442,7 +442,7 @@
     },
     "United States": {
       "gold": 6,
-      "silver": 9,
+      "silver": 10,
       "bronze": 5
     },
     "Uruguay": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-17T19:42:07.485Z",
-    "totalMedalsAwarded": 235,
-    "scrapedTotalMedals": 235,
+    "lastUpdated": "2026-02-17T20:29:31.241Z",
+    "totalMedalsAwarded": 238,
+    "scrapedTotalMedals": 238,
     "source": "Wikipedia"
   }
 }
