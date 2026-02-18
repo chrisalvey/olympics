@@ -22,7 +22,7 @@
     },
     "Australia": {
       "gold": 3,
-      "silver": 1,
+      "silver": 2,
       "bronze": 1
     },
     "Austria": {
@@ -76,9 +76,9 @@
       "bronze": 0
     },
     "China": {
-      "gold": 1,
+      "gold": 2,
       "silver": 3,
-      "bronze": 3
+      "bronze": 4
     },
     "Chinese Taipei": {
       "gold": 0,
@@ -408,11 +408,11 @@
     "Sweden": {
       "gold": 6,
       "silver": 5,
-      "bronze": 2
+      "bronze": 3
     },
     "Switzerland": {
       "gold": 5,
-      "silver": 3,
+      "silver": 4,
       "bronze": 3
     },
     "Thailand": {
@@ -441,7 +441,7 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 6,
+      "gold": 7,
       "silver": 11,
       "bronze": 6
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-18T12:44:42.950Z",
-    "totalMedalsAwarded": 250,
-    "scrapedTotalMedals": 250,
+    "lastUpdated": "2026-02-18T14:03:19.033Z",
+    "totalMedalsAwarded": 256,
+    "scrapedTotalMedals": 256,
     "source": "Wikipedia"
   }
 }
