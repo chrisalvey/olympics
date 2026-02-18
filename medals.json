@@ -143,7 +143,7 @@
     "Germany": {
       "gold": 5,
       "silver": 8,
-      "bronze": 7
+      "bronze": 8
     },
     "Great Britain": {
       "gold": 3,
@@ -406,13 +406,13 @@
       "bronze": 0
     },
     "Sweden": {
-      "gold": 5,
+      "gold": 6,
       "silver": 5,
       "bronze": 2
     },
     "Switzerland": {
       "gold": 5,
-      "silver": 2,
+      "silver": 3,
       "bronze": 3
     },
     "Thailand": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-18T10:37:13.663Z",
-    "totalMedalsAwarded": 241,
-    "scrapedTotalMedals": 241,
+    "lastUpdated": "2026-02-18T11:33:34.804Z",
+    "totalMedalsAwarded": 244,
+    "scrapedTotalMedals": 244,
     "source": "Wikipedia"
   }
 }
