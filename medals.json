@@ -76,7 +76,7 @@
       "bronze": 0
     },
     "China": {
-      "gold": 0,
+      "gold": 1,
       "silver": 3,
       "bronze": 3
     },
@@ -208,7 +208,7 @@
     "Italy": {
       "gold": 9,
       "silver": 4,
-      "bronze": 11
+      "bronze": 12
     },
     "Jamaica": {
       "gold": 0,
@@ -217,7 +217,7 @@
     },
     "Japan": {
       "gold": 4,
-      "silver": 5,
+      "silver": 6,
       "bronze": 10
     },
     "Kazakhstan": {
@@ -331,7 +331,7 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 14,
+      "gold": 15,
       "silver": 8,
       "bronze": 9
     },
@@ -442,8 +442,8 @@
     },
     "United States": {
       "gold": 6,
-      "silver": 10,
-      "bronze": 5
+      "silver": 11,
+      "bronze": 6
     },
     "Uruguay": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-18T11:33:34.804Z",
-    "totalMedalsAwarded": 244,
-    "scrapedTotalMedals": 244,
+    "lastUpdated": "2026-02-18T12:44:42.950Z",
+    "totalMedalsAwarded": 250,
+    "scrapedTotalMedals": 250,
     "source": "Wikipedia"
   }
 }
