@@ -66,7 +66,7 @@
       "bronze": 2
     },
     "Canada": {
-      "gold": 3,
+      "gold": 4,
       "silver": 4,
       "bronze": 6
     },
@@ -312,8 +312,8 @@
     },
     "Netherlands": {
       "gold": 6,
-      "silver": 6,
-      "bronze": 1
+      "silver": 7,
+      "bronze": 2
     },
     "New Zealand": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-18T20:31:27.333Z",
-    "totalMedalsAwarded": 265,
-    "scrapedTotalMedals": 265,
+    "lastUpdated": "2026-02-18T21:29:14.886Z",
+    "totalMedalsAwarded": 268,
+    "scrapedTotalMedals": 268,
     "source": "Wikipedia"
   }
 }
