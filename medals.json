@@ -131,7 +131,7 @@
       "bronze": 4
     },
     "France": {
-      "gold": 5,
+      "gold": 6,
       "silver": 7,
       "bronze": 4
     },
@@ -216,9 +216,9 @@
       "bronze": 0
     },
     "Japan": {
-      "gold": 4,
+      "gold": 5,
       "silver": 6,
-      "bronze": 10
+      "bronze": 11
     },
     "Kazakhstan": {
       "gold": 1,
@@ -317,7 +317,7 @@
     },
     "New Zealand": {
       "gold": 0,
-      "silver": 1,
+      "silver": 2,
       "bronze": 1
     },
     "Nigeria": {
@@ -333,7 +333,7 @@
     "Norway": {
       "gold": 15,
       "silver": 8,
-      "bronze": 9
+      "bronze": 10
     },
     "Pakistan": {
       "gold": 0,
@@ -407,7 +407,7 @@
     },
     "Sweden": {
       "gold": 6,
-      "silver": 5,
+      "silver": 6,
       "bronze": 3
     },
     "Switzerland": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-18T14:03:19.033Z",
-    "totalMedalsAwarded": 256,
-    "scrapedTotalMedals": 256,
+    "lastUpdated": "2026-02-18T16:55:25.898Z",
+    "totalMedalsAwarded": 262,
+    "scrapedTotalMedals": 262,
     "source": "Wikipedia"
   }
 }
