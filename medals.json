@@ -68,7 +68,7 @@
     "Canada": {
       "gold": 3,
       "silver": 4,
-      "bronze": 5
+      "bronze": 6
     },
     "Chile": {
       "gold": 0,
@@ -207,7 +207,7 @@
     },
     "Italy": {
       "gold": 9,
-      "silver": 4,
+      "silver": 5,
       "bronze": 12
     },
     "Jamaica": {
@@ -396,7 +396,7 @@
       "bronze": 0
     },
     "South Korea": {
-      "gold": 1,
+      "gold": 2,
       "silver": 2,
       "bronze": 3
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-18T19:42:26.227Z",
-    "totalMedalsAwarded": 262,
-    "scrapedTotalMedals": 262,
+    "lastUpdated": "2026-02-18T20:31:27.333Z",
+    "totalMedalsAwarded": 265,
+    "scrapedTotalMedals": 265,
     "source": "Wikipedia"
   }
 }
