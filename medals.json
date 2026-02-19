@@ -217,8 +217,8 @@
     },
     "Japan": {
       "gold": 5,
-      "silver": 6,
-      "bronze": 11
+      "silver": 7,
+      "bronze": 12
     },
     "Kazakhstan": {
       "gold": 1,
@@ -441,7 +441,7 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 8,
+      "gold": 9,
       "silver": 12,
       "bronze": 6
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-19T21:26:11.349Z",
-    "totalMedalsAwarded": 283,
-    "scrapedTotalMedals": 283,
+    "lastUpdated": "2026-02-19T22:24:28.964Z",
+    "totalMedalsAwarded": 286,
+    "scrapedTotalMedals": 286,
     "source": "Wikipedia"
   }
 }
