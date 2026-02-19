@@ -28,7 +28,7 @@
     "Austria": {
       "gold": 5,
       "silver": 8,
-      "bronze": 4
+      "bronze": 5
     },
     "Azerbaijan": {
       "gold": 0,
@@ -127,13 +127,13 @@
     },
     "Finland": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 4
     },
     "France": {
       "gold": 6,
-      "silver": 7,
-      "bronze": 4
+      "silver": 8,
+      "bronze": 5
     },
     "Georgia": {
       "gold": 0,
@@ -187,7 +187,7 @@
     },
     "Individual Neutral Athletes": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Iran": {
@@ -331,7 +331,7 @@
       "bronze": 0
     },
     "Norway": {
-      "gold": 15,
+      "gold": 16,
       "silver": 8,
       "bronze": 10
     },
@@ -401,9 +401,9 @@
       "bronze": 3
     },
     "Spain": {
-      "gold": 0,
+      "gold": 1,
       "silver": 0,
-      "bronze": 0
+      "bronze": 1
     },
     "Sweden": {
       "gold": 6,
@@ -411,7 +411,7 @@
       "bronze": 3
     },
     "Switzerland": {
-      "gold": 5,
+      "gold": 6,
       "silver": 4,
       "bronze": 3
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-19T12:45:10.477Z",
-    "totalMedalsAwarded": 268,
-    "scrapedTotalMedals": 268,
+    "lastUpdated": "2026-02-19T14:04:32.210Z",
+    "totalMedalsAwarded": 277,
+    "scrapedTotalMedals": 277,
     "source": "Wikipedia"
   }
 }
