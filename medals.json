@@ -396,8 +396,8 @@
       "bronze": 0
     },
     "South Korea": {
-      "gold": 2,
-      "silver": 3,
+      "gold": 3,
+      "silver": 4,
       "bronze": 3
     },
     "Spain": {
@@ -443,7 +443,7 @@
     "United States": {
       "gold": 10,
       "silver": 12,
-      "bronze": 6
+      "bronze": 7
     },
     "Uruguay": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-20T21:17:44.826Z",
-    "totalMedalsAwarded": 305,
-    "scrapedTotalMedals": 305,
+    "lastUpdated": "2026-02-20T22:18:13.918Z",
+    "totalMedalsAwarded": 308,
+    "scrapedTotalMedals": 308,
     "source": "Wikipedia"
   }
 }
