@@ -208,7 +208,7 @@
     "Italy": {
       "gold": 9,
       "silver": 5,
-      "bronze": 12
+      "bronze": 13
     },
     "Jamaica": {
       "gold": 0,
@@ -311,7 +311,7 @@
       "bronze": 0
     },
     "Netherlands": {
-      "gold": 7,
+      "gold": 8,
       "silver": 7,
       "bronze": 3
     },
@@ -397,7 +397,7 @@
     },
     "South Korea": {
       "gold": 2,
-      "silver": 2,
+      "silver": 3,
       "bronze": 3
     },
     "Spain": {
@@ -413,7 +413,7 @@
     "Switzerland": {
       "gold": 6,
       "silver": 6,
-      "bronze": 4
+      "bronze": 5
     },
     "Thailand": {
       "gold": 0,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-20T20:22:34.502Z",
-    "totalMedalsAwarded": 301,
-    "scrapedTotalMedals": 301,
+    "lastUpdated": "2026-02-20T21:17:44.826Z",
+    "totalMedalsAwarded": 305,
+    "scrapedTotalMedals": 305,
     "source": "Wikipedia"
   }
 }
