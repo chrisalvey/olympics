@@ -68,7 +68,7 @@
     "Canada": {
       "gold": 4,
       "silver": 5,
-      "bronze": 7
+      "bronze": 8
     },
     "Chile": {
       "gold": 0,
@@ -122,7 +122,7 @@
     },
     "Estonia": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Finland": {
@@ -441,7 +441,7 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 9,
+      "gold": 10,
       "silver": 12,
       "bronze": 6
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-20T19:32:42.277Z",
-    "totalMedalsAwarded": 298,
-    "scrapedTotalMedals": 298,
+    "lastUpdated": "2026-02-20T20:22:34.502Z",
+    "totalMedalsAwarded": 301,
+    "scrapedTotalMedals": 301,
     "source": "Wikipedia"
   }
 }
