@@ -68,7 +68,7 @@
     "Canada": {
       "gold": 4,
       "silver": 5,
-      "bronze": 6
+      "bronze": 7
     },
     "Chile": {
       "gold": 0,
@@ -311,7 +311,7 @@
       "bronze": 0
     },
     "Netherlands": {
-      "gold": 6,
+      "gold": 7,
       "silver": 7,
       "bronze": 3
     },
@@ -332,7 +332,7 @@
     },
     "Norway": {
       "gold": 17,
-      "silver": 9,
+      "silver": 10,
       "bronze": 10
     },
     "Pakistan": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-20T16:29:56.608Z",
-    "totalMedalsAwarded": 295,
-    "scrapedTotalMedals": 295,
+    "lastUpdated": "2026-02-20T17:31:43.946Z",
+    "totalMedalsAwarded": 298,
+    "scrapedTotalMedals": 298,
     "source": "Wikipedia"
   }
 }
