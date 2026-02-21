@@ -128,7 +128,7 @@
     "Finland": {
       "gold": 0,
       "silver": 1,
-      "bronze": 4
+      "bronze": 5
     },
     "France": {
       "gold": 8,
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-21T21:16:31.537Z",
-    "totalMedalsAwarded": 335,
-    "scrapedTotalMedals": 335,
+    "lastUpdated": "2026-02-21T22:15:59.869Z",
+    "totalMedalsAwarded": 336,
+    "scrapedTotalMedals": 336,
     "source": "Wikipedia"
   }
 }
