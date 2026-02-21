@@ -103,7 +103,7 @@
     "Czech Republic": {
       "gold": 2,
       "silver": 2,
-      "bronze": 0
+      "bronze": 1
     },
     "Denmark": {
       "gold": 0,
@@ -131,8 +131,8 @@
       "bronze": 4
     },
     "France": {
-      "gold": 7,
-      "silver": 8,
+      "gold": 8,
+      "silver": 9,
       "bronze": 6
     },
     "Georgia": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-21T13:37:17.777Z",
-    "totalMedalsAwarded": 320,
-    "scrapedTotalMedals": 320,
+    "lastUpdated": "2026-02-21T14:19:50.487Z",
+    "totalMedalsAwarded": 323,
+    "scrapedTotalMedals": 323,
     "source": "Wikipedia"
   }
 }
