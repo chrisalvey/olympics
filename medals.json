@@ -131,7 +131,7 @@
       "bronze": 4
     },
     "France": {
-      "gold": 6,
+      "gold": 7,
       "silver": 8,
       "bronze": 6
     },
@@ -403,7 +403,7 @@
     "Spain": {
       "gold": 1,
       "silver": 0,
-      "bronze": 1
+      "bronze": 2
     },
     "Sweden": {
       "gold": 6,
@@ -412,7 +412,7 @@
     },
     "Switzerland": {
       "gold": 6,
-      "silver": 7,
+      "silver": 8,
       "bronze": 6
     },
     "Thailand": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-21T12:31:35.458Z",
-    "totalMedalsAwarded": 317,
-    "scrapedTotalMedals": 317,
+    "lastUpdated": "2026-02-21T13:37:17.777Z",
+    "totalMedalsAwarded": 320,
+    "scrapedTotalMedals": 320,
     "source": "Wikipedia"
   }
 }
