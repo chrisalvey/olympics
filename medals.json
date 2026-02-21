@@ -68,7 +68,7 @@
     "Canada": {
       "gold": 4,
       "silver": 5,
-      "bronze": 8
+      "bronze": 9
     },
     "Chile": {
       "gold": 0,
@@ -107,7 +107,7 @@
     },
     "Denmark": {
       "gold": 0,
-      "silver": 0,
+      "silver": 1,
       "bronze": 0
     },
     "Ecuador": {
@@ -208,7 +208,7 @@
     "Italy": {
       "gold": 10,
       "silver": 6,
-      "bronze": 13
+      "bronze": 14
     },
     "Jamaica": {
       "gold": 0,
@@ -311,7 +311,7 @@
       "bronze": 0
     },
     "Netherlands": {
-      "gold": 8,
+      "gold": 9,
       "silver": 7,
       "bronze": 3
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-21T15:18:17.111Z",
-    "totalMedalsAwarded": 323,
-    "scrapedTotalMedals": 323,
+    "lastUpdated": "2026-02-21T16:19:49.700Z",
+    "totalMedalsAwarded": 327,
+    "scrapedTotalMedals": 327,
     "source": "Wikipedia"
   }
 }
