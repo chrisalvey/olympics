@@ -406,13 +406,13 @@
       "bronze": 2
     },
     "Sweden": {
-      "gold": 7,
+      "gold": 8,
       "silver": 6,
       "bronze": 4
     },
     "Switzerland": {
       "gold": 6,
-      "silver": 8,
+      "silver": 9,
       "bronze": 8
     },
     "Thailand": {
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-22T12:33:13.008Z",
-    "totalMedalsAwarded": 345,
-    "scrapedTotalMedals": 345,
+    "lastUpdated": "2026-02-22T13:38:31.292Z",
+    "totalMedalsAwarded": 347,
+    "scrapedTotalMedals": 347,
     "source": "Wikipedia"
   }
 }
