@@ -76,8 +76,8 @@
       "bronze": 0
     },
     "China": {
-      "gold": 4,
-      "silver": 3,
+      "gold": 5,
+      "silver": 4,
       "bronze": 6
     },
     "Chinese Taipei": {
@@ -148,7 +148,7 @@
     "Great Britain": {
       "gold": 3,
       "silver": 1,
-      "bronze": 0
+      "bronze": 1
     },
     "Greece": {
       "gold": 0,
@@ -332,7 +332,7 @@
     },
     "Norway": {
       "gold": 18,
-      "silver": 11,
+      "silver": 12,
       "bronze": 11
     },
     "Pakistan": {
@@ -406,7 +406,7 @@
       "bronze": 2
     },
     "Sweden": {
-      "gold": 6,
+      "gold": 7,
       "silver": 6,
       "bronze": 4
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-22T10:18:30.350Z",
-    "totalMedalsAwarded": 336,
-    "scrapedTotalMedals": 336,
+    "lastUpdated": "2026-02-22T11:15:58.476Z",
+    "totalMedalsAwarded": 341,
+    "scrapedTotalMedals": 341,
     "source": "Wikipedia"
   }
 }
