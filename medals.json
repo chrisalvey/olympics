@@ -67,7 +67,7 @@
     },
     "Canada": {
       "gold": 5,
-      "silver": 6,
+      "silver": 7,
       "bronze": 9
     },
     "Chile": {
@@ -441,7 +441,7 @@
       "bronze": 0
     },
     "United States": {
-      "gold": 11,
+      "gold": 12,
       "silver": 12,
       "bronze": 9
     },
@@ -462,9 +462,9 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-02-22T15:18:22.230Z",
-    "totalMedalsAwarded": 347,
-    "scrapedTotalMedals": 347,
+    "lastUpdated": "2026-02-22T16:21:19.704Z",
+    "totalMedalsAwarded": 349,
+    "scrapedTotalMedals": 349,
     "source": "Wikipedia"
   }
 }
