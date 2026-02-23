@@ -1,15 +1,8 @@
 name: Update Olympic Medals
 
 on:
-  # Smart scheduling during Olympics (Feb 6-22, 2026)
-  # Resynced: 2026-02-07 to fix GitHub Actions scheduling issue
-  schedule:
-    # Hourly during peak event times (8am-11pm Italy time = 7am-10pm UTC)
-    - cron: '0 7-22 * * *'
-    # Every 6 hours overnight when events are less frequent
-    - cron: '0 23,5 * * *'
-
-  # Allow manual triggering from GitHub Actions tab
+  # Olympics ended Feb 22, 2026 - schedule disabled
+  # Allow manual triggering from GitHub Actions tab only
   workflow_dispatch:
 
 jobs:
